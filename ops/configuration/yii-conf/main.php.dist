@@ -137,6 +137,10 @@ return CMap::mergeArray(array(
                     'class'=>'CFileLogRoute',
                     'levels'=>'error, warning, info, debug',
                 ),
+                // Enable log to be viewed from website
+                array(
+                    'class'=>'CWebLogRoute',
+                ),
             ),
         ),
 
