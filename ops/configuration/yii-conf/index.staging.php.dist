@@ -13,6 +13,11 @@ new yii\web\Application($yii2Config);
 $composer=dirname(__FILE__).'/vendor/autoload.php';
 require_once($composer);
 
+// Enable debug mode on staging server for WL work
+// The 2 lines below needs to be removed after WL work is finished
+defined('YII_DEBUG') or define('YII_DEBUG',true);
+defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
+
 # Run the Yii1.1 application
 Yii::$enableIncludePath = false;
 $config=dirname(__FILE__).'/protected/config/main.php';
