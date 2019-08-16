@@ -10,6 +10,9 @@ pyyaml \
 psycopg2 \
 pyautogui
 
+# Force reinstall selenium to version 3.8.0
+RUN pip3 install selenium==3.8.0 --force-reinstall
+
 WORKDIR /var/www
 
 ENTRYPOINT ["/var/www/tests/behave_tests"]
