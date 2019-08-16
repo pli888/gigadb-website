@@ -18,7 +18,7 @@
          "opauth/google": "^0.2.2",
          "opauth/linkedin": "^0.2.0",
          "drewm/mailchimp-api": "^v2.5",
-         "gregwar/image": "^2.0"
+         "gregwar/image": "2.*"
     },
     "require-dev": {
         "behat/behat":  "^3.5",
