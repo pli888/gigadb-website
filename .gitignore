@@ -3,7 +3,8 @@ logs
 assets
 giga_cache
 !assets/.gitignore
-css/site.css
+# Allow site.css to be committed and made available on staging server
+#css/site.css
 protected/runtime
 protected/config/db.json
 protected/config/es.json
