@@ -21,7 +21,14 @@ RUN echo "deb http://deb.debian.org/debian/ jessie main contrib non-free" | tee 
         libfreetype6-dev \
         libssl-dev \
         libmcrypt-dev \
-        bc
+        bc \
+        # Install exiftool for gregwar/image package to work with png files
+        exiftool
+
+# Install PHP exif extension for gregwar/image to work with png files
+RUN docker-php-ext-configure exif && \
+    docker-php-ext-install exif && \
+    docker-php-ext-enable exif
 
 RUN docker-php-ext-install mcrypt
 
