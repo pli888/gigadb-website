@@ -304,6 +304,8 @@ deploy_app:
     - docker-compose --tlsverify -H=$REMOTE_DOCKER_HOST -f ops/deployment/docker-compose.staging.yml up -d
     # Run database migrations if any
     - docker-compose --tlsverify -H=$REMOTE_DOCKER_HOST -f ops/deployment/docker-compose.staging.yml run --rm  application ./protected/yiic migrate --interactive=0
+    # Add templates from files/templates
+    - docker-compose --tlsverify -H=$REMOTE_DOCKER_HOST -f ops/deployment/docker-compose.staging.yml run --rm application ./protected/yiic templates add
     # Attempt to renew the web certificate for TLS termination on web container. NOOP if not close to expiration date
     - docker-compose --tlsverify -H=$REMOTE_DOCKER_HOST -f ops/deployment/docker-compose.staging.yml run --rm certbot renew
     # symlink the https configuration for web container and reload nginx (cannot be done earlier as nginx will crash if it cannot see valid web certificates)
