@@ -47,9 +47,9 @@ class SiteController extends Controller {
     * Administration action
 	*
 	**/
-
 	public function actionAdmin() {
-		$this->render('admin');
+        $this->layout='new_main';
+        $this->render('admin');
 	}
 
 	/**
