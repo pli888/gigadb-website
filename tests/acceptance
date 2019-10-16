@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-echo "About to run  automated tests..."
+echo "About to run automated tests..."
 
 echo "Loading environment..."
 set -a
@@ -19,10 +19,15 @@ if [ "$GIGADB_ENV" == "dev" ];then
 fi
 
 echo "Running acceptance tests"
-if [[ "$GIGADB_ENV" == "dev" ]];then
-	bin/behat --tags "@ok&&~@facebook" -v --stop-on-failure
+if [ "$GIGADB_ENV" == "dev" ];then
+    if [ $# -eq 0 ];then
+	    bin/behat --tags "@ok&&~@facebook" -v --stop-on-failure
+    elif [ $# -gt 0 ] && [ $# -lt 2 ];then
+        # For running specific tests
+        bin/behat --tags $1 -v --stop-on-failure
+    fi
 else
-	# we are on CI with remote runner, affilate login tests don't work becasause Google and Twitter block it
+	# we are on CI with remote runner, affiliate login tests don't work because Google and Twitter block it
 	bin/behat --tags "@ok&&~@affiliate-login&&~@javascript" -v --stop-on-failure
 fi
 

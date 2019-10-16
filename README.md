@@ -104,6 +104,16 @@ To only run unit tests, use the command:
 $ docker-compose run --rm test ./tests/unit_functional
 ```
 
+To only run Behat acceptance tests, use the command:
+```
+$ docker-compose run --rm test ./tests/acceptance
+```
+
+Specific Behat acceptance tests can be executed by passing a tag:
+```
+$ docker-compose run --rm test ./tests/acceptance @admin_page
+```
+
 ## Troubleshooting
 
 To access the services logs, use the command below:
