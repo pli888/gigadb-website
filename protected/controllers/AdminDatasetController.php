@@ -111,6 +111,7 @@ class AdminDatasetController extends Controller
      */
     public function actionAdmin()
     {
+        $this->layout='new_main';
         $model=new Dataset('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Dataset'])) {
