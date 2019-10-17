@@ -279,6 +279,7 @@ class AdminDatasetAuthorController extends Controller
 	 */
 	public function actionAdmin()
 	{
+        $this->layout='new_main';
 		$model=new DatasetAuthor('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['DatasetAuthor']))
