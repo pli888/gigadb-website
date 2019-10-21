@@ -279,6 +279,7 @@ class AdminDatasetController extends Controller
             }
         }
 
+        $this->layout='new_main';
         $this->render('update', array(
             'model' => $model,
             'curationlog'=>$dataProvider,
