@@ -19,6 +19,7 @@ services:
       - ${APPLICATION}/assets:/var/www/assets
       - ${APPLICATION}/images:/var/www/images
       - ${APPLICATION}/css:/var/www/css
+      - ${APPLICATION}/images:/var/www/images
       - le_config:/etc/letsencrypt
       - le_webrootpath:/var/www/.le
     networks:
