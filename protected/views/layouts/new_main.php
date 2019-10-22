@@ -22,7 +22,10 @@
                 <link rel="stylesheet" type="text/css" href="/fonts/pt_sans/v8/pt_sans.css">
                 <link rel="stylesheet" type="text/css" href="/fonts/lato/v11/lato.css">
                 <link rel="stylesheet" type="text/css" href="/css/common.css" />
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" defer></script>
+                <!-- Change jQuery version to fix JS in admin pages -->
+                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" defer></script> -->
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" defer></script>
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" defer></script>
                 <? } ?>
