@@ -61,9 +61,11 @@ $cs->registerCssFile('/css/jquery.tag-editor.css');
                     </div>
 
                     <div class="control-group">
-                        <fieldset>
-                            <legend>Types</legend>
-                            <?
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Types</h5>
+                                <?
                                 $datasetTypes = CHtml::listData(Type::model()->findAll(),'id','name');
                                 $checkedTypes = CHtml::listData($model->datasetTypes,'id','id');
                                 foreach ($datasetTypes as $id => $datasetType) {
@@ -74,8 +76,9 @@ $cs->registerCssFile('/css/jquery.tag-editor.css');
                                     echo $form->labelEx($model,"$datasetType",array('class'=>'form-check-label'));
                                     echo '</div>'."\n";
                                 }
-                            ?>
-                        </fieldset>
+                                ?>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="control-group">
