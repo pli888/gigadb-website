@@ -42,7 +42,7 @@
                 <th>
                     <a class="btn-green left2"
                        title="Add/update types of files supported by GigaDB"
-                       href="/adminFileType/admin">Data Types</a>
+                       href="/adminFileType/admin">File Types</a>
                 </th>
             </tr>
             <tr>
