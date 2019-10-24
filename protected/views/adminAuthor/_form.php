@@ -16,7 +16,7 @@
 	<div class="control-group">
 		<?php echo $form->labelEx($model,'surname',array('class'=>'control-label')); ?>
 				<div class="controls">
-		<?php echo $form->textField($model,'surname',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'surname',array('class'=>'col form-control form-control-lg', 'size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'surname'); ?>
 				</div>
 	</div>
@@ -24,7 +24,7 @@
     <div class="control-group">
         <?php echo $form->labelEx($model,'first_name',array('class'=>'control-label')); ?>
         <div class="controls">
-            <?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>255)); ?>
+            <?php echo $form->textField($model,'first_name',array('class'=>'col form-control form-control-lg', 'size'=>60,'maxlength'=>255)); ?>
             <?php echo $form->error($model,'first_name'); ?>
         </div>
     </div>
@@ -32,14 +32,14 @@
     <div class="control-group">
         <?php echo $form->labelEx($model,'middle_name',array('class'=>'control-label')); ?>
         <div class="controls">
-            <?php echo $form->textField($model,'middle_name',array('size'=>60,'maxlength'=>255)); ?>
+            <?php echo $form->textField($model,'middle_name',array('class'=>'col form-control form-control-lg', 'size'=>60,'maxlength'=>255)); ?>
             <?php echo $form->error($model,'middle_name'); ?>
         </div>
     </div>
     <div class="control-group">
 	    <?php echo $form->labelEx($model,'custom_name',array('class'=>'control-label')); ?>
         <div class="controls">
-            <?php echo $form->textField($model,'custom_name',array('size'=>60,'maxlength'=>255)); ?>
+            <?php echo $form->textField($model,'custom_name',array('class'=>'col form-control form-control-lg', 'size'=>60,'maxlength'=>255)); ?>
             <?php echo $form->error($model,'custom_name'); ?>
         </div>
     </div>
@@ -47,7 +47,7 @@
 	<div class="control-group">
 		<?php echo $form->labelEx($model,'orcid',array('class'=>'control-label')); ?>
 				<div class="controls">
-		<?php echo $form->textField($model,'orcid',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->textField($model,'orcid',array('class'=>'col form-control form-control-lg', 'size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'orcid'); ?>
 				</div>
 	</div>
@@ -55,7 +55,7 @@
 	<div class="control-group">
 		<?php echo $form->labelEx($model,'gigadb_user_id',array('class'=>'control-label')); ?>
 				<div class="controls">
-		<?php echo $form->textField($model,'gigadb_user_id',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->textField($model,'gigadb_user_id',array('class'=>'col form-control form-control-lg', 'size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'gigadb_user_id'); ?>
 				</div>
 	</div>
@@ -69,7 +69,7 @@
 				</div>
 	</div> */?>
 
-	<div class="merge_info well">
+<!--	<div class="merge_info well">-->
 <?php
 		$identical_authors = $model->getIdenticalAuthors() ;
 		if( !empty($identical_authors) ) {

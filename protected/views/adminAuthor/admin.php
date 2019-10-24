@@ -1,11 +1,18 @@
 <?php Yii::app()->clientScript->registerScript('helpers', 'baseUrl = '.CJSON::encode(Yii::app()->request->getBaseUrl(true)).';',CClientScript::POS_HEAD); ?>
 <?php Yii::app()->clientScript->registerScript('graphreq', 'var httpRequest;',CClientScript::POS_HEAD); ?>
 
-
-<p class="text-left">
-<h1>Manage Authors</h1>
-</p>
-
+<div class="container" id="manage_authors_page">
+    <section class="page-title-section">
+        <div class="page-title">
+            <ol class="breadcrumb pull-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">Authors</a></li>
+                <li class="active">Manage</li>
+            </ol>
+            <h4>Manage Authors</h4>
+        </div>
+    </section>
+    <section>
 <?php
 	$user = null;
 	if ( isset(Yii::app()->session['attach_user']) ) {
@@ -52,7 +59,7 @@
 
 <div class="row">
 	<div class="span3">
-		<a href="/adminAuthor/create" class="btn">Create a new author</a>
+		<a href="/adminAuthor/create" class="btn-green">Create a new author</a>
 </div>
 
 </div>
@@ -320,3 +327,6 @@
         $("#merge_status").removeAttr("class").empty();
     });
 </script>
+
+    </section>
+</div>
