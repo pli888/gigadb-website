@@ -69,6 +69,7 @@ class AdminDatasetAuthorController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $this->layout='new_main';
 		$this->render('create',array(
 			'model'=>$model,
 		));
