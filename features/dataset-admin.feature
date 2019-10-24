@@ -102,3 +102,14 @@ Scenario: new dataset with mandatory fields filled in
 	And the response should contain "10.5524/100900"
 	And I should see a button "Your dataset?"
 	And the url should match the pattern "/\/dataset\/view\/id\/100900\/token\//"
+
+@ok
+Scenario: Change dataset metadata on admin dataset update page and see changes on dataset page
+	Given I sign in as an admin
+	When I am on "/adminDataset/update/id/211"
+	And I fill in "Title" with "Hello World!"
+    And I fill in "Description" with "foo bar"
+	And I press "Save"
+	Then the url should match the pattern "/\/dataset\/100003/"
+	And the response should contain "Hello World!"
+    And the response should contain "foo bar"
