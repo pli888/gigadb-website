@@ -305,7 +305,7 @@ $cs->registerCssFile('/css/jquery.tag-editor.css');
         </div> <!-- end of container -->
 
     </div>
-</div>
+<!--</div>-->
 
 <script language="javascript">
 function checkdate() {
