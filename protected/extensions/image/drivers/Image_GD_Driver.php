@@ -76,8 +76,17 @@ class Image_GD_Driver extends Image_Driver {
 		// Create the GD image resource
 		$this->tmp_image = $create($image['file']);
 
-		// Get the quality setting from the actions
-		$quality = CArray::remove('quality', $actions);
+        # The quality key value can be missing so trying to
+        # remove it when it is not present can cause: Error
+        # 500 include(CArray.php): failed to open stream
+        # $quality = CArray::remove('quality', $actions);
+        # Therefore check quality value is present first
+        if (array_key_exists('quality', $actions)) {
+            $quality = $actions['quality'];
+            unset($actions['quality']);
+        } else {
+            $quality = null;
+        }
 
 		if ($status = $this->execute($actions))
 		{
