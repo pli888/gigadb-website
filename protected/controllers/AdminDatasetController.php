@@ -103,6 +103,7 @@ class AdminDatasetController extends Controller
 
         }
 
+        $this->layout='new_main';
         $this->render('create', array('model'=>$dataset)) ;
     }
 
