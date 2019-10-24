@@ -17,7 +17,7 @@
 	<div class="control-group">
 		<?php echo $form->labelEx($model,'name',array('class'=>'control-label')); ?>
 				<div class="controls">
-		<?php echo $form->textField($model,'name',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->textField($model,'name',array('class'=>'col form-control form-control-lg', 'size'=>32,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'name'); ?>
 				</div>
 	</div>
@@ -25,7 +25,7 @@
 	<div class="control-group">
 		<?php echo $form->labelEx($model,'description',array('class'=>'control-label')); ?>
 				<div class="controls">
-		<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textArea($model,'description',array('class'=>'col form-control form-control-lg', 'rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'description'); ?>
 				</div>
 	</div>
