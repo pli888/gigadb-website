@@ -160,6 +160,7 @@ class UserController extends Controller {
             }
         }
         $user->password = $user->password_repeat = '';
+        $this->layout='new_main';
         $this->render('update', array('model'=>$user));
 
     }
@@ -220,6 +221,7 @@ class UserController extends Controller {
         if(isset($_GET['User']))
             $model->setAttributes($_GET['User']);
 
+        $this->layout='new_main';
         $this->render('admin',array(
             'model'=>$model,
         ));
@@ -561,6 +563,7 @@ EO_MAIL;
      */
     public function actionView($id)
     {
+        $this->layout='new_main';
         $this->render('view',array(
             'model'=>$this->loadModel($id)
         ));

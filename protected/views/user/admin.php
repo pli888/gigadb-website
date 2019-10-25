@@ -1,71 +1,83 @@
-<h2>Manage Users</h2>
-<div class="clear"></div>
-<p>
-To list certain news items that you are looking for, you may search via keyword or value. Type your keyword or value into their respective boxes under the column headers and press the enter key. You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+<div class="container" id="create_author_page">
+    <section class="page-title-section">
+        <div class="page-title">
+            <ol class="breadcrumb pull-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">Author</a></li>
+                <li class="active">Create</li>
+            </ol>
+            <h4>Manage Users</h4>
+        </div>
+    </section>
+    <section>
+        <p>
+            To list certain users that you are looking for, you may search via keyword or value. Type your keyword or value into their respective boxes under the column headers and press the enter key. You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+            or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+        </p>
 
-<?php $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
-  'id'=>'controls',
-  // additional javascript options for the dialog plugin
-  'options'=>array(
-    'title'=>'Managing User',
-    'autoOpen'=>false,
-    'modal'=>true,
-  ),
-));
+        <?php $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+            'id'=>'controls',
+            // additional javascript options for the dialog plugin
+            'options'=>array(
+                'title'=>'Managing User',
+                'autoOpen'=>false,
+                'modal'=>true,
+            ),
+        ));
 
-?>
+        ?>
 
-<h3>Basic Operations</h3>
-<a href="#" class="btn btn-active" title="view" onclick="goto_userview();">View</a>
-<a href="#" class="btn btn-active" title="update" onclick="goto_userupdate();">Update</a>
-<a href="#" class="btn btn-active delete" title="delete" onclick="goto_userdelete();">Delete</a>
+        <h3>Basic Operations</h3>
+        <a href="#" class="btn btn-active" title="view" onclick="goto_userview();">View</a>
+        <a href="#" class="btn btn-active" title="update" onclick="goto_userupdate();">Update</a>
+        <a href="#" class="btn btn-active delete" title="delete" onclick="goto_userdelete();">Delete</a>
 
-<h3>Advanced Operations</h3>
-<a href="#" class="btn btn-active delete" title="link" onclick="goto_userlinkauthor();">Link this user to an author</a>
+        <h3>Advanced Operations</h3>
+        <a href="#" class="btn btn-active delete" title="link" onclick="goto_userlinkauthor();">Link this user to an author</a>
 
 
-<div id="status"></div>
+        <div id="status"></div>
 
-<?
+        <?
 
-$this->endWidget('zii.widgets.jui.CJuiDialog');
+        $this->endWidget('zii.widgets.jui.CJuiDialog');
 
-?>
+        ?>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-  'id'=>'news-grid',
-  'dataProvider'=>$model->search(),
-  'filter'=>$model, // turn on/off filtering
-  'itemsCssClass'=>'table table-bordered',
-  'selectionChanged'=>"function(id){open_controls($.fn.yiiGridView.getSelection(id));}",
-  'columns'=>array(
-    'id',
-    'email',
-    'first_name',
-    'last_name',
-    'role',
-    'affiliation',
-    'facebook_id',
-    'twitter_id',
-    'linkedin_id',
-    'google_id',
-    'username',  
-    array(
-        'name' => 'is_activated',
-        'value' => '($data->is_activated) ? "Yes" : "No"'
-        ),
-    array(
-      'name'=>'newsletter',
-      'value'=>'$data->renderNewsletter()',
-      ),
-    array(
-      'class'=>'CButtonColumn',
+        <?php $this->widget('zii.widgets.grid.CGridView', array(
+            'id'=>'news-grid',
+            'dataProvider'=>$model->search(),
+            'filter'=>$model, // turn on/off filtering
+            'itemsCssClass'=>'table table-bordered',
+            'selectionChanged'=>"function(id){open_controls($.fn.yiiGridView.getSelection(id));}",
+            'columns'=>array(
+                'id',
+                'email',
+                'first_name',
+                'last_name',
+                'role',
+                'affiliation',
+                'facebook_id',
+                'twitter_id',
+                'linkedin_id',
+                'google_id',
+                'username',
+                array(
+                    'name' => 'is_activated',
+                    'value' => '($data->is_activated) ? "Yes" : "No"'
+                ),
+                array(
+                    'name'=>'newsletter',
+                    'value'=>'$data->renderNewsletter()',
+                ),
+                array(
+                    'class'=>'CButtonColumn',
 
-    ),
-  ),
-)); ?>
+                ),
+            ),
+        )); ?>
+    </section>
+</div>
 
 <script>
 function open_controls(user_id) {
