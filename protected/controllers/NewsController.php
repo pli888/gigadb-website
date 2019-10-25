@@ -69,6 +69,7 @@ class NewsController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $this->layout='new_main';
 		$this->render('create',array(
 			'model'=>$model,
 		));
@@ -93,6 +94,7 @@ class NewsController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $this->layout='new_main';
 		$this->render('update',array(
 			'model'=>$model,
 		));
@@ -139,6 +141,7 @@ class NewsController extends Controller
 		if(isset($_GET['News']))
 			$model->setAttributes($_GET['News']);
 
+        $this->layout='new_main';
 		$this->render('admin',array(
 			'model'=>$model,
 		));
