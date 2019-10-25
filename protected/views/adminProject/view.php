@@ -13,14 +13,26 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Project #<?php echo $model->id; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'url',
-		'name',
-		'image_location',
-	),
-)); ?>
+<div class="container" id="view_project_page">
+    <section class="page-title-section">
+        <div class="page-title">
+            <ol class="breadcrumb pull-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">Project</a></li>
+                <li class="active">View</li>
+            </ol>
+            <h4>View Project #<?php echo $model->id; ?></h4>
+        </div>
+    </section>
+    <section>
+    <?php $this->widget('zii.widgets.CDetailView', array(
+        'data'=>$model,
+        'attributes'=>array(
+            'id',
+            'url',
+            'name',
+            'image_location',
+        ),
+    )); ?>
+    </section>
+</div>
