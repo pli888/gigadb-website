@@ -1,37 +1,50 @@
-<div class="row">
-    <div class="span10 offset1">
-        <div class="chart" id="chart_div" style="width: 600px; height: 400px">
+<div class="container" id="report_page">
+    <section class="page-title-section">
+        <div class="page-title">
+            <ol class="breadcrumb pull-right">
+                <li><a href="/">Home</a></li>
+                <li class="active">Report</li>
+            </ol>
+            <h4>Report</h4>
         </div>
-        <div class="setting">
-            <form class="form form-horizontal" method="POST">
-                <div class="control-group">
-                    <label class="control-lable">Start Date</label>
-                    <div class="controls">
-                        <?= CHtml::textField('Report[start_date]', isset($args['start_date'])?$args['start_date']: '', array('class'=>'date'))?>
-                    </div>
+    </section>
+    <section>
+        <div class="row">
+            <div class="span10 offset1">
+                <div class="chart" id="chart_div" style="width: 600px; height: 400px">
                 </div>
-                <div class="control-group">
-                    <label class="control-lable">End Date</label>
-                    <div class="controls">
-                        <?= CHtml::textField('Report[end_date]', isset($args['end_date'])?$args['end_date']: '', array('class'=>'date'))?>
-                    </div>
+                <div class="setting">
+                    <form class="form form-horizontal" method="POST">
+                        <div class="control-group">
+                            <label class="control-lable">Start Date</label>
+                            <div class="controls">
+                                <?= CHtml::textField('Report[start_date]', isset($args['start_date'])?$args['start_date']: '', array('class'=>'date'))?>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-lable">End Date</label>
+                            <div class="controls">
+                                <?= CHtml::textField('Report[end_date]', isset($args['end_date'])?$args['end_date']: '', array('class'=>'date'))?>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-lable">Display for DOI</label>
+                            <div class="controls">
+                                <?php echo CHtml::dropDownList('Report[ids][]', empty($selectDois)? 'all' : $selectDois, $dois,
+                                    array( 'class'=>'js-multi', 'multiple'=>'multiple', 'data-placeholder'=>Yii::t('app','Select DOIs'))
+                                    ); ?>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="submit" class="btn" name="report" value="View" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="control-group">
-                    <label class="control-lable">Display for DOI</label>
-                    <div class="controls">
-                        <?php echo CHtml::dropDownList('Report[ids][]', empty($selectDois)? 'all' : $selectDois, $dois, 
-							array( 'class'=>'js-multi', 'multiple'=>'multiple', 'data-placeholder'=>Yii::t('app','Select DOIs'))
-							); ?>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <input type="submit" class="btn" name="report" value="View" />
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </section>
 </div>
 <?php
 $clientScript = Yii::app()->clientScript;

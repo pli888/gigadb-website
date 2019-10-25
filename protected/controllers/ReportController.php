@@ -125,6 +125,7 @@ class ReportController extends Controller
 			}
 		}
 
+        $this->layout='new_main';
 		$this->render('index', array('dois'=>$l, 'args'=>$args, 'linedata'=>CJSON::encode($data), 'selectDois'=>$selectDois));
 	}
 }
