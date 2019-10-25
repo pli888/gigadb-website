@@ -47,6 +47,7 @@ class DatasetFunderController extends Controller
 	 */
 	public function actionView()
 	{
+        $this->layout='new_main';
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -99,6 +100,7 @@ class DatasetFunderController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $this->layout='new_main';
 		$this->render('create',array(
 			'model'=>$model,
 			'funders'=>$funders,
@@ -131,6 +133,7 @@ class DatasetFunderController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $this->layout='new_main';
 		$this->render('update',array(
 			'model'=>$model,
 			'datasets' => $datasets,
@@ -173,6 +176,7 @@ class DatasetFunderController extends Controller
 	 */
 	public function actionAdmin()
 	{
+        $this->layout='new_main';
 		$model=new DatasetFunder('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['DatasetFunder']))
