@@ -50,6 +50,7 @@ class AdminFileController extends Controller
      */
     public function actionView($id)
     {
+        $this->layout='new_main';
         $this->render('view',array(
             'model'=>$this->loadModel($id),
         ));
@@ -140,6 +141,7 @@ class AdminFileController extends Controller
             }
         }
 
+        $this->layout='new_main';
         $this->render('create', array(
             'model' => $model,
         ));
@@ -442,6 +444,7 @@ class AdminFileController extends Controller
             }
         }
 
+        $this->layout='new_main';
         $this->render('update', array(
             'model' => $model,
             'attribute' => $attribute
@@ -523,6 +526,7 @@ class AdminFileController extends Controller
         if (isset($_GET['File']))
             $model->attributes = $_GET['File'];
 
+        $this->layout='new_main';
         $this->render('admin', array(
             'model' => $model,
         ));
@@ -695,6 +699,7 @@ EO_MAIL;
             }
         }
 
+        $this->layout='new_main';
         $this->render('linkFolder', array(
             'model' => $model, 'buff' => $buff
         ));
