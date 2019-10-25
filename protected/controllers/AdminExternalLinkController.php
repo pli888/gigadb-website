@@ -46,6 +46,7 @@ class AdminExternalLinkController extends Controller
 	 */
 	public function actionView($id)
 	{
+        $this->layout='new_main';
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -69,6 +70,7 @@ class AdminExternalLinkController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $this->layout='new_main';
 		$this->render('create',array(
 			'model'=>$model,
 		));
@@ -200,6 +202,7 @@ class AdminExternalLinkController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $this->layout='new_main';
 		$this->render('update',array(
 			'model'=>$model,
 		));
@@ -246,6 +249,7 @@ class AdminExternalLinkController extends Controller
 		if(isset($_GET['ExternalLink']))
 			$model->setAttributes($_GET['ExternalLink']);
 
+        $this->layout='new_main';
 		$this->render('admin',array(
 			'model'=>$model,
 		));
