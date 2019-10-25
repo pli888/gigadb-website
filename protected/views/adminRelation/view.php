@@ -13,14 +13,33 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Relation #<?php echo $model->id; ?></h1>
+<div class="container" id="view_relation_page">
+    <section class="page-title-section">
+        <div class="page-title">
+            <ol class="breadcrumb pull-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">Relation</a></li>
+                <li class="active">View</li>
+            </ol>
+            <h4>View Relation #<?php echo $model->id; ?></h4>
+        </div>
+    </section>
+    <section>
+        <?php $this->widget('zii.widgets.CDetailView', array(
+            'data'=>$model,
+            'attributes'=>array(
+                'id',
+                'dataset_id',
+                'related_doi',
+                //'relationship',
+            ),
+        )); ?>
+    </section>
+</div>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'dataset_id',
-		'related_doi',
-		//'relationship',
-	),
-)); ?>
+
+
+
+
+
+
