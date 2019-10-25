@@ -46,6 +46,7 @@ class AdminDatasetProjectController extends Controller
 	 */
 	public function actionView($id)
 	{
+        $this->layout='new_main';
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -69,6 +70,7 @@ class AdminDatasetProjectController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $this->layout='new_main';
 		$this->render('create',array(
 			'model'=>$model,
 		));
@@ -142,6 +144,7 @@ class AdminDatasetProjectController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $this->layout='new_main';
 		$this->render('update',array(
 			'model'=>$model,
 		));
@@ -206,6 +209,7 @@ class AdminDatasetProjectController extends Controller
 		if(isset($_GET['DatasetProject']))
 			$model->setAttributes($_GET['DatasetProject']);
 
+        $this->layout='new_main';
 		$this->render('admin',array(
 			'model'=>$model,
 		));
