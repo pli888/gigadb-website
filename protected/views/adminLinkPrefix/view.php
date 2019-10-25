@@ -13,17 +13,32 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Prefix #<?php echo $model->id; ?></h1>
-<? if (Yii::app()->user->checkAccess('admin')) { ?>
-<div class="actionBar">
-[<?= CHtml::link('Manage Prefixes', array('admin')) ?>]
+<div class="container" id="view_link_prefix_page">
+    <section class="page-title-section">
+        <div class="page-title">
+            <ol class="breadcrumb pull-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">Link prefix</a></li>
+                <li class="active">View</li>
+            </ol>
+            <h4>View Prefix #<?php echo $model->id; ?></h4>
+        </div>
+    </section>
+    <section>
+        <? if (Yii::app()->user->checkAccess('admin')) { ?>
+            <div class="actionBar">
+                [<?= CHtml::link('Manage Link Prefixes', array('admin')) ?>]
+            </div>
+        <? } ?>
+    </section>
+    <section>
+        <?php $this->widget('zii.widgets.CDetailView', array(
+            'data'=>$model,
+            'attributes'=>array(
+                'id',
+                'prefix',
+                'url',
+            ),
+        )); ?>
+    </section>
 </div>
-<? } ?>
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'prefix',
-		'url',
-	),
-)); ?>
