@@ -201,6 +201,11 @@ and `54321` as the `Port` value. The `Maintenance database` is `gigadb`,
 For further investigation, check out the [docker-compose.yml](ops/deployment/docker-compose.yml) 
 to see how the services are assembled and what scripts they run.
 
+It is also possible to get command line access to the web container:
+```
+$ docker exec -it deployment_web_1 sh
+```
+
 ## Life cycle
 
 To regenerate the web application configuration files, *e.g.* because a variable 
