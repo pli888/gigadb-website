@@ -16,7 +16,7 @@ Feature: GigaDB administration page loading
     And I should see a button "Dataset Types" with link "/adminDatasetType/admin"
     And I should see a button "Dataset:Authors" with link "/adminDatasetAuthor/admin"
     And I should see a button "Samples" with link "/adminSample/admin"
-    And I should see a button "Data Types" with link "/adminFileType/admin"
+    And I should see a button "File Types" with link "/adminFileType/admin"
     And I should see a button "Dataset:Samples" with link "/adminDatasetSample/admin"
     And I should see a button "Species" with link "/adminSpecies/admin"
     And I should see a button "File Formats" with link "/adminFileFormat/admin"
