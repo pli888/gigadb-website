@@ -92,12 +92,12 @@ Feature: GigaDB administration page loading
     Then I should be on "/adminSample/admin"
 
   @ok @admin_page
-  Scenario: Go to Data Types admin page
+  Scenario: Go to File Types admin page
     Given I sign in as an admin
     And I am on "/site/admin"
-    When I follow "Data Types"
+    When I follow "File Types"
     Then I should be on "/adminFileType/admin"
-    And I should see a button "Create A New Data Type" with link "/adminFileType/create"
+    And I should see a button "Create A New File Type" with link "/adminFileType/create"
     And I should see "Readme"
     And I should see "Sequence assembly"
     And I should see "Annotation"
