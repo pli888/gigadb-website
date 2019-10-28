@@ -96,7 +96,7 @@
                                     array('class' => 'btn'));
 		}
 ?>
-</div>
+<!--</div>-->
 
 
 	<div class="pull-right">
