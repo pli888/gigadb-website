@@ -99,9 +99,15 @@ Selenium web browser (currently PhantomJS) will be automatically spun-off into
 its own container. If an acceptance test fails, it will leave a screenshot under 
 the `./tmp` directory.
 
-To only run unit tests, use the command:
+To run all functional and unit tests, use the command:
 ```
 $ docker-compose run --rm test ./tests/unit_functional
+```
+
+To run a specific functional or unit test, pass the name of the test as a
+command line argument:
+```
+$ docker-compose run --rm test ./tests/unit_functional protected/tests/functional/LoginTest
 ```
 
 To only run Behat acceptance tests, use the command:

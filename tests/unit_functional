@@ -10,22 +10,45 @@ echo "Loading credentials data"
 source "/var/www/.secrets"
 set +a
 
-printf "\nRunning PHPUnit functional tests\n"
+prepare_database_functional_tests () {
+    echo "Preparing database for functional testing..."
+    exec 3>&1
+    exec 1> /dev/null
+    pg_restore -h $GIGADB_HOST -U $GIGADB_USER -d $GIGADB_DB --clean --no-owner -v /var/www/sql/gigadb_testdata.pgdmp || true
+    exec 1>&3
+}
 
-echo "Preparing the database for functional tests..."
-exec 3>&1
-exec 1> /dev/null
-pg_restore -h $GIGADB_HOST -U $GIGADB_USER -d $GIGADB_DB --clean --no-owner -v /var/www/sql/gigadb_testdata.pgdmp || true
-exec 1>&3
+prepare_database_unit_tests () {
+    echo "Preparing  test database for unit testing..."
+    exec 3>&1
+    exec 1> /dev/null
+    psql -U $GIGADB_USER -h $GIGADB_HOST < /var/www/sql/gigadb_unit_tests.sql
+    exec 1>&3
+}
 
-./bin/phpunit protected/tests/functional  --verbose --configuration protected/tests/phpunit.xml --no-coverage
-
-printf "\nRunning PHPUnit unit tests\n"
-
-echo "Preparing the test database..."
-exec 3>&1
-exec 1> /dev/null
-psql -U $GIGADB_USER -h $GIGADB_HOST < /var/www/sql/gigadb_unit_tests.sql
-exec 1>&3
-
-./bin/phpunit protected/tests/unit  --verbose --configuration protected/tests/phpunit.xml --no-coverage
+# If no args then run all functional and unit tests
+if [[ $# -eq 0 ]]; then
+    printf "\nRunning PHPUnit functional tests\n"
+    prepare_database_functional_tests
+    ./bin/phpunit protected/tests/functional --verbose --configuration protected/tests/phpunit.xml --no-coverage
+    printf "\nRunning PHPUnit unit tests\n"
+    prepare_database_unit_tests
+    ./bin/phpunit protected/tests/unit --verbose --configuration protected/tests/phpunit.xml --no-coverage
+elif [[ $# -eq 1 ]]; then
+    FILE=$1".php"
+    if [[ $1 == *"protected/tests/functional"* ]] && [ -f "$FILE" ]; then
+        printf "\nRunning PHPUnit functional test: "$1"\n"
+        prepare_database_functional_tests
+        ./bin/phpunit $1 --verbose --configuration protected/tests/phpunit.xml --no-coverage
+    elif [[ $1 == *"protected/tests/unit"* ]] && [ -f "$FILE" ]; then
+        printf "\nRunning PHPUnit unit test: "$1"\n"
+        prepare_database_unit_tests
+        ./bin/phpunit $1 --verbose --configuration protected/tests/phpunit.xml --no-coverage
+    else
+        echo "Functional or unit test file not found: "$1
+        exit 1
+    fi
+else
+    echo "Usage: Takes 0 or 1 arg only"
+    exit 1
+fi
