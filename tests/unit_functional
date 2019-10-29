@@ -39,15 +39,14 @@ elif [[ $# -eq 1 ]]; then
     if [[ $1 == *"protected/tests/functional"* ]] && [ -f "$FILE" ]; then
         printf "\nRunning PHPUnit functional test: "$1"\n"
         prepare_database_functional_tests
-        ./bin/phpunit $1 --verbose --configuration protected/tests/phpunit.xml --no-coverage
     elif [[ $1 == *"protected/tests/unit"* ]] && [ -f "$FILE" ]; then
         printf "\nRunning PHPUnit unit test: "$1"\n"
         prepare_database_unit_tests
-        ./bin/phpunit $1 --verbose --configuration protected/tests/phpunit.xml --no-coverage
     else
         echo "Functional or unit test file not found: "$1
         exit 1
     fi
+    ./bin/phpunit $1 --verbose --configuration protected/tests/phpunit.xml --no-coverage
 else
     echo "Usage: Takes 0 or 1 arg only"
     exit 1
