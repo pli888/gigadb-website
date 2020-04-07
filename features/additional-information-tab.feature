@@ -113,8 +113,8 @@ Scenario: Dataset is not part of a large recognised (international) project
 
 @collaboration-link
 Scenario: Dataset is part of a large recognised (international) project
-    Given I am on "site/login" and I login
-    Given url address "/datasetSubmission/additionalManagement/id/322"
+    Given I am logged in to Gigadb web site
+    When I go to "/datasetSubmission/additionalManagement/id/322"
     And I press "No" button for "Public data archive links"
     And I press "No button for "Related GigaDB Datasets"
     And I press "Yes" button for "Project links"
@@ -123,7 +123,7 @@ Scenario: Dataset is part of a large recognised (international) project
 
 @collaboration-link
 Scenario: Link selected project to dataset
-    Given I am on "site/login" and I login
+    Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"
     And I press "No" button for "Public data archive links"
     And I press "No button for "Related GigaDB Datasets"
@@ -136,7 +136,7 @@ Scenario: Link selected project to dataset
 
 @collaboration-link
 Scenario: Delete project link to dataset
-    Given I am on "site/login" and I login
+    Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"
     And I press "No" button for "Public data archive links"
     And I press "No button for "Related GigaDB Datasets"
@@ -152,7 +152,7 @@ Scenario: Delete project link to dataset
 
 @other-links
 Scenario: Dataset is not associated with a Protocol IO, SketchFab, CodeOcean link nor another dataset stored from another repository
-    Given I am on "site/login" and I login
+    Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"
     And I press "No" button for "Public data archive links"
     And I press "No" button for "Related GigaDB Datasets"
@@ -168,7 +168,7 @@ Scenario: Dataset is not associated with a Protocol IO, SketchFab, CodeOcean lin
 
 @other-links @sketchfab
 Scenario: Dataset is associated with a SketchFab link
-    Given I am on "site/login" and I login
+    Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"
     And I press "No" button for "Public data archive links"
     And I press "No" button for "Related GigaDB Datasets"
@@ -190,7 +190,7 @@ Scenario: Dataset is associated with a SketchFab link
 
 @other-links @codeocean
 Scenario: Dataset has executable code in CodeOcean
-    Given I am on "site/login" and I login
+    Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"
     And I press "No" button for "Public data archive links"
     And I press "No" button for "Related GigaDB Datasets"
@@ -212,7 +212,7 @@ Scenario: Dataset has executable code in CodeOcean
 
 @other-links @protocolsio
 Scenario: Dataset is associated with a Protocols.io DOI
-    Given I am on "site/login" and I login
+    Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"
     And I press "No" button for "Public data archive links"
     And I press "No" button for "Related GigaDB Datasets"
@@ -234,7 +234,7 @@ Scenario: Dataset is associated with a Protocols.io DOI
 
 @other-links @doi-or-url
 Scenario: Dataset is associated with another manuscript DOI
-    Given I am on "site/login" and I login
+    Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"
     And I press "No" button for "Public data archive links"
     And I press "No" button for "Related GigaDB Datasets"
@@ -256,7 +256,7 @@ Scenario: Dataset is associated with another manuscript DOI
 
 @other-links @doi-or-url
   Scenario: Dataset is associated with a dataset DOI in another online repository
-    Given I am on "site/login" and I login
+    Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"
     And I press "No" button for Public data archive links
     And I press "No" button for "Related GigaDB Datasets"
