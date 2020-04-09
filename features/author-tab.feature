@@ -18,8 +18,8 @@ Scenario: Add an author to a dataset
     And I fill in "ORCiD" with "0000-0000-0000-0001"
     And I fill in "CrediT" with "Conceptualization"
     And I select "CrediT" from "Conceptualization" autocomplete list
-    And I press "Add Author" button
-    And I press "Save" button
+    And I press "Add Author"
+    And I press "Save"
     Then I should see a table
     | First Name | Middle Name | Last name | ORCiD | CRediT |
     | QA | "test middle name"  | Engineer  | 0000-0000-0000-0001 | Conceptualization |
@@ -28,9 +28,9 @@ Scenario: Add an author to a dataset
 Scenario: Add an Author via a CSV file to a dataset
     Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/authorManagement/id/322"
-    And I press "Choose file" to select CSV file
-    And I press "Add Authors" button
-    And I press "Save" button
+    And I attach the file "file.csv" to "Choose file"
+    And I press "Add Authors"
+    And I press "Save"
     Then I should see a table
     | First Name | Middle Name | Last name | ORCiD | CRediT |
     | L | | Skywalker  | 0000-0000-0000-0002 | Conceptualization |
@@ -40,9 +40,9 @@ Scenario: Add an Author via a CSV file to a dataset
 Scenario: Add an Author via a TSV file to a dataset
     Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/authorManagement/id/322"
-    And I press "Choose file" to select TSV file
-    And I press "Add Authors" button
-    And I press "Save" button
+    And I attach the file "file.tsv" to "Choose file"
+    And I press "Add Authors"
+    And I press "Save"
     Then I should see a table
     | First Name | Middle Name | Last name | ORCiD | CRediT |
     | B | | Solo  | 0000-0000-0000-0004 | Conceptualization |
