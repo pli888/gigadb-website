@@ -21,9 +21,11 @@
 
 	$this->loadFixture("file_format");
 	$this->loadFixture("file_type");
+	$this->loadFixture("contribution");  // Added by WL
+	$this->loadFixture("funder_name");  // Added by WL
 
-	// $this->loadFixture("species");
+    //$this->loadFixture("species");  // Added by WL
 	// $this->loadFixture("file");
-	// $this->loadFixture("sample");
+    $this->loadFixture("sample");  // Added by WL
 	// $this->loadFixture("file_sample");
 ?>
