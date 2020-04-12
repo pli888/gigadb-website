@@ -7,6 +7,9 @@ class DatasetTest extends CDbTestCase
         'datasets'=>'Dataset',
         'authors'=>'Author',
         'dataset_author'=>'DatasetAuthor',
+        'sample'=>'Sample',  // Change made by White Label
+        'dataset_sample'=>'DatasetSample',  // Change made by White Label
+        'sample_attribute'=>'SampleAttribute',  // Change made by White Label
     );
 
  	function testGetAuthors() {
@@ -25,6 +28,124 @@ class DatasetTest extends CDbTestCase
  		$this->assertEquals("Joe Bloggs", $this->datasets(1)->getCuratorName(),"Full name returned on getCuratorName()");
  	}
 
- }
+    /**
+     * @author White Label
+     */
+    function testSetIdentifier() {
+        $lastDataset = Dataset::model()->find(array('order'=>'identifier desc'));
+        $lastIdentifier = intval($lastDataset->identifier);
 
- ?>
+        $dataset = new Dataset();
+        $dataset->setIdentifier();
+
+        $this->assertEquals($lastIdentifier + 1, $dataset->identifier);
+    }
+
+    /**
+     * @author White Label
+     */
+    function testLoadByData() {
+        $data = array(
+            'manuscript_id' => 'test manuscript_id',
+            'title' => 'test title',
+            'description' => 'test description',
+        );
+
+        $dataset = new Dataset();
+        $dataset->loadByData($data);
+
+        $this->assertEquals('test manuscript_id', $dataset->manuscript_id);
+        $this->assertEquals('test title', $dataset->title);
+        $this->assertEquals('test description', $dataset->description);
+    }
+
+    /**
+     * @author White Label
+     */
+    function testValidate() {
+        $data = array(
+            'submitter_id' => 345,
+            'manuscript_id' => 'test manuscript_id',
+            'title' => 'test title',
+            'description' => 'test description',
+            'upload_status' => 'Incomplete',
+            'ftp_site' => "''",
+        );
+
+        $dataset = new Dataset();
+        $dataset->loadByData($data);
+        $dataset->types = array(
+            2,
+            4,
+        );
+        $res = $dataset->validate();
+
+        $this->assertTrue($res);
+    }
+
+    /**
+     * @author White Label
+     */
+    function testUpdateKeywords() {
+        $dataset = $this->datasets(0);
+
+        $newKeywords = array(
+            'test keyword1',
+            'test keyword2',
+            'test keyword3',
+        );
+        // DONT FORGET SHOULD BE STRING!!!
+        $dataset->updateKeywords(implode(',', $newKeywords));
+
+        $this->assertEquals($newKeywords, $dataset->getSemanticKeywords());
+    }
+
+    /**
+     * @author White Label
+     */
+    function testUpdateTypes() {
+        $dataset = $this->datasets(0);
+
+        $newTypes = array(
+            2,
+            4,
+        );
+        $dataset->updateTypes($newTypes);
+        $this->assertEquals($newTypes, $dataset->getTypeIds());
+    }
+
+    /**
+     * @author White Label
+     */
+    function testAddAuthor() {
+        $dataset = $this->datasets(2);
+        $author = $this->authors(2);
+
+        $dataset->addAuthor($author, 1, 'contribution1');
+        $authors = $dataset->getAuthor();
+        $this->assertEquals(1, count($authors));
+        $this->assertEquals('Juan', $authors[0]['first_name']);
+    }
+
+    /**
+     * @author White Label
+     */
+    function testRemoveWithAllData() {
+        $dataset = $this->datasets(2);
+
+        $this->assertTrue($dataset->removeWithAllData());
+    }
+
+    /**
+     * @author White Label
+     */
+    function testToReal() {
+        $dataset = Dataset::model()->findByPk(2);
+
+        $this->assertEquals(1, $dataset->is_test);
+
+        $this->assertTrue($dataset->toReal());
+
+        $this->assertEquals(0, $dataset->is_test);
+    }
+}
