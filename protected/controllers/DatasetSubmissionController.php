@@ -32,7 +32,7 @@ class DatasetSubmissionController extends Controller
     {
         return array(
             array('allow',  // allow logged-in users to perform 'upload'
-                'actions'=>array('upload','delete','create1','submit','updateSubmit', 'updateFile',
+                'actions'=>array('choose', 'upload','delete','create1','submit','updateSubmit', 'updateFile',
                     'datasetManagement','authorManagement','projectManagement','linkManagement','exLinkManagement',
                     'relatedDoiManagement','sampleManagement','PxInfoManagement','datasetAjaxDelete'),
                 'users'=>array('@'),
@@ -43,6 +43,14 @@ class DatasetSubmissionController extends Controller
         );
     }
 
+    /**
+     * Display choose view to provide choice of creating
+     * dataset by spreadsheet upload or submission wizard.
+     */
+    public function actionChoose()
+    {
+        $this->render('choose');
+    }
 
     /**
      * Lists all models.
@@ -177,7 +185,7 @@ EO_MAIL;
             }
 
             $isOld = 1;
-            if ($dataset->upload_status == 'UserStartedIncomplete') {
+            if ($dataset->upload_status == 'Incomplete') {
                 $isOld = 0;
             }
 
@@ -486,7 +494,7 @@ EO_MAIL;
                 $attrs = $_POST['Dataset'];
                 $dataset->title = $attrs['title'];
                 $dataset->description = $attrs['description'];
-                $dataset->upload_status = "UserStartedIncomplete";
+                $dataset->upload_status = "Incomplete";
                 $dataset->ftp_site = "''";
 
                 // save dataset types
