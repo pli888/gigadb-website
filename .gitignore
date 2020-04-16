@@ -20,6 +20,8 @@ protected/scripts/update_links.sh
 themes/classic/views/
 files/certs
 images/tempcaptcha/
+images/uploads/*
+!images/uploads/.gitkeep
 
 # PhpStorm
 *.iml
