@@ -77,7 +77,7 @@
                                     <? echo count($data[$i]->files); ?>
                                 </td>
                                 <td>
-                                    <? if ($data[$i]->upload_status !='Published' && $data[$i]->upload_status!='AuthorReview' && $data[$i]->upload_status!='Private'){ ?>
+                                    <? if ($data[$i]->upload_status !='Published' && $data[$i]->upload_status!='Pending' && $data[$i]->upload_status!='Private'){ ?>
                                         <a class="update" title="Update" href=<? echo "/datasetSubmission/datasetManagement/id/" . $data[$i]->id ?> ><img src="/images/update.png" alt="Update" /></a>
                                         <a class="js-delete-dataset" did="<?=$data[$i]->id?>" title="Delete"><img alt="Delete" src="/images/delete.png"></a>
                                         <? } ?>
@@ -86,3 +86,11 @@
         </tbody>
     </table>
 </section>
+
+<script>
+    $(document).ready(function () {
+        if (window.location.hash == '#submitted') {
+            $('a[href="'+ window.location.hash +'"]').trigger('click');
+        }
+    })
+</script>
