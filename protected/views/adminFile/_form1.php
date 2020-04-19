@@ -358,9 +358,4 @@
         //hide ajax indicator
         ajaxIndicatorStop();
     });
-
-    $(document).on('click', '.update', function () {
-        process('save');
-        return false;
-    });
 </script>
