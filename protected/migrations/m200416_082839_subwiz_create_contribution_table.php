@@ -10,7 +10,9 @@ class m200416_082839_subwiz_create_contribution_table extends CDbMigration
         $sql_createtab = sprintf(
             'CREATE TABLE "contribution" (
                 id integer NOT NULL,
-                name character varying(255) NOT NULL);'
+                name character varying(255) NOT NULL,
+                source character varying(255) NOT NULL,
+                description character varying(255) NOT NULL);'
         );
 
         $sql_createseq = sprintf(
@@ -54,59 +56,88 @@ class m200416_082839_subwiz_create_contribution_table extends CDbMigration
         // Contributor roles from https://casrai.org/credit/
         $this->insert('contribution', array(
             'id' => '1',
-            'name' =>'Conceptualization'
+            'name' =>'Conceptualization',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Ideas; formulation or evolution of overarching research goals and aims.'
         ));
         $this->insert('contribution', array(
             'id' => '2',
-            'name' =>'Data curation'
+            'name' =>'Data curation',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Management activities to annotate (produce metadata), scrub data and maintain research data (including software code, where it is necessary for interpreting the data itself) for initial use and later re-use.'
         ));
         $this->insert('contribution', array(
             'id' => '3',
-            'name' =>'Formal Analysis'
+            'name' =>'Formal Analysis',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Application of statistical, mathematical, computational, or other formal techniques to analyze or synthesize study data.'
+
         ));
         $this->insert('contribution', array(
             'id' => '4',
-            'name' =>'Funding acquisition'
+            'name' =>'Funding acquisition',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Acquisition of the financial support for the project leading to this publication.'
         ));
         $this->insert('contribution', array(
             'id' => '5',
-            'name' =>'Investigation'
+            'name' =>'Investigation',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Conducting a research and investigation process, specifically performing the experiments, or data/evidence collection.'
         ));
         $this->insert('contribution', array(
             'id' => '6',
-            'name' =>'Methodology'
+            'name' =>'Methodology',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Development or design of methodology; creation of models.'
         ));
         $this->insert('contribution', array(
             'id' => '7',
-            'name' =>'Project administration'
+            'name' =>'Project administration',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Management and coordination responsibility for the research activity planning and execution.'
         ));
         $this->insert('contribution', array(
             'id' => '8',
-            'name' =>'Resources'
+            'name' =>'Resources',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Provision of study materials, reagents, materials, patients, laboratory samples, animals, instrumentation, computing resources, or other analysis tools.'
         ));
         $this->insert('contribution', array(
             'id' => '9',
-            'name' =>'Software'
+            'name' =>'Software',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Programming, software development; designing computer programs; implementation of the computer code and supporting algorithms; testing of existing code components.'
         ));
         $this->insert('contribution', array(
             'id' => '10',
-            'name' =>'Supervision'
+            'name' =>'Supervision',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Oversight and leadership responsibility for the research activity planning and execution, including mentorship external to the core team.'
         ));
         $this->insert('contribution', array(
             'id' => '11',
-            'name' =>'Validation'
+            'name' =>'Validation',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Verification, whether as a part of the activity or separate, of the overall replication/reproducibility of results/experiments and other research outputs.'
         ));
         $this->insert('contribution', array(
             'id' => '12',
-            'name' =>'Visualization'
+            'name' =>'Visualization',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Preparation, creation and/or presentation of the published work, specifically visualization/data presentation.'
         ));
         $this->insert('contribution', array(
             'id' => '13',
-            'name' =>'Writing – original draft'
+            'name' =>'Writing – original draft',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Preparation, creation and/or presentation of the published work, specifically writing the initial draft (including substantive translation).'
         ));
         $this->insert('contribution', array(
             'id' => '14',
-            'name' =>'Writing – review & editing'
+            'name' =>'Writing – review & editing',
+            'source' => 'https://casrai.org/credit',
+            'description' => 'Preparation, creation and/or presentation of the published work by those from the original research group, specifically critical review, commentary or revision – including pre- or post-publication stages.'
         ));
     }
 	public function safeDown()
