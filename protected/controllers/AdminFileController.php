@@ -878,20 +878,15 @@ EO_MAIL;
         Util::returnJSON(array("success"=>false,"message"=>"Data is empty."));
     }
 
+    /**
+     * @throws Exception
+     */
     public function actionUploadFiles()
     {
         if ($_POST) {
             $files = CUploadedFile::getInstanceByName('files');
             if($files) {
-
-                if ($files->getType() != CsvHelper::TYPE_CSV && $files->getType() != CsvHelper::TYPE_TSV) {
-                    Util::returnJSON(array("success"=>false,"message"=>"File has wrong extension."));
-                } else {
-                    $delimiter = $files->getType() == CsvHelper::TYPE_CSV ? ';' : "\t";
-                    $rows = CsvHelper::getArrayByFileName($files->getTempName(), $delimiter);
-                    if (!$rows) {
-                        Util::returnJSON(array("success"=>false,"message"=>"File is empty."));
-                    }
+                $rows = CsvHelper::parse($files->getTempName(), $files->getExtensionName());
 
                     foreach ($rows as $key => $row) {
                         $number = $key + 1;
