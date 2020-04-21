@@ -265,6 +265,9 @@
                 } else {
                     alert(response.message)
                 }
+            },
+            error: function(xhr) {
+                alert(xhr.responseText);
             }
         });
 
