@@ -6,7 +6,6 @@ class m200417_050712_subwiz_alter_external_link_table_add_cols extends CDbMigrat
     {
         $this->execute("ALTER TABLE external_link
             ALTER external_link_type_id DROP NOT NULL,
-            ADD type integer NULL,
             ADD description character varying(200) NULL;");
     }
 
@@ -14,7 +13,6 @@ class m200417_050712_subwiz_alter_external_link_table_add_cols extends CDbMigrat
     {
         $this->execute("ALTER TABLE external_link
             ALTER external_link_type_id SET NOT NULL,
-            DROP type,
             DROP description;");
     }
 }

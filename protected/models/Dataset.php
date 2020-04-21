@@ -162,15 +162,15 @@ class Dataset extends CActiveRecord
 
     public function getPreviousDoi() {
         return Dataset::model()->find(array('condition' =>"identifier < :id and upload_status = 'Published'",
-                'params'=>array(':id'=>$this->identifier),
-                'order'=>'identifier desc'
+            'params'=>array(':id'=>$this->identifier),
+            'order'=>'identifier desc'
         ));
     }
 
     public function getNextDoi() {
         return Dataset::model()->find(array('condition' =>"identifier > :id and upload_status = 'Published'",
-                'params'=>array(':id'=>$this->identifier),
-                'order'=>'identifier asc'
+            'params'=>array(':id'=>$this->identifier),
+            'order'=>'identifier asc'
         ));
     }
 
@@ -273,16 +273,16 @@ class Dataset extends CActiveRecord
      */
     public function getCuratorName(){
 
-      $curator = User::model()->findByPk($this->curator_id);
+        $curator = User::model()->findByPk($this->curator_id);
 
-      if( isset($curator) ) {
-        $curator_name = $curator->getFullName();
-      }
-      else {
-        $curator_name = "";
-      }
+        if( isset($curator) ) {
+            $curator_name = $curator->getFullName();
+        }
+        else {
+            $curator_name = "";
+        }
 
-      return $curator_name;
+        return $curator_name;
 
     }
 
@@ -309,9 +309,9 @@ class Dataset extends CActiveRecord
 
     public function getListTitles(){
         $models=Dataset::model()->findAll(array(
-                'select'=>'t.title',
-                'distinct'=>true,
-            ));
+            'select'=>'t.title',
+            'distinct'=>true,
+        ));
         $list=array();
         foreach (array_values($models) as $model){
             $list[] = $model->title;
@@ -361,11 +361,11 @@ class Dataset extends CActiveRecord
     public function getAuthor()
     {
         $authors = Yii::app()->db->createCommand()
-                            ->select('a.id, a.surname, a.first_name')
-                            ->from('author a')
-                            ->join('dataset_author da', 'a.id = da.author_id')
-                            ->where('dataset_id = :id', array(':id' => $this->id))
-                            ->queryAll();
+            ->select('a.id, a.surname, a.first_name')
+            ->from('author a')
+            ->join('dataset_author da', 'a.id = da.author_id')
+            ->where('dataset_id = :id', array(':id' => $this->id))
+            ->queryAll();
 
         return $authors ? $authors : array();
     }
@@ -377,12 +377,12 @@ class Dataset extends CActiveRecord
     public function getSamples()
     {
         $samples = Yii::app()->db->createCommand()
-                            ->select('s.name, sp.tax_id, sp.common_name, sp.genbank_name')
-                            ->from('sample s')
-                            ->join('dataset_sample ds', 's.id = ds.sample_id')
-                            ->join('species sp', 's.species_id = sp.id')
-                            ->where('ds.dataset_id = :id', array(':id' => $this->id))
-                            ->queryAll();
+            ->select('s.name, sp.tax_id, sp.common_name, sp.genbank_name')
+            ->from('sample s')
+            ->join('dataset_sample ds', 's.id = ds.sample_id')
+            ->join('species sp', 's.species_id = sp.id')
+            ->where('ds.dataset_id = :id', array(':id' => $this->id))
+            ->queryAll();
 
         var_dump(count($samples)); die;
 
@@ -470,7 +470,7 @@ class Dataset extends CActiveRecord
      */
     public function toXML() {
         $xmlstr = "<?xml version='1.0' ?>\n".
-              '<resource xmlns="http://datacite.org/schema/kernel-4"
+            '<resource xmlns="http://datacite.org/schema/kernel-4"
                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                         xsi:schemaLocation="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4/metadata.xsd"
                 >
@@ -496,7 +496,7 @@ class Dataset extends CActiveRecord
             if ( $author->orcid != null ) {
                 $name_identifier = $creator->addChild('nameIdentifier',$author->orcid);
                 $name_identifier->addAttribute('schemeURI','http://orcid.org/');
-                    $name_identifier->addAttribute('nameIdentifierScheme','ORCID');
+                $name_identifier->addAttribute('nameIdentifierScheme','ORCID');
             }
             if( $author->gigadb_user_id != null ) {
                 $user = User::model()->find("id=?", array($author->gigadb_user_id));
@@ -535,7 +535,7 @@ class Dataset extends CActiveRecord
         }
 
         //<dates>
-    	//	<date dateType="Available">2014-10-17</date>
+        //	<date dateType="Available">2014-10-17</date>
         $dates = $xml->addChild("dates");
         $date = $dates->addChild('date',$publication_date->format('Y-m-d'));
         $date->addAttribute('dateType','Available');
@@ -675,20 +675,7 @@ class Dataset extends CActiveRecord
 
     public function getAdditionalInformation()
     {
-        return $this->additional_information ? json_decode($this->additional_information, true) : array();
-    }
-
-    public function setAdditionalInformation(array $addInfo)
-    {
-        $this->additional_information = json_encode($addInfo, true);
-    }
-
-    public function setAdditionalInformationKey($key, $value)
-    {
-        $addInfo = $this->getAdditionalInformation();
-        $addInfo[$key] = (int)$value;
-
-        $this->setAdditionalInformation($addInfo);
+        return $this->additional_information ? !!$this->additional_information : null;
     }
 
     public function getFunding()

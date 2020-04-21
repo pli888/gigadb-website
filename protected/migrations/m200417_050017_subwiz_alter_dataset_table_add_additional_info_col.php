@@ -5,7 +5,7 @@ class m200417_050017_subwiz_alter_dataset_table_add_additional_info_col extends 
     public function up()
     {
         $this->execute("ALTER TABLE dataset
-            ADD additional_information character varying(500) NULL;");
+            ADD additional_information smallint NULL;;");
     }
 
     public function down()
