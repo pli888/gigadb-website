@@ -448,7 +448,9 @@ EO_MAIL;
             $dataset->loadByData($_POST['Dataset']);
             $dataset->types = $newTypes;
             $dataset->keywords = explode(',', $newKeywords);
-            if ($dataset->validate() && $image->validate()) {
+            $datasetValidate = $dataset->validate();
+            $imageValidate = $image->validate();
+            if ($datasetValidate && $imageValidate) {
                 $image->save();
                 $dataset->image_id = $image->id;
                 $dataset->save();
