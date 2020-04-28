@@ -192,6 +192,7 @@ class DatasetSubmissionController extends Controller
     {
         if (isset($_GET['id'])) {
             $dataset = $this->getDataset($_GET['id']);
+            $dataset->modification_date = date('Y-m-d');
             $image = $dataset->image ?: new Images();
 
             if (isset($_POST['Images'])) {
@@ -203,6 +204,8 @@ class DatasetSubmissionController extends Controller
             $this->isSubmitter($dataset);
         } else {
             $dataset = new Dataset();
+            $dataset->is_test = isset($_GET['is_test']) && $_GET['is_test'] === '1' ? 1 : 0;
+            $dataset->creation_date = date('Y-m-d');
             $image = new Images();
         }
 
@@ -954,6 +957,7 @@ class DatasetSubmissionController extends Controller
                 if (!$attr) {
                     $attr = new Attribute;
                     $attr->attribute_name = $newSampleAttr['attr_name'];
+                    $attr->is_test = $dataset->is_test ? 1 : 0;
                     if (!$attr->validate()) {
                         $transaction->rollback();
                         $error = current($attr->getErrors());
@@ -963,6 +967,8 @@ class DatasetSubmissionController extends Controller
                         ));
                     }
                     $attr->save();
+                } else {
+                    $attr->is_test = $dataset->is_test ? 1 : 0;
                 }
 
                 $attrs[] = $attr;
@@ -1104,6 +1110,9 @@ class DatasetSubmissionController extends Controller
         } else {
             $dataset = $this->getDataset($_GET['id']);
             $dataset->upload_status = 'UserUploadingData';
+            if (isset($_GET['is_test']) && $_GET['is_test'] === '0'){
+                $dataset->toReal();
+            }
             $dataset->save(false);
 
             $this->isSubmitter($dataset);
