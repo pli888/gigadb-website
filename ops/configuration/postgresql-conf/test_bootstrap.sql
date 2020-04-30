@@ -4375,3 +4375,55 @@ GRANT ALL ON TABLE prefix TO PUBLIC;
 -- PostgreSQL database dump complete
 --
 
+ALTER TABLE "dataset"
+ALTER "dataset_size" TYPE bigint,
+ALTER "dataset_size" DROP DEFAULT,
+ALTER "dataset_size" DROP NOT NULL;
+
+CREATE SEQUENCE contribution_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;
+CREATE TABLE "contribution" (
+   "id" integer DEFAULT nextval('contribution_id_seq') NOT NULL,
+  "name" character varying(255) NOT NULL,
+  "source" character varying(255) NOT NULL,
+  "description" character varying(255) NOT NULL,
+  CONSTRAINT "contribution_id" PRIMARY KEY ("id"),
+    CONSTRAINT "contribution_name" UNIQUE ("name")
+) WITH (oids = false);
+
+ALTER TABLE "dataset_author"
+ADD "contribution_id" integer NULL;
+
+ALTER TABLE "dataset"
+ADD "additional_information" smallint NULL;
+
+ALTER TABLE "external_link"
+ADD "description" character varying(200) NULL;
+
+ALTER TABLE "prefix"
+ADD "regexp" character varying(128) NULL;
+
+ALTER TABLE "dataset"
+ADD "funding" smallint NULL;
+
+CREATE TABLE "template_name" (
+  "id" serial NOT NULL,
+  "template_name" character varying(50) NOT NULL,
+  "template_description" character varying(255) NULL,
+  "notes" character varying(255) NULL
+);
+
+ALTER TABLE "template_name"
+ADD CONSTRAINT "template_name_id" PRIMARY KEY ("id");
+
+CREATE TABLE "template_attribute" (
+    "id" serial NOT NULL,
+    "template_name_id" integer,
+    "attribute_id" integer,
+    CONSTRAINT "sample_template_attribute_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "sample_template_attribute_sample_template_id_fkey" FOREIGN KEY (template_name_id) REFERENCES template_name(id) ON DELETE CASCADE NOT DEFERRABLE,
+    CONSTRAINT "sample_template_attribute_attribute_id_fkey" FOREIGN KEY (attribute_id) REFERENCES attribute(id) ON DELETE CASCADE NOT DEFERRABLE
+) WITH (oids = false);
+
+ALTER TABLE "dataset"
+ADD "is_test" smallint NULL,
+ADD "creation_date" date NULL;
