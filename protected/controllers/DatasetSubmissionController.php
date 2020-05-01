@@ -219,7 +219,7 @@ class DatasetSubmissionController extends Controller
 
             $this->isSubmitter($dataset);
         } else {
-            $this->redirect(array('/datasetSubmission/create1'));
+            $this->redirect($this->getRedirectUrl());
         }
 
         $this->datasetUpdate($dataset, $image);
@@ -260,7 +260,7 @@ class DatasetSubmissionController extends Controller
     public function actionAuthorManagement()
     {
         if (!isset($_GET['id'])) {
-            $this->redirect("/datasetSubmission/create1");
+            $this->redirect($this->getRedirectUrl());
         } else {
             $dataset = $this->getDataset($_GET['id']);
 
@@ -405,7 +405,7 @@ class DatasetSubmissionController extends Controller
     public function actionAdditionalManagement()
     {
         if (!isset($_GET['id'])) {
-            $this->redirect("/datasetSubmission/create1");
+            $this->redirect($this->getRedirectUrl());
         } else {
             $dataset = $this->getDataset($_GET['id']);
 
@@ -631,7 +631,7 @@ class DatasetSubmissionController extends Controller
     public function actionFundingManagement()
     {
         if (!isset($_GET['id'])) {
-            $this->redirect("/datasetSubmission/create1");
+            $this->redirect($this->getRedirectUrl());
         } else {
             $dataset = $this->getDataset($_GET['id']);
 
@@ -837,7 +837,7 @@ class DatasetSubmissionController extends Controller
     public function actionSampleManagement()
     {
         if (!isset($_GET['id'])) {
-            $this->redirect("/datasetSubmission/create1");
+            $this->redirect($this->getRedirectUrl());
         }
 
         $dataset = $this->getDataset($_GET['id']);
@@ -1436,5 +1436,12 @@ class DatasetSubmissionController extends Controller
         }
 
         return true;
+    }
+
+    protected function getRedirectUrl()
+    {
+        $isTest = isset($_GET['is_test']) && $_GET['is_test'] == '1' ? '/is_test/1' : '';
+
+        return "/datasetSubmission/create1" . $isTest;
     }
 }
