@@ -263,12 +263,16 @@ foreach ($funders as $funder) {
     });
 
     $(fundingDiv).on('click', ".js-add-funding", function() {
+        var funderId = $('#funder_id').val();
+        if ($('.js-funder-id[value="' + funderId + '"]').length) {
+            alert('Funder "'+funderId+'" has already been taken.');
+        } else {
         $.ajax({
             type: 'POST',
             url: '/datasetSubmission/validateFunding',
             data:{
                 'dataset_id': datasetId,
-                'funder_id': $('#funder_id').val(),
+                'funder_id': funderId,
                 'grant': $('#grant').val(),
                 'pi_name': $('#pi_name').val(),
                 'program_name': $('#program_name').val()
@@ -303,6 +307,7 @@ foreach ($funders as $funder) {
                 alert(xhr.responseText);
             }
         });
+        }
 
         return false;
     });
