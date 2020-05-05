@@ -888,43 +888,42 @@ EO_MAIL;
             if($files) {
                 $rows = CsvHelper::parse($files->getTempName(), $files->getExtensionName());
 
-                    foreach ($rows as $key => $row) {
-                        $number = $key + 1;
-                        if (!isset($row[0]) || !$row[0]) {
-                            Util::returnJSON(array(
-                                "success"=>false,
-                                "message"=>"Row $number: File Name cannot be empty."
-                            ));
-                        }
-                        if (!isset($row[1]) || !$row[1]) {
-                            Util::returnJSON(array(
-                                "success"=>false,
-                                "message"=>"Row $number: Data Type cannot be empty."
-                            ));
-                        } else {
-                            $type = FileType::model()->findByAttributes(array('name' => $row[1]));
-                            if (!$type) {
-                                Util::returnJSON(array(
-                                    "success"=>false,
-                                    "message"=>"Row $number: Data Type is invalid."
-                                ));
-                            }
-
-                            $rows[$key][1] = $type->id;
-                        }
-                        if (!isset($row[2]) || !$row[2]) {
-                            Util::returnJSON(array(
-                                "success"=>false,
-                                "message"=>"Row $number: Description cannot be empty."
-                            ));
-                        }
+                foreach ($rows as $key => $row) {
+                    $number = $key + 1;
+                    if (!isset($row[0]) || !$row[0]) {
+                        Util::returnJSON(array(
+                            "success"=>false,
+                            "message"=>"Row $number: File Name cannot be empty."
+                        ));
                     }
+                    if (!isset($row[1]) || !$row[1]) {
+                        Util::returnJSON(array(
+                            "success"=>false,
+                            "message"=>"Row $number: Data Type cannot be empty."
+                        ));
+                    } else {
+                        $type = FileType::model()->findByAttributes(array('name' => $row[1]));
+                        if (!$type) {
+                            Util::returnJSON(array(
+                                "success"=>false,
+                                "message"=>"Row $number: Data Type is invalid."
+                            ));
+                        }
 
-                    Util::returnJSON(array(
-                        "success"=>true,
-                        'rows' => $rows
-                    ));
+                        $rows[$key][1] = $type->id;
+                    }
+                    if (!isset($row[2]) || !$row[2]) {
+                        Util::returnJSON(array(
+                            "success"=>false,
+                            "message"=>"Row $number: Description cannot be empty."
+                        ));
+                    }
                 }
+
+                Util::returnJSON(array(
+                    "success"=>true,
+                    'rows' => $rows
+                ));
             }
         }
     }
