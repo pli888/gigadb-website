@@ -221,6 +221,7 @@
 
 <script>
     $('#samples-table').resizable();
+    $(".delete-title").tooltip({'placement':'right'});
 
     var species = JSON.parse('<?= json_encode(array_values(CHtml::listData($species, 'id', 'common_name'))) ?>');
 
@@ -345,6 +346,8 @@
         samplesTable.find('.item').last().find('.js-species-autocomplete').autocomplete({
             source: species
         });
+
+        $(".delete-title").tooltip({'placement':'right'});
 
         return false;
     });
