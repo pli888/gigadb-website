@@ -47,14 +47,20 @@ class Dataset extends CActiveRecord
     public $types;
     public $keywords;
 
-    public static $statusList = array('Incomplete'=>'Incomplete',
-        'Request'=>'Request',
-        'Uploaded'=>'Uploaded',
-        'Pending'=>'Pending',
-        'Private'=>'Private',
-        'Published'=>'Published',
-        'UserUploadingData'=>'UserUploadingData',
+    public static $statusList = array(
+        'ImportFromEM'=>'ImportFromEM',
+        'UserStartedIncomplete'=>'UserStartedIncomplete',
+        'Rejected'=>'Rejected',
+        'Not required'=>'Not required',
         'AssigningFTPbox'=>'AssigningFTPbox',
+        'UserUploadingData'=>'UserUploadingData',
+        'DataAvailableForReview'=>'DataAvailableForReview',
+        'Submitted'=>'Submitted',
+        'DataPending'=>'DataPending',
+        'Curation'=>'Curation',
+        'AuthorReview'=>'AuthorReview',
+        'Private'=>'Private',
+        'Published' =>'Published',
     );
 
     /*
@@ -95,7 +101,8 @@ class Dataset extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('submitter_id, identifier, title, ftp_site, types', 'required'),
+            array('submitter_id, identifier, title, ftp_site', 'required'),
+            array('types', 'validateTypes'),
             array('submitter_id, image_id, publisher_id, funding, is_test, is_deleted', 'numerical', 'integerOnly'=>true),
             array('dataset_size', 'numerical'),
             array('identifier, excelfile_md5', 'length', 'max'=>32),
@@ -111,6 +118,13 @@ class Dataset extends CActiveRecord
             array('id, submitter_id, image_id, identifier, title, description, publisher, dataset_size, ftp_site, upload_status, excelfile, excelfile_md5, publication_date, modification_date', 'safe', 'on'=>'search'),
 #            array('projectIDs , sampleIDs , authorIDs , datasetTypeIDs' , 'safe'),
         );
+    }
+
+    public function validateTypes($attribute, $params)
+    {
+        if (isset($this->types) && !$this->types) {
+            $this->addError($attribute, 'Types cannot be blank.');
+        }
     }
 
     /**
@@ -403,7 +417,7 @@ class Dataset extends CActiveRecord
     }
 
     public function getIsIncomplete() {
-        return $this->upload_status == "Incomplete";
+        return $this->upload_status == "UserStartedIncomplete";
     }
 
     public function behaviors() {
@@ -644,7 +658,7 @@ class Dataset extends CActiveRecord
         $this->manuscript_id = $data['manuscript_id'];
         $this->title = $data['title'];
         $this->description = $data['description'];
-        $this->upload_status = "Incomplete";
+        $this->upload_status = "UserStartedIncomplete";
         $this->ftp_site = "''";
         $this->setIdentifier();
     }
