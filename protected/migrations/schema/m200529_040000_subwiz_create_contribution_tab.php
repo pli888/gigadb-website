@@ -1,6 +1,6 @@
 <?php
 
-class m200529__40000_subwiz_create_contribution_tab extends CDbMigration
+class m200529_040000_subwiz_create_contribution_tab extends CDbMigration
 {
     public function safeUp()
     {
