@@ -8,7 +8,7 @@
 class FtpHelperTest extends CDbTestCase
 {
     function testGetListOfFilesWithSizes() {
-        $array = FtpHelper::getListOfFilesWithSizes('user99', 'WhiteLabel');
+        $array = FtpHelper::getListOfFilesWithSizes('demo', 'password');
 
         $this->assertTrue(count($array) > 0);
     }

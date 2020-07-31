@@ -2,10 +2,7 @@
 
 class FtpHelper
 {
-    const HOST = 'parrot.genomics.cn';
-
-    //'user99'
-    //'WhiteLabel'
+    const HOST = 'test.rebex.net';
 
     public static function getListOfFilesWithSizes($user, $password)
     {
