@@ -15,7 +15,7 @@ Scenario: populate user identity field when creating an author
 	Given default admin user exists
 	And I sign in as an admin
 	And I am on "/adminAuthor/create"
-	When I fill in "Surname" with "Tano"
+	When I fill in "Last Name" with "Tano"
 	And I fill in "First Name" with "Ahsoka"
 	And I fill in "Middle Name" with "Fulcrum"
 	And I fill in "Gigadb User" with "345"

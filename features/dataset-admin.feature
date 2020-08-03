@@ -12,8 +12,8 @@ Scenario: form loading with all necessary fields
 	Given I sign in as an admin
 	When I go to "/adminDataset/update/id/210"
 	Then I should see a form element labelled "Submitter *"
-	And I should see a form element labelled "Curator Id"
-	And I should see a form element labelled "Manuscript Id"
+	And I should see a form element labelled "Curator ID"
+	And I should see a form element labelled "GigaScience manuscript"
 	And I should see a form element labelled "Upload Status"
 	And I should see a form element labelled "Workflow"
 	And I should see a form element labelled "Epigenomic"
@@ -25,19 +25,19 @@ Scenario: form loading with all necessary fields
 	And I should see a form element labelled "Proteomic"
 	And I should see a form element labelled "Genomic"
 	And I should see a form element labelled "Metadata"
-	And I should see a form element labelled "Dataset Size *"
+	And I should see a form element labelled "Dataset Size"
 	And I should see a form element labelled "Image Upload"
 	And I should see a form element labelled "Image URL"
 	And I should see a form element labelled "Image Source *"
-	And I should see a form element labelled "Image Tag"
+	And I should see a form element labelled "Image Title"
 	And I should see a form element labelled "Image License *"
-	And I should see a form element labelled "Image Photographer *"
+	And I should see a form element labelled "Image Credit *"
 	And I should see a form element labelled "DOI *"
 	And I should see a form element labelled "Ftp Site *"
 	And I should see a form element labelled "Fair Use Policy"
 	And I should see a form element labelled "Publication Date"
 	And I should see a form element labelled "Modification Date"
-	And I should see a form element labelled "Dataset Size *"
+	And I should see a form element labelled "Dataset Size"
 	And I should see a form element labelled "Title *"
 	And I should see a form element labelled "Description"
 	And I should see a form element labelled "Keywords"
@@ -84,7 +84,7 @@ Scenario: redirect
 	And I wait "10" seconds
 	And the url should be "/dataset/100002"
 
-@ok
+@ok @wlsubwiz-broken
 Scenario: new dataset with mandatory fields filled in
 	Given I sign in as an admin
 	And I am on "/adminDataset/admin"
@@ -94,7 +94,7 @@ Scenario: new dataset with mandatory fields filled in
 	And I fill in "Dataset Size" with "345345324235"
 	And I fill in "Image Source" with "Wikimedia"
 	And I fill in "Image License" with "CC0"
-	And I fill in "Image Photographer" with "Anonymous"
+	And I fill in "Image Credit *" with "Anonymous"
 	And I fill in "DOI" with "100900"
 	And I fill in "Ftp Site" with "ftp.genomics.cn"
 	And I press "Create"
