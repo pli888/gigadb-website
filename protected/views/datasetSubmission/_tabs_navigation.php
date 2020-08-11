@@ -12,7 +12,7 @@ $isTest = isset($_GET['is_test']) && $_GET['is_test'] == '1' ? '/is_test/1' : ''
 
 <a href="<?= $model->getIsNewRecord() ? '#' : "/datasetSubmission/datasetManagement{$modelId}{$isTest}" ?>"
    class="btn <?= $controller == 'datasetSubmission' && ($action == 'create1' || $action == 'datasetManagement') ? 'sw-selected-btn' : 'nomargin' ?>"><?= Yii::t('app' , 'Study')?></a>
-<a href="/datasetSubmission/authorManagement<?= $modelId . $isTest ?>"
+<a href="<?= $model->getIsNewRecord() ? '#' : "/datasetSubmission/authorManagement{$modelId}{$isTest}" ?>"
    class="btn <?= $action == 'authorManagement' ? 'sw-selected-btn' : 'nomargin' ?>"><?= Yii::t('app' , 'Author')?></a>
 <a href="/datasetSubmission/additionalManagement<?= $modelId . $isTest ?>"
    class="btn <?= $action == 'additionalManagement' ? 'sw-selected-btn' : 'nomargin' ?>"><?= Yii::t('app' , 'Additional Information')?></a>
