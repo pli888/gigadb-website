@@ -253,7 +253,8 @@ class DatasetSubmissionController extends Controller
                 if (isset($_POST['redirect_url']) && $_POST['redirect_url']) {
                     $this->redirect($_POST['redirect_url']);
                 }
-                $this->redirect(array('/datasetSubmission/datasetManagement', 'id'=>$dataset->id));
+                // When pressing Save button, the website will go to Author tab
+                $this->redirect(array('/datasetSubmission/authorManagement', 'id'=>$dataset->id));
             }
         }
     }
