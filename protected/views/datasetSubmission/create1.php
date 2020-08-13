@@ -266,14 +266,12 @@ $form = $this->beginWidget('CActiveForm', array(
             'id' => 'next-btn', 'disabled' => $disabled
         ));
         ?>
-        <?php if (!$model->getIsNewRecord()): ?>
-            <?php echo CHtml::submitButton('Next', array(
-                'class' => 'btn-green' . $class,
-                'id' => 'next-btn2', 'disabled' => $disabled,
-                'data-url' => '/datasetSubmission/authorManagement/id/' . $model->id
-            ));
-            ?>
-        <?php endif ?>
+        <?php echo CHtml::submitButton('Next', array(
+            'class' => 'btn-green' . $class,
+            'id' => 'next-btn2', 'disabled' => $disabled,
+            'data-url' => '/datasetSubmission/authorManagement/id/' . $model->id
+        ));
+        ?>
         <input type="hidden" name="redirect_url" id="redirect_url" value="">
     </div>
 
