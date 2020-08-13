@@ -9,7 +9,8 @@
     <div class="form-horizontal">
         <div id="author-grid" class="grid-view">
             <p>Please provide all author details, to do this you may add them individually, or upload a CSV file. Once added the author details will appear in the table below and you may make any required changes directly in the table.</p>
-            <table class="table table-bordered" id="author-table">
+            <div class="additional-bordered" style="overflow-x: auto;margin: 15px 0;">
+            <table class="table table-bordered" id="author-table" style="overflow: auto;">
                 <thead>
                 <tr>
                     <th id="author-grid_c0">First name</th>
@@ -83,7 +84,8 @@
                         <input id="js-author-orcid" type="text" pattern="[1-9]{4}-[1-9]{4}-[1-9]{4}-[1-9]{4}" name="Author[orcid]" placeholder="ORCiD (optional)" style="width:130px">
                     </td>
                     <td>
-                        <input id="js-author-contribution" class="js-author-required" type="text" name="Author[contribution]" placeholder="Contribution" style="width:120px">
+                        <?php echo CHtml::dropDownList('js-author-contribution', 'Select credit term', CHtml::listData(Contribution::model()->findAll(), 'name', 'name'), array('encode' => false, 'prompt' => 'Select credit term', 'id' => 'js-author-contribution', 'class' => 'js-author-required', 'style' => "width:140px"));    
+                        ?>
                     </td>
                     <td colspan="2">
                         <input type="hidden" value="999999999" class="js-author-rank">
@@ -92,6 +94,7 @@
                 </tr>
                 </tbody>
             </table>
+            </div>
         </div>
 
         <p style="text-align: center">OR</p>
@@ -118,15 +121,18 @@ Rosalind	Elsie	Franklin 	0000-0000-0000-0001	Conceptualization"
 <script>
     $(".delete-title").tooltip({'placement':'left'});
 
-    var contributions = JSON.parse('<?= json_encode(array_values(CHtml::listData($contributions, 'id', 'name'))) ?>');
+    //var contributions = JSON.parse('<?//= json_encode(array_values(CHtml::listData($contributions, 'id', 'name'))) ?>//');
     var deleteIds = [];
     var dataset_id = <?= $model->id ?>;
+    
+    // No need for text filtering now as author role is selected from drop down menu
+    // $( "#js-author-contribution" ).autocomplete({
+    //     source: contributions
+    // });
 
-    $( "#js-author-contribution" ).autocomplete({
-        source: contributions
-    });
-
-    $(document).on('keydown', '.js-author-required', function () {
+    // Check all text fields and drop down list with js-author-required class 
+    // have been filled and selected before making Add Author button active
+    $(".js-author-required").change(function() {
         setTimeout((function(){
             makeAddAuthorActiveIfCan();
         }), 50);
@@ -288,7 +294,6 @@ Rosalind	Elsie	Franklin 	0000-0000-0000-0001	Conceptualization"
         var middle_name = $('#js-author-middle-name').val();
         var orcid = $('#js-author-orcid').val();
         var contribution = $('#js-author-contribution').val();
-
         var author = {
             'first_name': first_name,
             'last_name': last_name,
