@@ -1,4 +1,51 @@
 id,attribute_name,definition,model,structured_comment_name,value_syntax,allowed_units,occurance,ontology_link,note
+1,analyte type,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+2,alternative accession-BioSample,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+3,alternative accession-BioProject,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+4,"Geographic location (country and/or sea,region)",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+5,geographic location (latitude),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+6,geographic location (longitude),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+7,Broad-scale environmental context,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+8,Local environmental context,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+9,Environmental medium,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+10,Life stage,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+11,Age,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+12,Sample source,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+13,Collection date,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+14,Ploidy,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+15,Tissue,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+16,Collected by,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+17,Isolate,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+18,Cell line,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+19,Sample collection device or method,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+20,Sample material processing,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+21,Amount or size of sample collected,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+22,Estimated genome size,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+23,sequencing method,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+24,Tissue type,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+25,Cell type,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+26,Sex,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+27,Disease status,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+28,Sample storage location,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+29,Experiment type,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+30,Experiment scanner,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+31,Experiment scan method,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+32,Experiment scan parameters,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+33,Experiment scan resolution,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+34,Anatomical plane,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+35,Body mass index,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+36,Diet,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+37,Medication,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+38,"Blood glucose (fasting, t=0)",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+39,Food name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+40,Food supplier,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+41,sequence quality check,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+42,assembly software,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+43,annotation,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+44,number of contigs,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+45,WGA amplication approach,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+46,multiplex identifiers,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+47,adapters,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
 200,sex,physical sex of the host,GSC_MIxS_v3,sex,[male|female|neuter|hermaphrodite|not determined],"","","",""
 269,geographic location (latitude and longitude),The geographical origin of the sample as defined by latitude and longitude. The values should be reported in decimal degrees and in WGS84 system,GSC_MIxS_v3,lat_lon,decimal degrees,"",1,"",""
 270,"geographic location (country and/or sea,region)","The geographical origin of the sample as defined by the country or sea name followed by specific region name. Country or sea names should be chosen from the INSDC country list (http://insdc.org/country.html), or the GAZ ontology (v1.446) (http://bioportal.bioontology.org/visualize/40651)",GSC_MIxS_v3,geo_loc_name,country or sea name (INSDC or GAZ):region(GAZ):specific location name,"",1,http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=GAZhttp://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=EFOhttp://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=POhttp://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=PATOhttp://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=DOID,""
