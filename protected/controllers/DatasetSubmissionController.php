@@ -890,7 +890,7 @@ class DatasetSubmissionController extends Controller
             }
         }
 
-        //$species = Species::model()->findAll(array('order'=>'common_name asc'));
+        $species = Species::model()->findAll(array('order'=>'common_name asc'));
         //$attrs = Attribute::model()->findAll(array('order'=>'attribute_name asc'));
 
         $this->render('sampleManagement', array(
@@ -901,7 +901,7 @@ class DatasetSubmissionController extends Controller
             'sas' => $sas,
             'sts' => $sts,
             'rows' => $rows,
-            //'species' => $species,
+            'species' => $species,
             //'attrs' => $attrs,
         ));
     }
