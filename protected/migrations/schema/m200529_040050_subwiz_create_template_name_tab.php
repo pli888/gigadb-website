@@ -7,7 +7,7 @@ class m200529_040050_subwiz_create_template_name_tab extends CDbMigration
         $this->execute("CREATE TABLE template_name (
             id integer NOT NULL,
             template_name character varying(50) NOT NULL,
-            template_description character varying(500),
+            template_description character varying(1000),
             notes character varying(255));");
 
         $this->execute("CREATE SEQUENCE template_name_id_seq
