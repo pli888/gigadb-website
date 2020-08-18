@@ -2,6 +2,7 @@
 /** @var Dataset $model */
 /** @var Unit[] $units */
 /** @var Sample[] $samples */
+/** @var Species[] $species */
 /** @var SampleAttribute[] $sas */
 /** @var TemplateName[] $sts */
 /** @var TemplateName $template */
@@ -254,6 +255,14 @@
 
     getAttributesAutocomplete();
 
+    function getSpeciesNameAutocomplete() {
+        var speciesList = JSON.parse('<?= json_encode(array_values(CHtml::listData($species, 'id', 'common_name'))) ?>');
+        $("#js-species-autocomplete").autocomplete({
+            source: speciesList
+        });
+    }
+    getSpeciesNameAutocomplete();
+
     var baseUrl = '<?= '/datasetSubmission/sampleManagement/id/'. $model->id ?>';
     var units = JSON.parse('<?= json_encode(CHtml::listData($units, 'id', 'name')) ?>');
     var datasetId = <?= $model->id ?>;
@@ -342,7 +351,7 @@
             '</td>';
 
         newTr += '<td>' +
-            '<input type="text" class="js-species-autocomplete" placeholder=\'Species name\'>' +
+            '<input id="js-species-autocomplete" type="text" class="js-species-autocomplete" placeholder=\'Species name\'>' +
             '</td>';
 
         newTr += '<td>' +
@@ -361,6 +370,8 @@
         $('#js-no-results').hide();
 
         $(".delete-title").tooltip({'placement':'right'});
+
+        getSpeciesNameAutocomplete();
 
         return false;
     });
