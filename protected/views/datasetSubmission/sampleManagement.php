@@ -58,9 +58,27 @@
                 <table class="table table-bordered sample-tab-table" id="samples-table" style="overflow: auto;">
                     <thead>
                     <tr>
-                        <th style="white-space: nowrap;">Sample ID</th>
-                        <th style="white-space: nowrap;">Species name</th>
-                        <th style="white-space: nowrap;" class="sample-attribute-column">Description <input type="hidden" value="description"></th>
+                        <th id="sample-grid_c0">
+                            <span>Sample ID</span>
+                            <a class="myHint"
+                               data-content='The name used to uniquely identify the sample in your study'
+                               style="float: right">
+                            </a>
+                        </th>
+                        <th id="sample-grid_c1">
+                            <span>Species name</span>
+                            <a class="myHint"
+                               data-content='Please select the relevant species name from the list here, start typing either the common name or Latin name to refine the list. If the species is not present please contact us to get it added.'
+                               style="float: right">
+                            </a>
+                        </th>
+                        <th id="sample-grid_c2">
+                            <span>Description</span>
+                            <a class="myHint"
+                               data-content='Please provide a short description of this specific sample, it should be unique to this sample, it can include where it was collected, which tissue, and/or what was extracted, e.g. "DNA extracted from blood of captive grown frog in Birmingham."'
+                               style="float: right">
+                            </a>
+                        </th>
                         <?php if ($rows): ?>
                             <?php for ($j = 3, $k = count($rows[0]); $j < $k; $j++): ?>
                                 <?php
