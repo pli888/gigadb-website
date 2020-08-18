@@ -13,7 +13,13 @@
             <table class="table table-bordered" id="author-table" style="overflow: auto;">
                 <thead>
                 <tr>
-                    <th id="author-grid_c0">First name</th>
+                    <th id="author-grid_c0">
+                        <span>First name</span>
+                        <a class="myHint"
+                           data-content='Enter the first name of the author.'
+                           style="float: right">
+                        </a>
+                    </th>
                     <th id="author-grid_c1">
                         <span>Middle name</span>
                         <a class="myHint"
@@ -21,7 +27,13 @@
                            style="float: right">
                         </a>
                     </th>
-                    <th id="author-grid_c2">Last name</th>
+                    <th id="author-grid_c0">
+                        <span>Last name</span>
+                        <a class="myHint"
+                           data-content='Enter the Last/Family name of the author.'
+                           style="float: right">
+                        </a>
+                    </th>
                     <th id="author-grid_c3">
                         <span>ORCiD</span>
                         <a class="myHint"
@@ -30,7 +42,14 @@
                            style="float: right;">
                         </a>
                     </th>
-                    <th id="author-grid_c4">CrediT</th>
+                    <th id="author-grid_c4">
+                        <span>CrediT</span>
+                        <a class="myHint"
+                           data-content='The CASRAI CRediT Author Contributions using the <a href="https://casrai.org/credit/" target="_blank">CRediT taxonomy</a>.'
+                           data-html="true"
+                           style="float: right">
+                        </a>
+                    </th>
                     <th id="author-grid_c5">
                         <span>Order</span>
                         <a class="myHint"
