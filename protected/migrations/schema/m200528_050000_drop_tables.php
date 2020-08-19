@@ -7,8 +7,11 @@ class m200528_050000_drop_tables extends CDbMigration
         $this->execute("DROP VIEW IF EXISTS show_accession;");
         $this->execute("DROP VIEW IF EXISTS show_manuscript;");
         $this->execute("DROP VIEW IF EXISTS show_project;");
+        $this->execute("DROP VIEW IF EXISTS show_externallink;");
+        $this->execute("DROP VIEW IF EXISTS show_file;");
         $this->execute("DROP VIEW IF EXISTS homepage_dataset_type;");
         $this->execute("DROP VIEW IF EXISTS file_number;");
+        $this->execute("DROP VIEW IF EXISTS sample_number;");
         
         $this->dropTable('user_command');
         $this->dropTable('search');
