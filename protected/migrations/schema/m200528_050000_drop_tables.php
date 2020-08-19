@@ -4,6 +4,12 @@ class m200528_050000_drop_tables extends CDbMigration
 {
     public function safeUp()
     {
+        $this->execute("DROP VIEW IF EXISTS show_accession;");
+        $this->execute("DROP VIEW IF EXISTS show_manuscript;");
+        $this->execute("DROP VIEW IF EXISTS show_project;");
+        $this->execute("DROP VIEW IF EXISTS homepage_dataset_type;");
+        
+        $this->dropTable('user_command');
         $this->dropTable('search');
         $this->dropTable('sample_rel');
         $this->dropTable('sample_experiment');
