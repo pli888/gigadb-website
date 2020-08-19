@@ -241,11 +241,6 @@ with_new_cert_deploy:
     # Redeploy all containers (run --rm webapp alone won't redeploy the containers)
     - docker-compose --tlsverify -H=$REMOTE_DOCKER_HOST -f ops/deployment/docker-compose.staging.yml up -d
     # Run database migrations if any
-    - sudo apt-get install -y postgresql-client libpq-dev
-    - export PGPASSWORD=$STAGING_GIGADB_PASSWORD
-    - psql -h "$STAGING_GIGADB_HOST" -U "$STAGING_GIGADB_USER" postgres -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'gigadb';"
-    - psql -h "$STAGING_GIGADB_HOST" -U "$STAGING_GIGADB_USER" postgres -c "drop database gigadb;"
-    - psql -h "$STAGING_GIGADB_HOST" -U "$STAGING_GIGADB_USER" postgres -c "create database gigadb;"
     - docker-compose --tlsverify -H=$REMOTE_DOCKER_HOST -f ops/deployment/docker-compose.staging.yml run --rm  application ./protected/yiic migrate --migrationPath=application.migrations.schema --interactive=0
     - docker-compose --tlsverify -H=$REMOTE_DOCKER_HOST -f ops/deployment/docker-compose.staging.yml run --rm  application ./protected/yiic migrate --migrationPath=application.migrations.data.dev --interactive=0
     # Generate the web certificate for TLS termination on web container.
