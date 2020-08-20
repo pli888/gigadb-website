@@ -1,6 +1,12 @@
 <?php
 
-class m200528_050000_drop_tables extends CDbMigration
+ /**
+ * Remove objects in Postgresql database in preparation
+ * for running Yii schema and data migrations
+ *
+ * @author  peter+github@gigasciencejournal.com
+ */
+class m300000_000000_drop_tables extends CDbMigration
 {
     public function safeUp()
     {
