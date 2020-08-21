@@ -66,7 +66,13 @@ class m300000_000000_drop_tables extends CDbMigration
         $this->execute("DROP SEQUENCE IF EXISTS sample_rel_id_seq CASCADE;");
         $this->execute("DROP SEQUENCE IF EXISTS search_id_seq CASCADE;");
         $this->execute("DROP SEQUENCE IF EXISTS user_command_id_seq CASCADE;");
+        $this->execute("DROP SEQUENCE IF EXISTS contribution_id_seq CASCADE;");
+        $this->execute("DROP SEQUENCE IF EXISTS template_name_id_seq CASCADE;");
+        $this->execute("DROP SEQUENCE IF EXISTS template_attribute_id_seq CASCADE;");
 
+        $this->execute("DROP TABLE IF EXISTS template_attribute CASCADE;");
+        $this->execute("DROP TABLE IF EXISTS template_name CASCADE;");
+        $this->execute("DROP TABLE IF EXISTS contribution CASCADE;");
         $this->execute("DROP TABLE IF EXISTS user_command CASCADE;");
         $this->execute("DROP TABLE IF EXISTS search CASCADE;");
         $this->execute("DROP TABLE IF EXISTS sample_rel CASCADE;");
