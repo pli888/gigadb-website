@@ -20,7 +20,6 @@ id,prefix,url,source,icon
 22,ProteomeCentral     ,http://proteomecentral.proteomexchange.org/cgi/GetDataset?ID=,"",
 23,MCZ                 ,http://mczbase.mcz.harvard.edu/guid/,EBI,
 24,ERA                 ,http://www.ebi.ac.uk/ena/data/view/,EBI,
-25,GitHub              ,https://github.com/,"",
 26,yahoo               ,http://www.yahoo.com.tw,"",
 27,Submission          ,https://www.ebi.ac.uk/ena/data/view/,EBI,
 28,Submission          ,http://www.ncbi.nlm.nih.gov/sra/?term=,NCBI,
@@ -45,3 +44,4 @@ id,prefix,url,source,icon
 47,RefSeq              ,https://www.ncbi.nlm.nih.gov/assembly/,"",
 48,CNSA_Project        ,https://db.cngb.org/cnsa/project/,"",
 49,HTTP                ,http://,"",
+50,MG-RAST             ,https://www.mg-rast.org/linkin.cgi?project=,EBI,

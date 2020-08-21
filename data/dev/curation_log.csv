@@ -1,1 +1,9 @@
 id,dataset_id,creation_date,created_by,last_modified_date,last_modified_by,action,comments
+1,8,2018-08-10,System,,,Curator Assigned L Skywalker,
+2,8,2018-08-20,System,,,Status changed to Published,
+3,22,2018-08-10,Yoda,,,Curator Assigned OW Kenobi,
+4,22,2018-08-20,System,,,Status changed to Published,
+5,144,2018-08-10,Yoda,,,Curator Assigned M Windu,
+6,144,2018-08-20,System,,,Status changed to Published,
+7,200,2018-08-10,Palatine,,,Curator Assigned D Vader,
+8,200,2018-08-20,System,,,Status changed to Published,

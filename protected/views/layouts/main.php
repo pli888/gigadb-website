@@ -20,8 +20,45 @@
     <?= $this->renderPartial('//shared/_google_analytics')?>
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- New Javascript added for /datasetSubmission/choose view by WL -->
+    <script>
+        $(document).ready(function () {
+            $('.myHint').on('click', function () {
+                var a = $(this);
+                if (a.hasClass('my-clicked')) {
+                    a.removeClass('my-clicked');
+                    a.popover('hide');
+                    a.on('mouseenter', function() {
+                        $(this).popover('show');
+                    });
+                    a.on('mouseleave', function() {
+                        $(this).popover('hide');
+                    });
+                } else {
+                    a.addClass('my-clicked');
+                    a.popover('show');
+                    a.off('mouseenter');
+                    a.off('mouseleave');
+                }
+            });
+            $(".myHint").on('mouseenter', function() {
+                $(this).popover('show');
+            });
+            $('.myHint').on('mouseleave', function() {
+                $(this).popover('hide');
+            });
+
+            $(".delete-title").tooltip({'placement':'top'});
+
+            $(document).on('click', '.js-not-allowed', function() {
+                return false;
+            });
+        });
+    </script>
 </head>
 
 <body>

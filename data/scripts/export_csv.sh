@@ -192,8 +192,9 @@ PGPASSWORD=vagrant psql -h localhost -p 54321 -U gigadb $DATABASE_NAME <<EOF
 EOF
 
 echo "Creating: type.csv"
+# Downloading all types
 PGPASSWORD=vagrant psql -h localhost -p 54321 -U gigadb $DATABASE_NAME <<EOF
-  \copy (SELECT * FROM "type" WHERE id IN (SELECT type_id FROM dataset_type WHERE $out_dataset_ids) ORDER BY id ASC) To '${output_dir_path}/type.csv' With (FORMAT CSV, HEADER)
+  \copy (SELECT * FROM type ORDER BY id ASC) To '${output_dir_path}/type.csv' With (FORMAT CSV, HEADER)
 EOF
 
 echo "Creating: external_link.csv"
@@ -341,9 +342,9 @@ PGPASSWORD=vagrant psql -h localhost -p 54321 -U gigadb $DATABASE_NAME <<EOF
 EOF
 
 echo "Creating: attribute.csv"
-# Attribute id 497 is urltoredirect attribute which is essential for dataset page display
+# Downloading all attributes
 PGPASSWORD=vagrant psql -h localhost -p 54321 -U gigadb $DATABASE_NAME <<EOF
-  \copy (SELECT * FROM attribute WHERE id IN (497) OR id IN (SELECT DISTINCT attribute_id FROM dataset_attributes WHERE $out_dataset_ids) OR id IN (SELECT DISTINCT attribute_id FROM exp_attributes WHERE exp_id IN (SELECT DISTINCT id FROM experiment WHERE $out_dataset_ids)) OR id IN (SELECT DISTINCT attribute_id FROM file_attributes WHERE file_id IN (SELECT DISTINCT id FROM file WHERE $out_dataset_ids)) OR id IN (SELECT DISTINCT attribute_id FROM sample_attribute WHERE sample_id IN (SELECT DISTINCT sample_id FROM dataset_sample WHERE $out_dataset_ids)) ORDER BY id ASC) To '${output_dir_path}/attribute.csv' With (FORMAT CSV, HEADER)
+  \copy (SELECT * FROM attribute ORDER BY id ASC) To '${output_dir_path}/attribute.csv' With (FORMAT CSV, HEADER)
 EOF
 
 echo "Creating: file.csv"

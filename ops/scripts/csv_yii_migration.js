@@ -120,7 +120,13 @@ const getMigrationFileName = tableName => {
         case "YiiSession":
             return "m200529_050470_insert_data_YiiSession_tab";
         case "user_command":
-            return "m200529_050580_insert_data_user_command_tab";
+            return "m200529_050480_insert_data_user_command_tab";
+        case "contribution":
+            return "m200529_050490_insert_data_contribution_tab";
+        case "template_name":
+            return "m200529_050500_insert_data_template_name_tab";
+        case "template_attribute":
+            return "m200529_050510_insert_data_template_attribute_tab";
         default:
             throw new Error("No match for table name!");
     }
@@ -145,6 +151,7 @@ for(var a = 0; a < files.length; a ++) {
     var filePath = PROJECT_DIR.concat("/data/", csvDir, "/", files[a]);
     var tokens = files[a].split(".");
     var tableName = tokens[0];
+    // console.log("Doing table: ", tableName);
     var outfile = PROJECT_DIR.concat(OUTPUT_DIR, csvDir, "/", getMigrationFileName(tableName), ".php");
 
     var out = "";

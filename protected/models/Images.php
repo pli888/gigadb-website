@@ -6,6 +6,7 @@
  *
  * The followings are the available columns in table 'image':
  * @property integer $id
+ * @property string $location
  * @property string $tag
  * @property string $url
  * @property string $license
@@ -18,9 +19,11 @@
 class Images extends ImageHaver
 {
 
+    /** @var $image_upload CUploadedFile */
     public $image_upload;
-    public $is_no_image;
+    public $is_no_image = 0;
     public static $fup_img = '/images/fair.png';
+    public $old_image;
     /**
      * Returns the static model of the specified AR class.
      * @param string $className active record class name.
@@ -47,7 +50,8 @@ class Images extends ImageHaver
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('image_upload', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'),
+            array('image_upload', 'file', 'types'=>'jpg, jpeg, gif, png', 'allowEmpty'=>true, 'on'=>'update'),
+            array('image_upload', 'validateImageUpload'),
             array('license, photographer, source', 'required'),
             array('tag', 'length', 'max'=>120),
             array('url, source', 'length', 'max'=>256),
@@ -56,6 +60,14 @@ class Images extends ImageHaver
             // Please remove those attributes that should not be searched.
             array('id, tag, url, license, photographer, source', 'safe', 'on'=>'search'),
         );
+    }
+
+    public function validateImageUpload($attribute, $params)
+    {
+        if (!$this->is_no_image && !$this->$attribute && ($this->getIsNewRecord() || $this->location == 'no_image.jpg')) {
+            $labels = $this->attributeLabels();
+            $this->addError($attribute, $labels[$attribute] . ' cannot be blank.');
+        }
     }
 
     /**
@@ -77,10 +89,10 @@ class Images extends ImageHaver
     {
         return array(
             'id' => 'ID',
-            'tag' => 'Image Tag',
+            'tag' => 'Image Title',
             'url' => 'Image URL',
             'license' => 'Image License',
-            'photographer' => 'Image Photographer',
+            'photographer' => 'Image Credit',
             'source' => 'Image Source',
             'image_upload' => 'Upload Image',
         );
@@ -118,6 +130,66 @@ class Images extends ImageHaver
 
     public function getImageTypeName() {
         return "image_upload";
+    }
+
+    public function setIsNoImage($isNoImage)
+    {
+        $this->is_no_image = (int)$isNoImage;
+    }
+
+    public function loadByData($data)
+    {
+        if (!$data['is_no_image']) {
+            $this->image_upload = CUploadedFile::getInstance($this, 'image_upload');
+            if ($this->image_upload) {
+                $this->old_image = $this->url;
+
+                $fileName = time() . '.' . $this->image_upload->getExtensionName();
+                $this->url = MainHelper::getUploadsDir() . '/' . $fileName;
+                $this->location = $fileName;
+            }
+
+            $this->tag = $data['tag'];
+            $this->license = $data['license'];
+            $this->photographer = $data['photographer'];
+            $this->source = $data['source'];
+            $this->is_no_image = 0;
+        } else {
+            if ($this->url && $this->url != "http://gigadb.org/images/data/cropped/no_image.png") {
+                $this->old_image = $this->url;
+            }
+
+            $this->url="http://gigadb.org/images/data/cropped/no_image.png";
+            $this->location="no_image.jpg";
+            $this->tag="no image icon";
+            $this->license="Public domain";
+            $this->photographer="GigaDB";
+            $this->source="GigaDB";
+            $this->is_no_image = 1;
+        }
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function saveImageFile()
+    {
+        if ($this->image_upload) {
+            $res = Gregwar\Image\Image::open($this->image_upload->getTempName())
+                ->resize(400, 400, 0xffffff)
+                ->save($this->url);
+
+            if (!$res) {
+                return false;
+            }
+
+            if ($this->old_image && file_exists($this->old_image)) {
+                unlink($this->old_image);
+            }
+        }
+
+        return true;
     }
 
 #    // Or this, for that matter

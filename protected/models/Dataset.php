@@ -1,6 +1,31 @@
 <?php
 Yii::import('application.extensions.CAdvancedArBehavior');
 
+/**
+ * @property integer $id
+ * @property integer $submitter_id
+ * @property integer $image_id
+ * @property integer $curator_id
+ * @property string $manuscript_id
+ * @property string $identifier
+ * @property string $title
+ * @property string $description
+ * @property integer $dataset_size
+ * @property string $ftp_site
+ * @property string $upload_status
+ * @property string $excelfile
+ * @property string $excelfile_md5
+ * @property string $publication_date
+ * @property string $modification_date
+ * @property integer $publisher_id
+ * @property string $token
+ * @property string $fairnuse
+ * @property integer $additional_information
+ * @property integer $funding
+ * @property integer $is_test
+ * @property string $creation_date
+ * @property integer $is_deleted
+ */
 class Dataset extends CActiveRecord
 {
     /**
@@ -15,27 +40,28 @@ class Dataset extends CActiveRecord
     const URL_BIBTEXT = 'http://data.datacite.org/application/x-bibtex/10.5524/';
     const URL_TEXT = 'http://data.datacite.org/application/x-datacite+text/10.5524/';
 
-
     public $dTypes="";
     public $commonNames="";
     public $email;
     public $union;
     public $types;
+    public $keywords;
 
-    public static $statusList = array('ImportFromEM'=>'ImportFromEM',
-                         'UserStartedIncomplete'=>'UserStartedIncomplete',
-                         'Rejected'=>'Rejected',
-                         'Not required'=>'Not required',
-                         'AssigningFTPbox'=>'AssigningFTPbox',
-                         'UserUploadingData'=>'UserUploadingData',
-                         'DataAvailableForReview'=>'DataAvailableForReview',
-                         'Submitted'=>'Submitted',
-                         'DataPending'=>'DataPending',
-                         'Curation'=>'Curation',
-                         'AuthorReview'=>'AuthorReview',
-                         'Private'=>'Private',
-                         'Published' =>'Published',
-                         );
+    public static $statusList = array(
+        'ImportFromEM'=>'ImportFromEM',
+        'UserStartedIncomplete'=>'UserStartedIncomplete',
+        'Rejected'=>'Rejected',
+        'Not required'=>'Not required',
+        'AssigningFTPbox'=>'AssigningFTPbox',
+        'UserUploadingData'=>'UserUploadingData',
+        'DataAvailableForReview'=>'DataAvailableForReview',
+        'Submitted'=>'Submitted',
+        'DataPending'=>'DataPending',
+        'Curation'=>'Curation',
+        'AuthorReview'=>'AuthorReview',
+        'Private'=>'Private',
+        'Published' =>'Published',
+    );
 
     /*
      * List of Many To Many RelationShip
@@ -75,20 +101,30 @@ class Dataset extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('submitter_id, identifier, title, dataset_size, ftp_site', 'required'),
-            array('submitter_id, image_id, publisher_id', 'numerical', 'integerOnly'=>true),
+            array('submitter_id, identifier, title, ftp_site', 'required'),
+            array('types', 'validateTypes'),
+            array('submitter_id, image_id, publisher_id, funding, is_test, is_deleted', 'numerical', 'integerOnly'=>true),
             array('dataset_size', 'numerical'),
             array('identifier, excelfile_md5', 'length', 'max'=>32),
             array('title', 'length', 'max'=>300),
+            array('additional_information', 'length', 'max'=>500),
             array('upload_status', 'length', 'max'=>45),
+            array('manuscript_id', 'length', 'max'=>50),
             array('ftp_site', 'length', 'max'=>100),
             array('excelfile', 'length', 'max'=>50),
-            array('description, publication_date, modification_date, image_id, fairnuse, types', 'safe'),
+            array('description, publication_date, modification_date, creation_date, image_id, fairnuse, types', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, submitter_id, image_id, identifier, title, description, publisher, dataset_size, ftp_site, upload_status, excelfile, excelfile_md5, publication_date, modification_date', 'safe', 'on'=>'search'),
 #            array('projectIDs , sampleIDs , authorIDs , datasetTypeIDs' , 'safe'),
         );
+    }
+
+    public function validateTypes($attribute, $params)
+    {
+        if (isset($this->types) && !$this->types) {
+            $this->addError($attribute, 'Types cannot be blank.');
+        }
     }
 
     /**
@@ -145,15 +181,15 @@ class Dataset extends CActiveRecord
 
     public function getPreviousDoi() {
         return Dataset::model()->find(array('condition' =>"identifier < :id and upload_status = 'Published'",
-                'params'=>array(':id'=>$this->identifier),
-                'order'=>'identifier desc'
+            'params'=>array(':id'=>$this->identifier),
+            'order'=>'identifier desc'
         ));
     }
 
     public function getNextDoi() {
         return Dataset::model()->find(array('condition' =>"identifier > :id and upload_status = 'Published'",
-                'params'=>array(':id'=>$this->identifier),
-                'order'=>'identifier asc'
+            'params'=>array(':id'=>$this->identifier),
+            'order'=>'identifier asc'
         ));
     }
 
@@ -196,6 +232,8 @@ class Dataset extends CActiveRecord
             'id' => 'ID',
             'submitter_id' => 'Submitter',
             'image_id' => 'Image',
+            'curator_id' => 'Curator ID',
+            'manuscript_id' => 'GigaScience manuscript',
             'identifier' => 'DOI',
             'title' => Yii::t('app' ,'Title'),
             'description' => 'Description',
@@ -254,16 +292,16 @@ class Dataset extends CActiveRecord
      */
     public function getCuratorName(){
 
-      $curator = User::model()->findByPk($this->curator_id);
+        $curator = User::model()->findByPk($this->curator_id);
 
-      if( isset($curator) ) {
-        $curator_name = $curator->getFullName();
-      }
-      else {
-        $curator_name = "";
-      }
+        if( isset($curator) ) {
+            $curator_name = $curator->getFullName();
+        }
+        else {
+            $curator_name = "";
+        }
 
-      return $curator_name;
+        return $curator_name;
 
     }
 
@@ -290,9 +328,9 @@ class Dataset extends CActiveRecord
 
     public function getListTitles(){
         $models=Dataset::model()->findAll(array(
-                'select'=>'t.title',
-                'distinct'=>true,
-            ));
+            'select'=>'t.title',
+            'distinct'=>true,
+        ));
         $list=array();
         foreach (array_values($models) as $model){
             $list[] = $model->title;
@@ -342,11 +380,11 @@ class Dataset extends CActiveRecord
     public function getAuthor()
     {
         $authors = Yii::app()->db->createCommand()
-                            ->select('a.id, a.surname, a.first_name')
-                            ->from('author a')
-                            ->join('dataset_author da', 'a.id = da.author_id')
-                            ->where('dataset_id = :id', array(':id' => $this->id))
-                            ->queryAll();
+            ->select('a.id, a.surname, a.first_name')
+            ->from('author a')
+            ->join('dataset_author da', 'a.id = da.author_id')
+            ->where('dataset_id = :id', array(':id' => $this->id))
+            ->queryAll();
 
         return $authors ? $authors : array();
     }
@@ -358,12 +396,12 @@ class Dataset extends CActiveRecord
     public function getSamples()
     {
         $samples = Yii::app()->db->createCommand()
-                            ->select('s.name, sp.tax_id, sp.common_name, sp.genbank_name')
-                            ->from('sample s')
-                            ->join('dataset_sample ds', 's.id = ds.sample_id')
-                            ->join('species sp', 's.species_id = sp.id')
-                            ->where('ds.dataset_id = :id', array(':id' => $this->id))
-                            ->queryAll();
+            ->select('s.name, sp.tax_id, sp.common_name, sp.genbank_name')
+            ->from('sample s')
+            ->join('dataset_sample ds', 's.id = ds.sample_id')
+            ->join('species sp', 's.species_id = sp.id')
+            ->where('ds.dataset_id = :id', array(':id' => $this->id))
+            ->queryAll();
 
         var_dump(count($samples)); die;
 
@@ -405,6 +443,10 @@ class Dataset extends CActiveRecord
     }
 
     public function getTypeIds() {
+        if ($this->types) {
+            return $this->types;
+        }
+
         $types = $this->datasetTypes;
         $ids = array();
         foreach($types as $type) {
@@ -414,6 +456,10 @@ class Dataset extends CActiveRecord
     }
 
     public function getSemanticKeywords() {
+        if ($this->keywords) {
+            return $this->keywords;
+        }
+
         $sKeywordAttr = Attribute::model()->findByAttributes(array('attribute_name'=>'keyword'));
 
         $sk = DatasetAttributes::model()->findAllByAttributes(array('dataset_id'=>$this->id,'attribute_id'=>$sKeywordAttr->id));
@@ -443,7 +489,7 @@ class Dataset extends CActiveRecord
      */
     public function toXML() {
         $xmlstr = "<?xml version='1.0' ?>\n".
-              '<resource xmlns="http://datacite.org/schema/kernel-4"
+            '<resource xmlns="http://datacite.org/schema/kernel-4"
                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                         xsi:schemaLocation="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4/metadata.xsd"
                 >
@@ -469,7 +515,7 @@ class Dataset extends CActiveRecord
             if ( $author->orcid != null ) {
                 $name_identifier = $creator->addChild('nameIdentifier',$author->orcid);
                 $name_identifier->addAttribute('schemeURI','http://orcid.org/');
-                    $name_identifier->addAttribute('nameIdentifierScheme','ORCID');
+                $name_identifier->addAttribute('nameIdentifierScheme','ORCID');
             }
             if( $author->gigadb_user_id != null ) {
                 $user = User::model()->find("id=?", array($author->gigadb_user_id));
@@ -508,7 +554,7 @@ class Dataset extends CActiveRecord
         }
 
         //<dates>
-    	//	<date dateType="Available">2014-10-17</date>
+        //	<date dateType="Available">2014-10-17</date>
         $dates = $xml->addChild("dates");
         $date = $dates->addChild('date',$publication_date->format('Y-m-d'));
         $date->addAttribute('dateType','Available');
@@ -523,7 +569,7 @@ class Dataset extends CActiveRecord
         //<relatedIdentifiers>
         $manuscripts=$this->manuscripts;
         $internal_links=$this->relations;
-        
+
         $fundings=$this->datasetFunders;
 
         $related_identifiers = $xml->addChild("relatedIdentifiers");
@@ -592,5 +638,214 @@ class Dataset extends CActiveRecord
 
 
         return $xml->asXML();
+    }
+
+    public function setIdentifier()
+    {
+        $lastDataset = Dataset::model()->find(array('order'=>'identifier desc'));
+        $lastIdentifier = intval($lastDataset->identifier);
+
+        $this->identifier = $lastIdentifier + 1;
+    }
+
+    public function loadByData($data)
+    {
+        if (!empty($data['submitter_id'])) {
+            $this->submitter_id = $data['submitter_id'];
+        } else {
+            $this->submitter_id = Yii::app()->user !== null && isset(Yii::app()->user->_id) ? Yii::app()->user->_id : null;
+        }
+        $this->manuscript_id = $data['manuscript_id'];
+        $this->title = $data['title'];
+        $this->description = $data['description'];
+        $this->upload_status = "UserStartedIncomplete";
+        $this->ftp_site = "''";
+        $this->setIdentifier();
+    }
+
+    public function updateKeywords($keywords)
+    {
+        $attribute_service = Yii::app()->attributeService;
+        $attribute_service->replaceKeywordsForDatasetIdWithString($this->id, $keywords);
+    }
+
+    public function updateTypes($types)
+    {
+        DatasetType::storeDatasetTypes($this->id, $types);
+    }
+
+    public function addAuthor(Author $author, $rank, $contribution)
+    {
+        $da = DatasetAuthor::model()->findByAttributes(array('dataset_id'=>$this->id, 'author_id' => $author->id));
+        if(!$da) {
+            $da = new DatasetAuthor();
+            $da->dataset_id = $this->id;
+            $da->author_id = $author->id;
+        }
+
+        $contribution = Contribution::model()->findByAttributes(array('name'=>$contribution));
+
+        $da->rank = $rank;
+
+        $da->contribution_id = $contribution ? $contribution->id : 0;
+
+        return $da->save();
+    }
+
+    public function getAdditionalInformation()
+    {
+        return $this->additional_information ? !!$this->additional_information : null;
+    }
+
+    public function getFunding()
+    {
+        return isset($this->funding) ? !!$this->funding : null;
+    }
+
+
+    public function removeWithAllData()
+    {
+        $transaction = Yii::app()->db->getCurrentTransaction();
+        if (!$transaction) {
+            $transaction = Yii::app()->db->beginTransaction();
+        }
+
+        //AUTHORS
+        $das = DatasetAuthor::model()->findAllByAttributes(array('dataset_id'=>$this->id));
+        foreach ($das as $da) {
+            $author = $da->author;
+            if (!$da->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+
+            //if Author doesnt exist in another DatasetAuthor then delete it
+            $das2 = DatasetAuthor::model()->findByAttributes(array('author_id' => $author->id));
+            if (!count($das2)) {
+                if (!$author->delete()) {
+                    $transaction->rollback();
+                    return false;
+                }
+            }
+        }
+
+        //ADDITIONAL
+        $links = Link::model()->findAllByAttributes(array('dataset_id'=>$this->id));
+        foreach ($links as $link) {
+            if (!$link->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+
+        $relations = Relation::model()->findAllByAttributes(array('dataset_id'=>$this->id));
+        foreach ($relations as $relation) {
+            if (!$relation->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+
+        $projects = DatasetProject::model()->findAllByAttributes(array('dataset_id'=>$this->id));
+        foreach ($projects as $project) {
+            if (!$project->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+
+        $manuscripts = Manuscript::model()->findAllByAttributes(array('dataset_id'=>$this->id));
+        foreach ($manuscripts as $manuscript) {
+            if (!$manuscript->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+
+        $exLinks = ExternalLink::model()->findAllByAttributes(array('dataset_id'=>$this->id));
+        foreach ($exLinks as $exLink) {
+            if (!$exLink->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+
+        //FUNDING
+        $fundings = DatasetFunder::model()->findAllByAttributes(array('dataset_id'=>$this->id));
+        foreach ($fundings as $funding) {
+            if (!$funding->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+
+        //SAMPLES
+        $samples = $this->samples;
+        foreach ($samples as $sample) {
+            $sampleAttributes = SampleAttribute::model()->findAllByAttributes(array('sample_id'=>$sample->id));
+            foreach ($sampleAttributes as $sampleAttribute) {
+                if (!$sampleAttribute->delete()) {
+                    $transaction->rollback();
+                    return false;
+                }
+            }
+        }
+
+        //FILES
+        $files = File::model()->findAllByAttributes(array('dataset_id'=>$this->id));
+        foreach ($files as $file) {
+            if (!$file->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+
+        //DATASET
+        $image = $this->image;
+        $url = $image ? $image->url : '';
+        if ($image && $image->delete()) {
+            $transaction->rollback();
+            return false;
+        }
+
+        $logs = DatasetLog::model()->findAllByAttributes(array('dataset_id'=>$this->id));
+        foreach ($logs as $log) {
+            if (!$log->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+
+        $datasetAttributes = $this->datasetAttributes;
+        foreach ($datasetAttributes as $datasetAttribute) {
+            if (!$datasetAttribute->delete()) {
+                $transaction->rollback();
+                return false;
+            }
+        }
+
+        if (!$this->delete()) {
+            $transaction->rollback();
+            return false;
+        }
+
+        if ($url && $url != Images::NO_IMG_URL && file_exists($url)) {
+            unlink($image->url);
+        }
+
+        $transaction->commit();
+
+        return true;
+    }
+
+    public function toReal()
+    {
+        $this->is_test = 0;
+
+        if (!$this->save(false)) {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -5,11 +5,12 @@
  *
  * The followings are the available columns in table 'author':
  * @property integer $id
- * @property string $name$surname
+ * @property string $surname
  * @property string $middle_name
  * @property string $first_name
  * @property string $orcid
- * @property integer $position$gigadb_user_id
+ * @property integer $position
+ * @property integer $gigadb_user_id
  *
  * The followings are the available model relations:
  * @property DatasetAuthor[] $datasetAuthors
@@ -40,11 +41,12 @@ class Author extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('surname', 'required'),
+            array('first_name, surname', 'required'),
             array('gigadb_user_id', 'numerical', 'integerOnly' => true),
             array('gigadb_user_id', 'unique', 'className' => 'Author'),
             array('surname, middle_name, first_name, custom_name', 'length', 'max' => 255),
             array('orcid', 'length', 'max' => 128),
+            array('orcid', 'match', 'pattern' => '/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, surname, middle_name, first_name, custom_name,orcid, gigadb_user_id, dois_search', 'safe', 'on' => 'search'),
@@ -59,7 +61,7 @@ class Author extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'datasetAuthors' => array(self::HAS_MANY, 'DatasetAuthor', 'author_id'),
-            'datasets' => array(self::MANY_MANY, 'Dataset', 'dataset_author(dataset_id,author_id)')
+            'datasets' => array(self::MANY_MANY, 'Dataset', 'dataset_author(dataset_id,author_id)'),
         );
     }
 
@@ -69,7 +71,7 @@ class Author extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'surname' => 'Surname',
+            'surname' => 'Last Name',
             'middle_name' => 'Middle Name',
             'first_name' => 'First Name',
             'custom_name' => 'Display Name',
@@ -389,5 +391,37 @@ EO_SQL;
 
     public function IsIdenticalTo($author) {
         return $this->id == $author || in_array($author,$this->getIdenticalAuthors());
+    }
+
+    public function loadByData($data)
+    {
+        if (isset($data['first_name'])) {
+            $this->first_name = $data['first_name'];
+        }
+        if (isset($data['middle_name'])) {
+            $this->middle_name = $data['middle_name'];
+        }
+        if (isset($data['last_name'])) {
+            $this->surname = $data['last_name'];
+        }
+        if(isset($data['orcid'])) {
+            $this->orcid = $data['orcid'];
+        }
+    }
+
+    public function loadByCsvRow($row)
+    {
+        if (isset($row[0])) {
+            $this->first_name = $row[0];
+        }
+        if (isset($row[1])) {
+            $this->middle_name = $row[1];
+        }
+        if (isset($row[2])) {
+            $this->surname = $row[2];
+        }
+        if(isset($row[3])) {
+            $this->orcid = $row[3];
+        }
     }
 }
