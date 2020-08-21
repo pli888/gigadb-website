@@ -45,3 +45,4 @@ id,prefix,url,source,icon
 47,RefSeq              ,https://www.ncbi.nlm.nih.gov/assembly/,"",
 48,CNSA_Project        ,https://db.cngb.org/cnsa/project/,"",
 49,HTTP                ,http://,"",
+50,MG-RAST             ,https://www.mg-rast.org/linkin.cgi?project=,EBI,

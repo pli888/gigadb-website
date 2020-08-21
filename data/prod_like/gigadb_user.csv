@@ -7,7 +7,7 @@ id,email,password,first_name,last_name,affiliation,role,is_activated,newsletter,
 835,test+835@gigasciencejournal.com,"",Junhua,Li,BGI-Shenzhen,"",t,t,f,,,,,test+835@gigasciencejournal.com,,EBI
 951,test+951@gigasciencejournal.com,"",Cong,Peng,"Xiangya Hospital, Central South University, Changsha, Hunan, China","",f,t,f,,,,,test+951@gigasciencejournal.com,,EBI
 978,test+978@gigasciencejournal.com,cacd427aa91d2a24c915669c7549f8f5,Patricia,Soranno,"Michigan State University, East Lansing, MI, USA","",t,t,f,,,,,test+978@gigasciencejournal.com,,EBI
-988,test+988@gigasciencejournal.com,25a57ffdedcba0010cae20983ac20a54,Chris,Armit,GigaScience,admin,t,t,t,,,,,test+988@gigasciencejournal.com,,EBI
+988,test+988@gigasciencejournal.com,66e8516ff071263619cb51cca7336385,Chris,Armit,GigaScience,admin,t,f,t,,,,,test+988@gigasciencejournal.com,,EBI
 989,test+989@gigasciencejournal.com,7d1cb5211394497300ef8d375a50754f,Mary Ann,Tuli,GigaScience,admin,t,t,f,,,,,test+989@gigasciencejournal.com,,NCBI
 1190,test+1190@gigasciencejournal.com,261f256a6a63cc1ea5673775968ae3b7,Hao-Chun,Hsu,"Department of Bio-Industrial Mechatronics Engineering, Natio",user,t,t,t,,,,,test+1190@gigasciencejournal.com,,NCBI
 1312,test+1312@gigasciencejournal.com,"",Andrew,Stubbs,"Erasmus University Medical Centre, Rotterdam, The Netherlands","",t,t,f,,,,,test+1312@gigasciencejournal.com,,EBI

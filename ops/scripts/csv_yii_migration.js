@@ -151,7 +151,7 @@ for(var a = 0; a < files.length; a ++) {
     var filePath = PROJECT_DIR.concat("/data/", csvDir, "/", files[a]);
     var tokens = files[a].split(".");
     var tableName = tokens[0];
-    console.log("Doing table: ", tableName);
+    // console.log("Doing table: ", tableName);
     var outfile = PROJECT_DIR.concat(OUTPUT_DIR, csvDir, "/", getMigrationFileName(tableName), ".php");
 
     var out = "";
