@@ -656,3 +656,7 @@ id,attribute_name,definition,model,structured_comment_name,value_syntax,allowed_
 899,GenBank,,,,,,,,
 900,env_feature,,,,,,,,
 901,Licence,,,,,,,,
+902,annotation,,,,,,,,
+903,sequence quality check,,,,,,,,
+904,number of contigs,,,,,,,,
+905,WGA amplification approach,,,,,,,,
