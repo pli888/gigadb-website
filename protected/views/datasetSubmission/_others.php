@@ -1,5 +1,5 @@
 <?php
-$exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSources;
+$exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSources || $isRepositories;
 ?>
 <div class="form-horizontal additional-bordered">
     <h3 style="display: inline-block">Other links</h3>
@@ -14,6 +14,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
     <?php $this->renderPartial('_protocols', array('model' => $model, 'isProtocols' => $isProtocols)); ?>
     <?php $this->renderPartial('_3d_images', array('model' => $model, 'is3dImages' => $is3dImages)); ?>
     <?php $this->renderPartial('_codes', array('model' => $model, 'isCodes' => $isCodes)); ?>
+    <?php $this->renderPartial('_repositories', array('model' => $model, 'isRepositories' => $isRepositories)); ?>
     <?php $this->renderPartial('_sources', array('model' => $model, 'isSources' => $isSources)); ?>
 
     <div class="clear"></div>
@@ -40,6 +41,9 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
             <?php foreach($codes as $exLink): ?>
                 <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
             <?php endforeach; ?>
+            <?php foreach($repositories as $exLink): ?>
+                <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
+            <?php endforeach; ?>
             <?php foreach($sources as $exLink): ?>
                 <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
             <?php endforeach; ?>
@@ -60,6 +64,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
     var protocolsDiv = $('#protocols');
     var _3dimagesDiv = $('#3d_images');
     var codesDiv = $('#codes');
+    var repositoriesDiv = $('#repositories');
     var sourcesDiv = $('#sources');
 
     $(manuscriptsDiv).on('keydown', 'input[name="link"]', function (event) {
@@ -142,6 +147,26 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
         }), 50);
     });
 
+    $(repositoriesDiv).on('keydown', 'input[name="link"]', function (event) {
+        var input = $(this);
+
+        setTimeout((function(){
+            var val = input.val().trim();
+            var valLength = val.length;
+
+            if (valLength){
+                $('.js-not-allowed', repositoriesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
+            } else {
+                $('.js-add-exLink', repositoriesDiv).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
+            }
+
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                $('.js-add-exLink', repositoriesDiv).trigger('click');
+            }
+        }), 50);
+    });
+
     $(sourcesDiv).on('keydown', 'input[name="link"]', function () {
         var input = $(this);
 
@@ -217,6 +242,8 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
                         div = _3dimagesDiv;
                     }  else if (response.exLink['type'] == <?= AIHelper::CODES ?>) {
                         div = codesDiv;
+                    }  else if (response.exLink['type'] == <?= AIHelper::REPOSITORIES ?>) {
+                        div = repositoriesDiv;
                     }  else if (response.exLink['type'] == <?= AIHelper::SOURCES ?>) {
                         div = sourcesDiv;
 

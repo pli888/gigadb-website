@@ -50,7 +50,7 @@ class ExternalLink extends CActiveRecord
             //array('url', 'validateUrlUnique'),
             array('url', 'validateUrlByPattern'),
             array('description', 'length', 'max'=>200),
-            array('external_link_type_id', 'in', 'range' => array(AIHelper::MANUSCRIPTS, AIHelper::PROTOCOLS, AIHelper::_3D_IMAGES, AIHelper::CODES, AIHelper::SOURCES)),
+            array('external_link_type_id', 'in', 'range' => array(AIHelper::MANUSCRIPTS, AIHelper::PROTOCOLS, AIHelper::_3D_IMAGES, AIHelper::CODES, AIHelper::SOURCES, AIHelper::REPOSITORIES)),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, dataset_id, url, external_link_type_id, doi_search, external_link_type_search', 'safe', 'on'=>'search'),
