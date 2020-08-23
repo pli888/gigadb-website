@@ -443,6 +443,11 @@ class DatasetSubmissionController extends Controller
                 'external_link_type_id' => AIHelper::CODES
             ), array('order'=>'id asc'));
 
+            $repositories = ExternalLink::model()->findAllByAttributes(array(
+                'dataset_id'=>$dataset->id,
+                'external_link_type_id' => AIHelper::REPOSITORIES
+            ), array('order'=>'id asc'));
+
             $sources = ExternalLink::model()->findAllByAttributes(array(
                 'dataset_id'=>$dataset->id,
                 'external_link_type_id' => AIHelper::SOURCES
@@ -458,6 +463,7 @@ class DatasetSubmissionController extends Controller
                 'protocols' => $protocols,
                 '_3dImages' => $_3dImages,
                 'codes' => $codes,
+                'repositories' => $repositories,
                 'sources' => $sources,
             ));
         }

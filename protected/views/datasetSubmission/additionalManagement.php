@@ -10,9 +10,10 @@ $isManuscripts = $additionalInfo ? !!count($manuscripts) : null;
 $isProtocols = $additionalInfo ? !!count($protocols) : null;
 $is3dImages = $additionalInfo ? !!count($_3dImages) : null;
 $isCodes = $additionalInfo ? !!count($codes) : null;
+$isRepositories = $additionalInfo ? !!count($repositories) : null;
 $isSources = $additionalInfo ? !!count($sources) : null;
 
-$disabled = $isSources === null || $isCodes === null || $is3dImages === null || $isProtocols === null || $isManuscripts === null || $isProjects === null || $isRelatedDoi === null || $isPublicLinks === null;
+$disabled = $isSources === null || $isCodes === null || $isRepositories === null || $is3dImages === null || $isProtocols === null || $isManuscripts === null || $isProjects === null || $isRelatedDoi === null || $isPublicLinks === null;
 ?>
 <h2>Add Additional Information</h2>
 <div class="clear"></div>
@@ -41,11 +42,13 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
             '_3dImages' => $_3dImages,
             'codes' => $codes,
             'sources' => $sources,
+            'repositories' => $repositories,
             'isManuscripts' => $isManuscripts,
             'isProtocols' => $isProtocols,
             'is3dImages' => $is3dImages,
             'isCodes' => $isCodes,
             'isSources' => $isSources,
+            'isRepositories' => $isRepositories,
         )); ?>
     </div>
 
@@ -102,6 +105,7 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
                 && $('#protocols-no').hasClass('btn-green')
                 && $('#3d_images-no').hasClass('btn-green')
                 && $('#codes-no').hasClass('btn-green')
+                && $('#repositories-no').hasClass('btn-green')
                 && $('#sources-no').hasClass('btn-green')
             ) {
                 target.hide();
@@ -263,6 +267,7 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
             && ($('#protocols-no').hasClass('btn-green') || ($('#protocols-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::PROTOCOLS ?>').length))
             && ($('#3d_images-no').hasClass('btn-green') || ($('#3d_images-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::_3D_IMAGES ?>').length))
             && ($('#codes-no').hasClass('btn-green') || ($('#codes-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::CODES ?>').length))
+            && ($('#repositories-no').hasClass('btn-green') || ($('#repositories-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::REPOSITORIES ?>').length))
             && ($('#sources-no').hasClass('btn-green') || ($('#sources-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::SOURCES ?>').length))
         ) {
             $('#additional-save').find('.js-not-allowed').removeClass('js-not-allowed').addClass('btn-green js-save-additional');
