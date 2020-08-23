@@ -118,6 +118,12 @@ const getMigrationFileName = tableName => {
             return "m200529_050470_insert_data_YiiSession_tab";
         case "user_command":
             return "m200529_050480_insert_data_user_command_tab";
+        case "contribution":
+            return "m200529_050490_insert_data_contribution_tab";
+        case "template_name":
+            return "m200529_050500_insert_data_template_name_tab";
+        case "template_attribute":
+            return "m200529_050510_insert_data_template_attribute_tab";
         default:
             throw new Error("No match for table name!");
     }
