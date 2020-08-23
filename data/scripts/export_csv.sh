@@ -202,9 +202,10 @@ PGPASSWORD=vagrant psql -h localhost -p 54321 -U gigadb $DATABASE_NAME <<EOF
   \copy (SELECT * FROM external_link WHERE $out_dataset_ids ORDER BY id ASC) To '${output_dir_path}/external_link.csv' With (FORMAT CSV, HEADER)
 EOF
 
+# All external_link_type entries required for subwiz
 echo "Creating: external_link_type.csv"
 PGPASSWORD=vagrant psql -h localhost -p 54321 -U gigadb $DATABASE_NAME <<EOF
-  \copy (SELECT * FROM "external_link_type" WHERE id IN (SELECT external_link_type_id FROM external_link WHERE $out_dataset_ids) ORDER BY id ASC) To '${output_dir_path}/external_link_type.csv' With (FORMAT CSV, HEADER)
+  \copy (SELECT * FROM "external_link_type" ORDER BY id ASC) To '${output_dir_path}/external_link_type.csv' With (FORMAT CSV, HEADER)
 EOF
 
 echo "Creating: dataset_funder.csv"
