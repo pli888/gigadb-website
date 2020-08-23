@@ -205,6 +205,11 @@ for(var a = 0; a < files.length; a ++) {
         }
     }
 
+    // Add command to reset next value for sequences otherwise might get duplicate key violation for id values
+    if(tableName !== "unit") {
+        out = out.concat(INDENT, INDENT, "$this->execute(\"SELECT setval(pg_get_serial_sequence('", tableName, "', 'id'), coalesce(max(id),0) + 1, false) FROM ", tableName, ";\");", NEWLINE);
+    }
+    
     out = out.concat(INDENT, "}", NEWLINE, NEWLINE);
     
     out = out.concat(INDENT, "public function safeDown()", NEWLINE, "    {", NEWLINE);
