@@ -1172,6 +1172,8 @@ class DatasetSubmissionController extends Controller
 
             $this->isSubmitter($dataset);
 
+            CurationLog::createlog($dataset->upload_status, $dataset->id);
+
             $this->render('end', array('model' => $dataset));
         }
     }
