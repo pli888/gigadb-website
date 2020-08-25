@@ -52,6 +52,7 @@ class DatasetSubmissionController extends Controller
      */
     public function actionChoose()
     {
+        $this->layout='new_main';
         $this->render('choose');
     }
 

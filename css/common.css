@@ -15,6 +15,13 @@ a.btn:hover,
 a.btn:focus {
     text-decoration: none;
 }
+a.myHint {
+    display: inline-block;
+    float: left;
+    background-image: url(/images/hint-icon.png);
+    height: 20px;
+    width: 20px;
+}
 .dropdown-menu > li > a {
     text-decoration: none;
 }
@@ -101,6 +108,13 @@ table.table a {
 }
 .color-background-block > p {
     color: #999;
+}
+.red-btn,
+.red-btn:focus,
+.red-btn:hover {
+    color: #fff;
+    background: #f80202;
+    border: 1px #f80202 solid;
 }
 .background-btn,
 .background-btn:focus,
