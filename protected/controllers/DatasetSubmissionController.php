@@ -69,6 +69,7 @@ class DatasetSubmissionController extends Controller
 
     public function actionUpload()
     {
+        $this->layout='new_main';
         $file = CUploadedFile::getInstanceByName('xls');
         if ($file) {
             $loggedUser = MainHelper::getLoggedUser();
