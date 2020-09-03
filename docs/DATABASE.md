@@ -39,15 +39,10 @@ database for querying.
 ## Converting CSV files into Yii migration scripts
 
 The CSV files must be converted to Yii migration scripts before the data can be
-uploaded into a database. However, this is done automatically done as part of 
-the config process:
+uploaded into a database. This is achieved using the `csv-to-migrations` docker
+service as follows:
 ```
-$ docker-compose run --rm config            # generate the configuration using variables in .env, GitLab, then exit
-```
-
-This process executes `generate_config.sh` which now includes a new step:
-```
-node /var/www/ops/scripts/csv_yii_migration.js $CSV_DIR
+$ docker-compose up csv-to-migrations
 ```
 
 A JavaScript program called `csv_yii_migration.js` is executed which will 
