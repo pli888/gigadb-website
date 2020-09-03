@@ -159,7 +159,7 @@ for(var a = 0; a < files.length; a ++) {
     var csvHeaderData = fs.readFileSync(filePath, 'utf8');
     // Parse CSV string
     var jsonData = papa.parse(csvHeaderData, config);
-    console.log("No. rows: ", jsonData.data.length);
+    console.log("Creating migration file for: ", tableName);
     for(var t = 0; t < jsonData.data.length; t++) {  // Go thru each row
         for(var h = 0; h < jsonData.meta.fields.length; h++) { // Go thru each column
             if(h === 0) {
