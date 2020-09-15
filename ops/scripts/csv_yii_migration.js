@@ -5,6 +5,14 @@
 const fs = require('fs');
 const fsPath = require('fs-path');
 const papa = require('papaparse');
+const handlebars = require('handlebars');
+
+handlebars.registerHelper('ifCond', function(v1, v2, options) {
+    if(v1 === v2) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
 
 // Global scope
 var PROJECT_DIR = "/var/www";
@@ -126,7 +134,7 @@ const getMigrationFileName = tableName => {
     }
 };
 
-// Configuration to using Papa Parse CSV parser
+// Configuration for using Papa Parse CSV parser
 let config = {
     delimiter: ",",
     newline: "\n",
@@ -137,6 +145,106 @@ let config = {
     skipEmptyLines: true,
 };
 
+// Loop over 3 tables
+// let tables = ['author', 'dataset', 'sample'];
+// let myJsonString = JSON.stringify(tables);
+// console.log(myJsonString);
+
+// Other data
+// let small_data = {
+//     data: [
+//         {table: "author"},
+//         {table: "dataset"},
+//         {table: "sample"}
+//     ]
+// };
+// var context = { "name" : "Ritesh Kumar" };
+// var context = { "name" : "Ritesh Kumar", "occupation" : "developer" };
+
+var files = fs.readdirSync(csvDirPath);
+for(let a = 0; a < files.length; a ++) {
+    // Create file paths
+    let filePath = PROJECT_DIR.concat("/data/", csvDir, "/", files[a]);
+    let tokens = files[a].split(".");
+    let tableName = tokens[0];
+    let outfile = "/var/www/out/" + getMigrationFileName(tableName) + ".php";
+    
+    let csvHeaderData = fs.readFileSync(filePath, 'utf8');
+    // Parse CSV string
+    let jsonData = papa.parse(csvHeaderData, config);
+    var data = JSON.stringify(jsonData);
+    var parsed = JSON.parse(data);
+    let context = { class_name: getMigrationFileName(tableName), table_name: tokens[0], data: parsed.data};
+    if(tableName === "publisher") {
+        console.log(context);
+    }
+
+    // Read handlebars template as string
+    let template = fs.readFileSync("./migration.php.template.test.dist", "utf8");
+    const templateScript = handlebars.compile(template);
+    // console.log(templateScript(context));
+    // Output Yii migration script
+    fsPath.writeFile(outfile, templateScript(context), function (err) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+        
+    // for(var row = 0; row < jsonData.data.length; row++) {  // Go thru each row
+    //     for(var col = 0; col < jsonData.meta.fields.length; col++) { // Go thru each column
+    //         // if(col === 0) {
+    //         //     out = out.concat(INDENT, INDENT, "$this->insert('", tableName, "', array(", NEWLINE);
+    //         // }
+    //
+    //         // Record ids to help with creating safeDown() function below
+    //         var col_value = jsonData.meta.fields[col];
+    //         if(col_value === "id") {
+    //             ids.push(jsonData.data[row][col_value]);
+    //         }
+    //
+    //         var value = jsonData.data[row][col_value];
+    //
+    //         // Hard-code encrypted user password into migration script for testing purposes
+    //         if(col_value === "password") {
+    //             out = out.concat(INDENT, INDENT, INDENT, "'", col_value, "' => '5a4f75053077a32e681f81daa8792f95',", NEWLINE);
+    //         }
+    //         else if (value.length === 0) {  // Deal with fields having empty values
+    //             if(col === jsonData.meta.fields.length-1) {  // if field is last one in jsonData.meta.fields array
+    //                 out = out.concat(INDENT, INDENT, "));", NEWLINE);
+    //             }
+    //             continue;
+    //         }
+    //         else {
+    //             var field_value_str = jsonData.data[row][col_value];
+    //             // Deal with single quote characters in values which causes
+    //             // problems when running Yii migrations
+    //             field_value_str = field_value_str.split("'").join("\\'");
+    //             out = out.concat(INDENT, INDENT, INDENT, "'", col_value, "' => '", field_value_str, "',", NEWLINE);
+    //         }
+    //
+    //         if(col === jsonData.meta.fields.length-1) {
+    //             out = out.concat(INDENT, INDENT, "));", NEWLINE);
+    //         }
+    //     }
+    // }
+    
+    // var json_str = '{"class_name": "' + getMigrationFileName(tableName) + '", "table_name": "' + tableName + '",\ndetails: []\n}';
+    // console.log(JSON.parse(json_str));
+    // let context = JSON.parse(json_str);
+    // for(var t = 0; t < jsonData.data.length; t++) {  // Go thru each row
+    //     for (var h = 0; h < jsonData.meta.fields.length; h++) { // Go thru each column
+    //         if (h === 0) {
+    //             out = out.concat(INDENT, INDENT, "$this->insert('", tableName, "', array(", NEWLINE);
+    //         }
+    //     }
+    // }
+    
+    
+    
+
+}
+
+/*
 // A loop to create Yii migration scripts for each CSV file
 // containing table data
 var files = fs.readdirSync(csvDirPath);
@@ -219,3 +327,4 @@ for(var a = 0; a < files.length; a ++) {
         }
     });
 }
+*/

@@ -1,0 +1,21 @@
+<?php
+
+class {{ class_name }} extends CDbMigration
+{
+    public function safeUp()
+    {
+        $this->insert('{{ table_name }}', array(
+            {{#each data}}
+                Key: {{@key}} Value = {{id}}
+                'id' => '{{id}}',
+                'name' => '{{name}}',
+                {{#ifCond description ""}}
+                    {{description}} is equal to empty string
+                {{else}}
+                    {{description}} is NOT equal to empty string
+                {{/ifCond}}
+            {{/each}}
+        ));
+    }
+    
+}
