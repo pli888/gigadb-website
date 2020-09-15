@@ -6,13 +6,7 @@ const fs = require('fs');
 const fsPath = require('fs-path');
 const papa = require('papaparse');
 const handlebars = require('handlebars');
-
-handlebars.registerHelper('ifCond', function(v1, v2, options) {
-    if(v1 === v2) {
-        return options.fn(this);
-    }
-    return options.inverse(this);
-});
+const jp = require('jsonpath');
 
 // Global scope
 var PROJECT_DIR = "/var/www";
@@ -145,51 +139,48 @@ let config = {
     skipEmptyLines: true,
 };
 
-// Loop over 3 tables
-// let tables = ['author', 'dataset', 'sample'];
-// let myJsonString = JSON.stringify(tables);
-// console.log(myJsonString);
-
-// Other data
-// let small_data = {
-//     data: [
-//         {table: "author"},
-//         {table: "dataset"},
-//         {table: "sample"}
-//     ]
-// };
-// var context = { "name" : "Ritesh Kumar" };
-// var context = { "name" : "Ritesh Kumar", "occupation" : "developer" };
-
 var files = fs.readdirSync(csvDirPath);
 for(let a = 0; a < files.length; a ++) {
     // Create file paths
     let filePath = PROJECT_DIR.concat("/data/", csvDir, "/", files[a]);
     let tokens = files[a].split(".");
     let tableName = tokens[0];
-    let outfile = "/var/www/out/" + getMigrationFileName(tableName) + ".php";
+    let outfile = "/var/www/protected/migrations/data/dev/" + getMigrationFileName(tableName) + ".php";
     
-    let csvHeaderData = fs.readFileSync(filePath, 'utf8');
-    // Parse CSV string
-    let jsonData = papa.parse(csvHeaderData, config);
-    var data = JSON.stringify(jsonData);
-    var parsed = JSON.parse(data);
-    let context = { class_name: getMigrationFileName(tableName), table_name: tokens[0], data: parsed.data};
-    if(tableName === "publisher") {
+    if(tableName === "gigadb_user") {
+        let csvHeaderData = fs.readFileSync(filePath, 'utf8');
+        // Parse CSV string
+        let jsonData = papa.parse(csvHeaderData, config);
+        let ids = jp.query(jsonData, '$..id');
+        console.log(ids);
+        var filtered = ids.filter(function (el) {
+            return el !== "";
+        });
+
+        console.log(filtered);
+        var data = JSON.stringify(jsonData);
+        var parsed = JSON.parse(data);
+
+        let context = {
+            class_name: getMigrationFileName(tableName),
+            table_name: tokens[0],
+            safeup_data: parsed.data,
+            safedown_data: filtered
+        };
         console.log(context);
+        // Read handlebars template as string
+        let templateFile = "/var/www/ops/scripts/migration.php.template.test.dist";
+        let template = fs.readFileSync(templateFile, "utf8");
+        const templateScript = handlebars.compile(template);
+        console.log(templateScript(context));
+        // Output Yii migration script
+        fsPath.writeFile(outfile, templateScript(context), function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        });
     }
 
-    // Read handlebars template as string
-    let template = fs.readFileSync("./migration.php.template.test.dist", "utf8");
-    const templateScript = handlebars.compile(template);
-    // console.log(templateScript(context));
-    // Output Yii migration script
-    fsPath.writeFile(outfile, templateScript(context), function (err) {
-        if (err) {
-            return console.log(err);
-        }
-    });
-        
     // for(var row = 0; row < jsonData.data.length; row++) {  // Go thru each row
     //     for(var col = 0; col < jsonData.meta.fields.length; col++) { // Go thru each column
     //         // if(col === 0) {
