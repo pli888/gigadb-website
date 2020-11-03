@@ -193,6 +193,7 @@ class DatasetSubmissionController extends Controller
 
     public function actionCreate1()
     {
+        $this->layout='new_main';
         if (isset($_GET['id'])) {
             $this->redirect(array('/datasetSubmission/datasetManagement', 'id'=>$_GET['id']));
         } else {
