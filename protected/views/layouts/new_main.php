@@ -45,7 +45,7 @@
                     <ul class="list-inline text-left base-top-account-bar">
                         <? if(Yii::app()->user->isGuest) { ?>
                             <li><a href="/site/login"><i class="fa fa-sign-in"></i> Login / Signup</a></li>
-                            <? } else {
+                            <? } else { 
 
                             $name = Yii::app()->user->getFirst_Name();
 
@@ -155,8 +155,8 @@
             <div class="row">
                 <div class="col-xs-6">
                     <ul class="list-inline base-footer-logo-bar">
-                        <li><a href="https://academic.oup.com/gigascience"><img src="/images/new_interface_image/gigascience.png" alt="Go to GigaScience Journal web site"></a></li>
-                        <li><a href="http://www.genomics.cn/"><img src="/images/new_interface_image/bgi-logo.png" alt="Go to 华大基因 BGI (Beijing Genomics Institute) website"></a></li>
+                        <li><a href="https://academic.oup.com/gigascience"><img src="/images/new_interface_image/gigascience_white.png" alt="Go to GigaScience Journal web site"></a></li>
+                        <li><a href="http://www.genomics.cn/"><img src="/images/new_interface_image/bgi_logo_white.png" alt="Go to 华大基因 BGI (Beijing Genomics Institute) website"></a></li>
                         <li><a href="https://www.cngb.org"><img src="/images/new_interface_image/chinagenbank.png" alt="Go to CNGB (China National Gene Bank) website"></a></li>
                     </ul>
                 </div>

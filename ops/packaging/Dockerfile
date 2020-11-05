@@ -179,6 +179,22 @@ RUN if [ ${INSTALL_APCU} = true ]; then \
     echo 'apc.shm_size="64M"' | tee -a /usr/local/etc/php/conf.d/apcu.ini \
 ;fi
 
+ARG INSTALL_MAILPARSE=false
+RUN if [ ${INSTALL_MAILPARSE} = true ]; then \
+    # Install mailparse extension
+    pecl install mailparse && \
+    docker-php-ext-enable mailparse \
+;fi
+
+ARG INSTALL_CSSLINT_JSHINT=false
+RUN if [ ${INSTALL_CSSLINT_JSHINT} = true ]; then \
+    curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh && \
+    bash nodesource_setup.sh && \
+    apt-get install -y nodejs && \
+    rm nodesource_setup.sh && \
+    npm install -g csslint jshint \
+;fi
+
 RUN usermod -u 1000 www-data
 
 WORKDIR /var/www
