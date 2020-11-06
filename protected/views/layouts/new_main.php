@@ -21,20 +21,22 @@
                 <link rel="stylesheet" type="text/css" href="/fonts/open_sans/v13/open_sans.css">
                 <link rel="stylesheet" type="text/css" href="/fonts/pt_sans/v8/pt_sans.css">
                 <link rel="stylesheet" type="text/css" href="/fonts/lato/v11/lato.css">
-                <!-- Disable common.css whilst fixing CSS problems -->
-                <!-- <link rel="stylesheet" type="text/css" href="/css/common.css" /> -->
-                <!-- Using current.css for developing fix for CSS problems in current green layout -->
-                <link rel="stylesheet" type="text/css" href="/css/current.css" />
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" defer></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" defer></script>
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" defer></script>
+                <link rel="stylesheet" type="text/css" href="/css/common.css" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
                 <? } ?>
+    <?php if (($this->id == 'datasetSubmission')) {
+        $this->renderPartial('//shared/_my_hint');
+    }
+    ?>
                     <title>
                         <?php echo CHtml::encode($this->pageTitle); ?>
                     </title>
 </head>
 
 <body>
+<!-- new_main.php -->
     <div class="base-top-bar">
         <div class="container">
             <div class="row">
@@ -42,7 +44,7 @@
                     <ul class="list-inline text-left base-top-account-bar">
                         <? if(Yii::app()->user->isGuest) { ?>
                             <li><a href="/site/login"><i class="fa fa-sign-in"></i> Login / Signup</a></li>
-                            <? } else { 
+                            <? } else {
 
                             $name = Yii::app()->user->getFirst_Name();
 
