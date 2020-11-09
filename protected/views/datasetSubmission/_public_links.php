@@ -11,14 +11,14 @@
         <a href="#"
            data-target="public-links"
            id="public-links-yes"
-           class="btn additional-button <?php if ($isPublicLinks === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn background-btn additional-button <?php if ($isPublicLinks === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
         <a href="#"
            data-target="public-links"
            data-next-block="related-doi-block"
            data-url="/adminLink/deleteLinks"
            id="public-links-no"
            data-id="<?= $model->id ?>"
-           class="btn additional-button <?php if ($isPublicLinks === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn background-btn additional-button <?php if ($isPublicLinks === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
     </div>
 
     <div id="public-links"<?php if ($isPublicLinks !== true): ?> style="display: none"<?php endif; ?>>
@@ -31,7 +31,7 @@
                 <?= CHtml::dropDownList('prefix',
                     null,
                     array('' => 'Please select') + CHtml::listData($link_database,'prefix','prefix'),
-                    array('class'=>'js-database dropdown-white', 'style'=>'width:250px'));
+                    array('class'=>'js-database form-control', 'style'=>'width:250px'));
                 ?>
             </div>
         </div>
@@ -42,8 +42,8 @@
             <label class='control-label'>Accession number</label>
             <a class="myHint" data-content="Please provide unique identifier of linked data, e.g. an SRA accession; SRS012345."></a>
             <div class="controls">
-                <?= CHtml::textField('link', '', array('class'=>'js-acc-num', 'size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Unique identifier of linked data")); ?>
-                <a href="#" dataset-id="<?=$model->id?>" class="btn js-not-allowed" style="margin-left: 20px;"/>Add Link</a>
+                <?= CHtml::textField('link', '', array('class'=>'js-acc-num form-control', 'size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Unique identifier of linked data")); ?>
+                <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" style="margin-left: 20px;"/>Add Link</a>
             </div>
         </div>
 

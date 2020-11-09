@@ -410,6 +410,7 @@ class DatasetSubmissionController extends Controller
      */
     public function actionAdditionalManagement()
     {
+        $this->layout='new_main';
         if (!isset($_GET['id'])) {
             $this->redirect($this->getRedirectUrl());
         } else {
