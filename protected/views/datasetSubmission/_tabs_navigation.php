@@ -11,9 +11,9 @@ $isTest = isset($_GET['is_test']) && $_GET['is_test'] == '1' ? '/is_test/1' : ''
 <?php endif; ?>
 
 <a href="<?= $model->getIsNewRecord() ? '#' : "/datasetSubmission/datasetManagement{$modelId}{$isTest}" ?>"
-   class="btn btn-success <?= $controller == 'datasetSubmission' && ($action == 'create1' || $action == 'datasetManagement') ? 'sw-selected-btn' : 'nomargin' ?>"><?= Yii::t('app' , 'Study')?></a>
+   class="btn btn-default <?= $controller == 'datasetSubmission' && ($action == 'create1' || $action == 'datasetManagement') ? 'btn-success' : 'nomargin' ?>"><?= Yii::t('app' , 'Study')?></a>
 <a href="<?= $model->getIsNewRecord() ? '#' : "/datasetSubmission/authorManagement{$modelId}{$isTest}" ?>"
-   class="btn btn-default <?= $action == 'authorManagement' ? 'sw-selected-btn' : 'nomargin' ?>"><?= Yii::t('app' , 'Author')?></a>
+   class="btn btn-default <?= $action == 'authorManagement' ? 'btn-success' : 'nomargin' ?>"><?= Yii::t('app' , 'Author')?></a>
 <a href="<?= $model->getIsNewRecord() ? '#' : "/datasetSubmission/additionalManagement{$modelId}{$isTest}" ?>"
    class="btn btn-default <?= $action == 'additionalManagement' ? 'sw-selected-btn' : 'nomargin' ?>"><?= Yii::t('app' , 'Additional Information')?></a>
 <a href="<?= $model->getIsNewRecord() ? '#' : "/datasetSubmission/fundingManagement{$modelId}{$isTest}" ?>"

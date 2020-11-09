@@ -264,6 +264,7 @@ class DatasetSubmissionController extends Controller
 
     public function actionAuthorManagement()
     {
+        $this->layout='new_main';
         if (!isset($_GET['id'])) {
             $this->redirect($this->getRedirectUrl());
         } else {
