@@ -1,158 +1,160 @@
 <script src="/js/jquery.maskedinput.js"></script>
 
-<div class="content">
-    <div class="container">
+<div class="container">
+    <div class="content">
         <section>
             <div class="dataset-submission-page-title">
                 <h4>Add Authors</h4>
-                <!-- <div class="clear"></div> -->
             </div>
-
             <?php $this->renderPartial('_tabs_navigation', array('model' => $model)); ?>
-
             <div class="col-xs-12 form well">
                 <div class="form-horizontal">
-                    <div class="col-xs-12">
-                        <div id="author-grid" class="grid-view">
-                            <p>Please provide all author details, to do this you may 
-                                add them individually, or upload a CSV file. Once 
-                                added the author details will appear in the table 
-                                below and you may make any required changes directly 
-                                in the table.</p>
-                            <div class="additional-bordered" style="overflow-x: auto;margin: 15px 0;">
-                                <table class="table table-bordered" id="author-table" style="overflow: auto;">
-                                    <thead>
-                                        <tr>
-                                            <th id="author-grid_c0">
-                                                <span>First name</span>
-                                                <a class="myHint"
-                                                   data-content='Enter the first name of the author.'
-                                                   style="float: right">
-                                                </a>
-                                            </th>
-                                            <th id="author-grid_c1">
-                                                <span>Middle name</span>
-                                                <a class="myHint"
-                                                   data-content='Enter all middle names or initials separated by spaces, the initial of each middle name will be used in the displayed name.'
-                                                   style="float: right">
-                                                </a>
-                                            </th>
-                                            <th id="author-grid_c0">
-                                                <span>Last name</span>
-                                                <a class="myHint"
-                                                   data-content='Enter the Last/Family name of the author.'
-                                                   style="float: right">
-                                                </a>
-                                            </th>
-                                            <th id="author-grid_c3">
-                                                <span>ORCiD</span>
-                                                <a class="myHint"
-                                                   data-content='<a href=https://orcid.org/about/what-is-orcid/mission target=_blank>ORCID<a/> provides a persistent digital identifier that distinguishes you from every other researcher.'
-                                                   data-html="true"
-                                                   style="float: right;">
-                                                </a>
-                                            </th>
-                                            <th id="author-grid_c4">
-                                                <span>CrediT</span>
-                                                <a class="myHint"
-                                                   data-content='The CASRAI CRediT Author Contributions using the <a href="https://casrai.org/credit/" target="_blank">CRediT taxonomy</a>.'
-                                                   data-html="true"
-                                                   style="float: right">
-                                                </a>
-                                            </th>
-                                            <th id="author-grid_c5">
-                                                <span>Order</span>
-                                                <a class="myHint"
-                                                   data-content="This is the order in which authors will appear in the dataset citation."
-                                                   style="float: right;"></a>
-                                            </th>
-                                            <th id="author-grid_c6" class="button-column" width="5%"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach($das as $da): ?>
-                                            <tr class="odd">
-                                                <td><?=$da->author->first_name?></td>
-                                                <td><?=$da->author->middle_name?></td>
-                                                <td><?=$da->author->surname?></td>
-                                                <td><?=$da->author->orcid?></td>
-                                                <td><?=$da->contribution ? $da->contribution->name : '' ?></td>
-                                                <td>
-                                                    <input class='js-author-rank'
-                                                           id="js-author-rank-<?=$da->id?>"
-                                                           da-id="<?=$da->id?>"
-                                                           value="<?=$da->rank?>"
-                                                           type="text"
-                                                           style="width:25px">
-                                                </td>
-                                                <td class="button-column">
-                                                    <input type="hidden" class="js-da-id" value="<?= $da->id ?>">
-                                                    <a class="js-delete-author delete-title" da-id="<?= $da->id ?>"  title="delete this row">
-                                                        <img alt="delete this row" src="/images/delete.png">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="author-grid" class="grid-view">
+                                <p>Please provide all author details, to do this you may 
+                                    add them individually, or upload a CSV file. Once 
+                                    added the author details will appear in the table 
+                                    below and you may make any required changes directly 
+                                    in the table.</p>
+                                <div class="additional-bordered" style="overflow-x: auto;margin: 15px 0;">
+                                    <table class="table table-bordered" id="author-table" style="overflow: auto;">
+                                        <thead>
+                                            <tr>
+                                                <th id="author-grid_c0">
+                                                    <span>First name</span>
+                                                    <a class="myHint"
+                                                       data-content='Enter the first name of the author.'
+                                                       style="float: right">
                                                     </a>
+                                                </th>
+                                                <th id="author-grid_c1">
+                                                    <span>Middle name</span>
+                                                    <a class="myHint"
+                                                       data-content='Enter all middle names or initials separated by spaces, the initial of each middle name will be used in the displayed name.'
+                                                       style="float: right">
+                                                    </a>
+                                                </th>
+                                                <th id="author-grid_c0">
+                                                    <span>Last name</span>
+                                                    <a class="myHint"
+                                                       data-content='Enter the Last/Family name of the author.'
+                                                       style="float: right">
+                                                    </a>
+                                                </th>
+                                                <th id="author-grid_c3">
+                                                    <span>ORCiD</span>
+                                                    <a class="myHint"
+                                                       data-content='<a href=https://orcid.org/about/what-is-orcid/mission target=_blank>ORCID<a/> provides a persistent digital identifier that distinguishes you from every other researcher.'
+                                                       data-html="true"
+                                                       style="float: right;">
+                                                    </a>
+                                                </th>
+                                                <th id="author-grid_c4">
+                                                    <span>CrediT</span>
+                                                    <a class="myHint"
+                                                       data-content='The CASRAI CRediT Author Contributions using the <a href="https://casrai.org/credit/" target="_blank">CRediT taxonomy</a>.'
+                                                       data-html="true"
+                                                       style="float: right">
+                                                    </a>
+                                                </th>
+                                                <th id="author-grid_c5">
+                                                    <span>Order</span>
+                                                    <a class="myHint"
+                                                       data-content="This is the order in which authors will appear in the dataset citation."
+                                                       style="float: right;"></a>
+                                                </th>
+                                                <th id="author-grid_c6" class="button-column" width="5%"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach($das as $da): ?>
+                                                <tr class="odd">
+                                                    <td><?=$da->author->first_name?></td>
+                                                    <td><?=$da->author->middle_name?></td>
+                                                    <td><?=$da->author->surname?></td>
+                                                    <td><?=$da->author->orcid?></td>
+                                                    <td><?=$da->contribution ? $da->contribution->name : '' ?></td>
+                                                    <td>
+                                                        <input class='js-author-rank'
+                                                               id="js-author-rank-<?=$da->id?>"
+                                                               da-id="<?=$da->id?>"
+                                                               value="<?=$da->rank?>"
+                                                               type="text"
+                                                               style="width:25px">
+                                                    </td>
+                                                    <td class="button-column">
+                                                        <input type="hidden" class="js-da-id" value="<?= $da->id ?>">
+                                                        <a class="js-delete-author delete-title" da-id="<?= $da->id ?>"  title="delete this row">
+                                                            <img alt="delete this row" src="/images/delete.png">
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                            <tr id="no-results"<?php if ($das): ?> style="display: none;"<?php endif ?>>
+                                                <td colspan="7">
+                                                    <span class="empty">No results found.</span>
+                                                    <input type="hidden" value="999999998" class="js-author-rank">
                                                 </td>
                                             </tr>
-                                        <?php endforeach; ?>
-                                        <tr id="no-results"<?php if ($das): ?> style="display: none;"<?php endif ?>>
-                                            <td colspan="7">
-                                                <span class="empty">No results found.</span>
-                                                <input type="hidden" value="999999998" class="js-author-rank">
-                                            </td>
-                                        </tr>
-                                        <tr id="authors-form">
-                                            <td>
-                                                <input id="js-author-first-name" class="js-author-required" type="text" name="Author[first_name]" placeholder="First Name" style="width:150px">
-                                            </td>
-                                            <td>
-                                                <input id="js-author-middle-name" type="text" name="Author[middle_name]" placeholder="Middle Name (optional)" style="width:150px">
-                                            </td>
-                                            <td>
-                                                <input id="js-author-last-name" class="js-author-required" type="text" name="Author[last_name]" placeholder="Last Name" style="width:150px">
-                                            </td>
-                                            <td>
-                                                <input id="js-author-orcid" type="text" pattern="[1-9]{4}-[1-9]{4}-[1-9]{4}-[1-9]{4}" name="Author[orcid]" placeholder="ORCiD (optional)" style="width:130px">
-                                            </td>
-                                            <td>
-                                                <?php echo CHtml::dropDownList('js-author-contribution', 'Select credit term', CHtml::listData(Contribution::model()->findAll(), 'name', 'name'), array('encode' => false, 'prompt' => 'Select credit term', 'id' => 'js-author-contribution', 'class' => 'form-control js-author-required', 'style' => "width:140px"));    
-                                                ?>
-                                            </td>
-                                            <td colspan="2">
-                                                <input type="hidden" value="999999999" class="js-author-rank">
-                                                <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" id="js-add-author"/>Add Author</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            <tr id="authors-form">
+                                                <td>
+                                                    <input id="js-author-first-name" class="js-author-required" type="text" name="Author[first_name]" placeholder="First Name" style="width:150px">
+                                                </td>
+                                                <td>
+                                                    <input id="js-author-middle-name" type="text" name="Author[middle_name]" placeholder="Middle Name (optional)" style="width:150px">
+                                                </td>
+                                                <td>
+                                                    <input id="js-author-last-name" class="js-author-required" type="text" name="Author[last_name]" placeholder="Last Name" style="width:150px">
+                                                </td>
+                                                <td>
+                                                    <input id="js-author-orcid" type="text" pattern="[1-9]{4}-[1-9]{4}-[1-9]{4}-[1-9]{4}" name="Author[orcid]" placeholder="ORCiD (optional)" style="width:130px">
+                                                </td>
+                                                <td>
+                                                    <?php echo CHtml::dropDownList('js-author-contribution', 'Select credit term', CHtml::listData(Contribution::model()->findAll(), 'name', 'name'), array('encode' => false, 'prompt' => 'Select credit term', 'id' => 'js-author-contribution', 'class' => 'form-control js-author-required', 'style' => "width:140px"));    
+                                                    ?>
+                                                </td>
+                                                <td colspan="2">
+                                                    <input type="hidden" value="999999999" class="js-author-rank">
+                                                    <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" id="js-add-author"/>Add Author</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- row -->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p style="text-align: center">OR</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div style="text-align:center" class="add-author-container">
+                                <label for="authors">Author list upload</label>
+                                <a class="myHint" data-content="You may upload a tabular file of authors names (in TSV or CSV format), please use include 5 columns and 1 row for each author, e.g.<br> Firstname	Middlename	Lastname	ORCID 		contribution<br>Rosalind	Elsie	Franklin 	0000-0000-0000-0001	Conceptualization"
+                                   data-html="true" style="float: none"></a>
+                                <input type="file" id="authors" name="authors">
+                                <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" id="js-add-authors"/>Add Authors</a>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-xs-12">
-                        <p style="text-align: center">OR</p>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <div style="text-align:center" class="add-author-container">
-                            <label for="authors">Author list upload</label>
-                            <a class="myHint" data-content="You may upload a tabular file of authors names (in TSV or CSV format), please use include 5 columns and 1 row for each author, e.g.<br> Firstname	Middlename	Lastname	ORCID 		contribution<br>Rosalind	Elsie	Franklin 	0000-0000-0000-0001	Conceptualization"
-                               data-html="true" style="float: none"></a>
-                            <input type="file" id="authors" name="authors">
-                            <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" id="js-add-authors"/>Add Authors</a>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div style="text-align:center">
+                                <a href="/datasetSubmission/create1/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
+                                <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn background-btn js-save-authors">Save</a>
+                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-save-authors">Next</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xs-12">
-                    <div style="text-align:center">
-                        <a href="/datasetSubmission/create1/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
-                        <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn background-btn js-save-authors">Save</a>
-                        <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-save-authors">Next</a>
-                    </div>
-                </div>
+                </div> <!-- form-horizontal -->
             </div> <!-- col-xs-12 form well" -->
-        </section>
-    </div> <!-- container -->
-</div> <!-- content -->
+        </section> <!-- section -->
+    </div> <!-- content -->
+</div> <!-- container -->
 
 <script>
     $(".delete-title").tooltip({'placement':'left'});
