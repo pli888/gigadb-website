@@ -11,14 +11,14 @@
         <a href="#"
            data-target="public-links"
            id="public-links-yes"
-           class="btn background-btn additional-button <?php if ($isPublicLinks === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn background-btn additional-button <?php if ($isPublicLinks === true): ?>btn background-btn<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
         <a href="#"
            data-target="public-links"
            data-next-block="related-doi-block"
            data-url="/adminLink/deleteLinks"
            id="public-links-no"
            data-id="<?= $model->id ?>"
-           class="btn background-btn additional-button <?php if ($isPublicLinks === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn background-btn additional-button <?php if ($isPublicLinks === false): ?>btn background-btn<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
     </div>
 
     <div id="public-links"<?php if ($isPublicLinks !== true): ?> style="display: none"<?php endif; ?>>
