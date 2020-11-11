@@ -56,19 +56,15 @@ $disabled = $isSources === null || $isCodes === null || $isRepositories === null
                         'isRepositories' => $isRepositories,
                     )); ?>
                 </div>
-                <div class="row subwiz-row">
-                    <div class="col-xs-12">
-                        <div style="text-align:center" id="additional-save">
-                            <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
-                            <?php if ($disabled): ?>
-                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Save</a>
-                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Next</a>
-                            <?php else: ?>
-                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Save</a>
-                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Next</a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+                <div style="text-align:center" id="additional-save">
+                    <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
+                    <?php if ($disabled): ?>
+                        <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Save</a>
+                        <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Next</a>
+                    <?php else: ?>
+                        <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Save</a>
+                        <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Next</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>
