@@ -643,6 +643,7 @@ class DatasetSubmissionController extends Controller
      */
     public function actionFundingManagement()
     {
+        $this->layout='new_main';
         if (!isset($_GET['id'])) {
             $this->redirect($this->getRedirectUrl());
         } else {

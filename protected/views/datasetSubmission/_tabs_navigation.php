@@ -16,7 +16,7 @@ $isTest = isset($_GET['is_test']) && $_GET['is_test'] == '1' ? '/is_test/1' : ''
             <a href="<?= $model->getIsNewRecord() ? '#' : "/datasetSubmission/additionalManagement{$modelId}{$isTest}" ?>"
                class="btn btn-default <?= $action == 'additionalManagement' ? 'btn-success' : 'nomargin' ?>"><?= Yii::t('app' , 'Additional Information')?></a>
             <a href="<?= $model->getIsNewRecord() ? '#' : "/datasetSubmission/fundingManagement{$modelId}{$isTest}" ?>"
-               class="btn btn-default <?= $action == 'fundingManagement' ? 'sw-selected-btn' : 'nomargin' ?>"><?= Yii::t('app' , 'Funding')?></a>
+               class="btn btn-default <?= $action == 'fundingManagement' ? 'btn-success' : 'nomargin' ?>"><?= Yii::t('app' , 'Funding')?></a>
             <a href="<?= $model->getIsNewRecord() ? '#' : "/datasetSubmission/sampleManagement{$modelId}{$isTest}" ?>"
                class="btn btn-default <?= $action == 'sampleManagement' || $action == 'end' ? 'sw-selected-btn' : 'nomargin' ?>"><?= Yii::t('app' , 'Sample')?></a>
 <?php if($controller == 'adminFile' && $action == 'create1' || $model->upload_status == 'UserUploadingData' ): ?>
