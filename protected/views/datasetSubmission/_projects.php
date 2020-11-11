@@ -1,72 +1,75 @@
-<div class="form-horizontal additional-bordered">
-    <h3 style="display: inline-block">Collaboration links</h3>
-    <a class="myHint" style="float: none;" data-content="If your dataset is part of an international collaborative project you may provide the details here."></a>
-
-
-    <p class="note">
-        Is this data part of a large recognised (international) project ? E.g. G10K
-    </p>
-
-    <div style="text-align: center; margin-bottom: 15px;">
-        <a href="#"
-           data-target="projects"
-           id="projects-yes"
-           class="btn additional-button <?php if ($isProjects === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
-        <a href="#"
-           data-target="projects"
-           data-next-block="others-block"
-           id="projects-no"
-           data-url="/adminDatasetProject/deleteProjects"
-           data-id="<?= $model->id ?>"
-           class="btn additional-button <?php if ($isProjects === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
-    </div>
-
-    <div id="projects"<?php if ($isProjects !== true): ?> style="display: none"<?php endif; ?>>
+    <div class="form-horizontal additional-bordered">
+        <h3 style="display: inline-block">Collaboration links</h3>
+        <a class="myHint" style="float: none;" data-content="If your dataset is part of an international collaborative project you may provide the details here."></a>
         <p class="note">
-            Please select the appropriate project from the dropdown list and click “Add Project”, you may add multiple projects if appropriate.
-            <br>
-            If the project you wish to add is not in the list, please complete the submission without it and inform us by email so we may add it to your dataset and update this list.
+            Is this data part of a large recognised (international) project ? E.g. G10K
         </p>
-
-        <div class="control-group" style="text-align: center">
-            <?= CHtml::dropDownList('project', null,
-                array('' => 'Please select') + CHtml::listData(Project::model()->findAll(), 'id', 'name'),
-                array('class'=>'js-project dropdown-white','style'=>'width:auto')); ?>
-            <a href="#" dataset-id="<?=$model->id?>" class="btn js-not-allowed" style="margin-left: 20px;"/>Add Project</a>
+        <div style="text-align: center; margin-bottom: 15px;">
+            <a href="#"
+               data-target="projects"
+               id="projects-yes"
+               class="btn additional-button <?php if ($isProjects === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+            <a href="#"
+               data-target="projects"
+               data-next-block="others-block"
+               id="projects-no"
+               data-url="/adminDatasetProject/deleteProjects"
+               data-id="<?= $model->id ?>"
+               class="btn additional-button <?php if ($isProjects === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
         </div>
-
-        <div id="author-grid" class="grid-view">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th id="author-grid_c0" width="80%">Project Name</th>
-                    <th id="author-grid_c5" class="button-column" width="20%"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach($dps as $dp) { ?>
-                    <tr class="odd js-my-item">
-                        <td>
-                            <?=$dp->project->name?>
-                            <input type="hidden" class="js-project-id" value="<?= $dp->project->id ?>">
-                        </td>
-                        <td class="button-column">
-                            <input type="hidden" class="js-my-id" value="<?= $dp->id ?>">
-                            <a class="js-delete-project delete-title" dp-id="<?=$dp->id?>" data-id="<?= $model->id ?>" title="delete this row">
-                                <img alt="delete this row" src="/images/delete.png">
-                            </a>
-                        </td>
-                    </tr>
-                <? } ?>
-                <tr class="js-no-results"<?php if ($dps): ?> style="display: none"<?php endif ?>>
-                    <td colspan="4">
-                        <span class="empty">No results found.</span>
-                    </td>
-                </tr>
-                <tr>
-                </tbody>
-            </table>
-        </div>
+        <div id="projects"<?php if ($isProjects !== true): ?> style="display: none"<?php endif; ?>>
+            <div class="row subwiz-row">
+                <div class="col-xs-12">
+                <p class="note">
+                    Please select the appropriate project from the dropdown list and click “Add Project”, you may add multiple projects if appropriate.
+                    <br>
+                    If the project you wish to add is not in the list, please complete the submission without it and inform us by email so we may add it to your dataset and update this list.
+                </p>
+    
+                <div class="control-group" style="text-align: center">
+                    <?= CHtml::dropDownList('project', null,
+                        array('' => 'Please select') + CHtml::listData(Project::model()->findAll(), 'id', 'name'),
+                        array('class'=>'js-project form-control','style'=>'width:auto')); ?>
+                    <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" style="margin-left: 20px;"/>Add Project</a>
+                </div>
+                <div class="row subwiz-row">
+                    <div class="col-xs-12">
+                        <div id="author-grid" class="grid-view">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th id="author-grid_c0" width="80%">Project Name</th>
+                                    <th id="author-grid_c5" class="button-column" width="20%"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($dps as $dp) { ?>
+                                    <tr class="odd js-my-item">
+                                        <td>
+                                            <?=$dp->project->name?>
+                                            <input type="hidden" class="js-project-id" value="<?= $dp->project->id ?>">
+                                        </td>
+                                        <td class="button-column">
+                                            <input type="hidden" class="js-my-id" value="<?= $dp->id ?>">
+                                            <a class="js-delete-project delete-title" dp-id="<?=$dp->id?>" data-id="<?= $model->id ?>" title="delete this row">
+                                                <img alt="delete this row" src="/images/delete.png">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <? } ?>
+                                <tr class="js-no-results"<?php if ($dps): ?> style="display: none"<?php endif ?>>
+                                    <td colspan="4">
+                                        <span class="empty">No results found.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
     </div>
 </div>
 
