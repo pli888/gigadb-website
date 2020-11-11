@@ -1167,6 +1167,7 @@ class DatasetSubmissionController extends Controller
      */
     public function actionEnd()
     {
+        $this->layout='new_main';
         if (!isset($_GET['id'])) {
             $this->redirect("/user/view_profile");
         } else {
