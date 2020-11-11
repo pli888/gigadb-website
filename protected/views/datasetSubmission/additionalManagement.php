@@ -16,58 +16,58 @@ $isSources = $additionalInfo ? !!count($sources) : null;
 $disabled = $isSources === null || $isCodes === null || $isRepositories === null || $is3dImages === null || $isProtocols === null || $isManuscripts === null || $isProjects === null || $isRelatedDoi === null || $isPublicLinks === null;
 ?>
 
-<div class="content">
-    <div class="container">
+<div class="container">
+    <div class="content">
         <section>
             <div class="dataset-submission-page-title">
                 <h4>Add Additional Information</h4>
-                <div class="clear"></div>
             </div>
-
             <?php $this->renderPartial('_tabs_navigation', array('model' => $model)); ?>
-
-            <div class="col-xs-12 form well">
-                <?php $this->renderPartial('_public_links', array('model' => $model, 'links' => $links, 'link_database' => $link_database, 'isPublicLinks' => $isPublicLinks)); ?>
-            
-                <div id="related-doi-block"<?php if ($isPublicLinks === null): ?> style="display: none;"<?php endif ?>>
-                    <div class="clear"></div>
-                    <?php $this->renderPartial('_related_doi', array('model' => $model, 'relations' => $relations, 'isRelatedDoi' => $isRelatedDoi)); ?>
+            <div class="form well">
+                <div class="row subwiz-row">
+                    <div class="col-xs-12">
+                        <?php $this->renderPartial('_public_links', array('model' => $model, 'links' => $links, 'link_database' => $link_database, 'isPublicLinks' => $isPublicLinks)); ?>
+                        <div id="related-doi-block"<?php if ($isPublicLinks === null): ?> style="display: none;"<?php endif ?>>
+                            <div class="clear"></div>
+                            <?php $this->renderPartial('_related_doi', array('model' => $model, 'relations' => $relations, 'isRelatedDoi' => $isRelatedDoi)); ?>
+                        </div>
+                        <div id="projects-block"<?php if ($isRelatedDoi === null): ?> style="display: none;"<?php endif ?>>
+                            <div class="clear"></div>
+                            <?php $this->renderPartial('_projects', array('model' => $model, 'dps' => $dps, 'isProjects' => $isProjects)); ?>
+                        </div>
+                        <div id="others-block" <?php if ($isProjects === null): ?> style="display: none;"<?php endif ?>>
+                            <div class="clear"></div>
+                            <?php $this->renderPartial('_others', array(
+                                'model' => $model,
+                                'manuscripts' => $manuscripts,
+                                'protocols' => $protocols,
+                                '_3dImages' => $_3dImages,
+                                'codes' => $codes,
+                                'sources' => $sources,
+                                'repositories' => $repositories,
+                                'isManuscripts' => $isManuscripts,
+                                'isProtocols' => $isProtocols,
+                                'is3dImages' => $is3dImages,
+                                'isCodes' => $isCodes,
+                                'isSources' => $isSources,
+                                'isRepositories' => $isRepositories,
+                            )); ?>
+                        </div>
+                    </div>
                 </div>
-            
-                <div id="projects-block"<?php if ($isRelatedDoi === null): ?> style="display: none;"<?php endif ?>>
-                    <div class="clear"></div>
-                    <?php $this->renderPartial('_projects', array('model' => $model, 'dps' => $dps, 'isProjects' => $isProjects)); ?>
-                </div>
-
-                <div id="others-block" <?php if ($isProjects === null): ?> style="display: none;"<?php endif ?>>
-                    <div class="clear"></div>
-                    <?php $this->renderPartial('_others', array(
-                        'model' => $model,
-                        'manuscripts' => $manuscripts,
-                        'protocols' => $protocols,
-                        '_3dImages' => $_3dImages,
-                        'codes' => $codes,
-                        'sources' => $sources,
-                        'repositories' => $repositories,
-                        'isManuscripts' => $isManuscripts,
-                        'isProtocols' => $isProtocols,
-                        'is3dImages' => $is3dImages,
-                        'isCodes' => $isCodes,
-                        'isSources' => $isSources,
-                        'isRepositories' => $isRepositories,
-                    )); ?>
-                </div>
-
-                <div class="clear"></div>
-                <div style="text-align:center" id="additional-save">
-                    <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
-                    <?php if ($disabled): ?>
-                        <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Save</a>
-                        <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Next</a>
-                    <?php else: ?>
-                        <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Save</a>
-                        <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Next</a>
-                    <?php endif; ?>
+                <div class="row subwiz-row">
+                    <div class="col-xs-12">
+                        <div style="text-align:center" id="additional-save">
+                            <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
+                            <?php if ($disabled): ?>
+                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Save</a>
+                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Next</a>
+                            <?php else: ?>
+                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Save</a>
+                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Next</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
