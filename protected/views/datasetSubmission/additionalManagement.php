@@ -24,36 +24,37 @@ $disabled = $isSources === null || $isCodes === null || $isRepositories === null
             </div>
             <?php $this->renderPartial('_tabs_navigation', array('model' => $model)); ?>
             <div class="form well">
-                <div class="row subwiz-row">
-                    <div class="col-xs-12">
-                        <?php $this->renderPartial('_public_links', array('model' => $model, 'links' => $links, 'link_database' => $link_database, 'isPublicLinks' => $isPublicLinks)); ?>
-                        <div id="related-doi-block"<?php if ($isPublicLinks === null): ?> style="display: none;"<?php endif ?>>
-                            <div class="clear"></div>
-                            <?php $this->renderPartial('_related_doi', array('model' => $model, 'relations' => $relations, 'isRelatedDoi' => $isRelatedDoi)); ?>
-                        </div>
-                        <div id="projects-block"<?php if ($isRelatedDoi === null): ?> style="display: none;"<?php endif ?>>
-                            <div class="clear"></div>
-                            <?php $this->renderPartial('_projects', array('model' => $model, 'dps' => $dps, 'isProjects' => $isProjects)); ?>
-                        </div>
-                        <div id="others-block" <?php if ($isProjects === null): ?> style="display: none;"<?php endif ?>>
-                            <div class="clear"></div>
-                            <?php $this->renderPartial('_others', array(
-                                'model' => $model,
-                                'manuscripts' => $manuscripts,
-                                'protocols' => $protocols,
-                                '_3dImages' => $_3dImages,
-                                'codes' => $codes,
-                                'sources' => $sources,
-                                'repositories' => $repositories,
-                                'isManuscripts' => $isManuscripts,
-                                'isProtocols' => $isProtocols,
-                                'is3dImages' => $is3dImages,
-                                'isCodes' => $isCodes,
-                                'isSources' => $isSources,
-                                'isRepositories' => $isRepositories,
-                            )); ?>
-                        </div>
-                    </div>
+                <?php $this->renderPartial('_public_links', array(
+                    'model' => $model, 
+                    'links' => $links, 
+                    'link_database' => $link_database, 
+                    'isPublicLinks' => $isPublicLinks)); 
+                ?>
+                <div id="related-doi-block"<?php if ($isPublicLinks === null): ?> style="display: none;"<?php endif ?>>
+                    <div class="clear"></div>
+                    <?php $this->renderPartial('_related_doi', array('model' => $model, 'relations' => $relations, 'isRelatedDoi' => $isRelatedDoi)); ?>
+                </div>
+                <div id="projects-block"<?php if ($isRelatedDoi === null): ?> style="display: none;"<?php endif ?>>
+                    <div class="clear"></div>
+                    <?php $this->renderPartial('_projects', array('model' => $model, 'dps' => $dps, 'isProjects' => $isProjects)); ?>
+                </div>
+                <div id="others-block" <?php if ($isProjects === null): ?> style="display: none;"<?php endif ?>>
+                    <div class="clear"></div>
+                    <?php $this->renderPartial('_others', array(
+                        'model' => $model,
+                        'manuscripts' => $manuscripts,
+                        'protocols' => $protocols,
+                        '_3dImages' => $_3dImages,
+                        'codes' => $codes,
+                        'sources' => $sources,
+                        'repositories' => $repositories,
+                        'isManuscripts' => $isManuscripts,
+                        'isProtocols' => $isProtocols,
+                        'is3dImages' => $is3dImages,
+                        'isCodes' => $isCodes,
+                        'isSources' => $isSources,
+                        'isRepositories' => $isRepositories,
+                    )); ?>
                 </div>
                 <div class="row subwiz-row">
                     <div class="col-xs-12">

@@ -1,12 +1,9 @@
 <div class="form-horizontal additional-bordered">
     <h3 style="display: inline-block">Public data archive links</h3>
     <a class="myHint" style="float: none;" data-content="You should include top level accessions only, e.g. If you add the BioProject accession there is no need to add every BioSample accession contained within that BioProject."></a>
-
-
     <p class="note">
         Have you already submitted data to a public repository that is directly described as part of this dataset? E.g. raw sequence data submitted to the Sequence Read Archives.
     </p>
-
     <div style="text-align: center; margin-bottom: 15px;">
         <a href="#"
            data-target="public-links"
@@ -20,64 +17,72 @@
            data-id="<?= $model->id ?>"
            class="btn background-btn additional-button <?php if ($isPublicLinks === false): ?>btn background-btn<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
     </div>
-
     <div id="public-links"<?php if ($isPublicLinks !== true): ?> style="display: none"<?php endif; ?>>
-        <p class="note">Please select the appropriate database from the list (you may repeat process to add different database links).</p>
-
-        <div class="control-group">
-            <label class='control-label'>Database</label>
-            <a class="myHint" data-html="true" data-content="Please contact <a href=&quot;mailto:database@gigasciencejournal.com&quot; >database@gigasciencejournal.com</a> to request the addition of a new database."></a>
-            <div class="controls">
-                <?= CHtml::dropDownList('prefix',
-                    null,
-                    array('' => 'Please select') + CHtml::listData($link_database,'prefix','prefix'),
-                    array('class'=>'js-database form-control', 'style'=>'width:250px'));
-                ?>
+        <div class="row subwiz-row">
+            <div class="col-xs-12">
+            <p class="note">Please select the appropriate database from the list (you may repeat process to add different database links).</p>
+    
+            <div class="control-group">
+                <label class='control-label'>Database</label>
+                <a class="myHint" data-html="true" data-content="Please contact <a href=&quot;mailto:database@gigasciencejournal.com&quot; >database@gigasciencejournal.com</a> to request the addition of a new database."></a>
+                <div class="controls">
+                    <?= CHtml::dropDownList('prefix',
+                        null,
+                        array('' => 'Please select') + CHtml::listData($link_database,'prefix','prefix'),
+                        array('class'=>'js-database form-control', 'style'=>'width:250px'));
+                    ?>
+                </div>
             </div>
         </div>
-
-        <p class="note js-set-database">Please select add accession numbers to your data in the above database</p>
-
-        <div class="control-group js-set-database">
-            <label class='control-label'>Accession number</label>
-            <a class="myHint" data-content="Please provide unique identifier of linked data, e.g. an SRA accession; SRS012345."></a>
-            <div class="controls">
-                <?= CHtml::textField('link', '', array('class'=>'js-acc-num form-control', 'size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Unique identifier of linked data")); ?>
-                <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" style="margin-left: 20px;"/>Add Link</a>
+    </div>
+    <div class="row subwiz-row">
+        <div class="col-xs-12">
+            <p class="note js-set-database">Please select add accession numbers to your data in the above database</p>
+    
+            <div class="control-group js-set-database">
+                <label class='control-label'>Accession number</label>
+                <a class="myHint" data-content="Please provide unique identifier of linked data, e.g. an SRA accession; SRS012345."></a>
+                <div class="controls">
+                    <?= CHtml::textField('link', '', array('class'=>'js-acc-num form-control', 'size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Unique identifier of linked data")); ?>
+                    <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" style="margin-left: 20px;"/>Add Link</a>
+                </div>
             </div>
         </div>
-
-        <div class="grid-view">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th id="author-grid_c0" width="45%">Link Type</th>
-                    <th id="author-grid_c0" width="45%">Link</th>
-                    <th id="author-grid_c5" class="button-column" width="10%"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach($links as $link): ?>
-                <?php $pos = strpos($link->link, ':') ?>
-                    <tr class="odd js-my-item">
-                        <td><?= substr($link->link, 0, $pos) ?></td>
-                        <td><?= substr($link->link, $pos + 1) ?></td>
-                        <td class="button-column">
-                            <input type="hidden" class="js-my-id" value="<?= $link->id ?>">
-                            <a class="js-delete-link delete-title" link-id="<?=$link->id?>" data-id="<?= $model->id ?>" title="delete this row">
-                                <img alt="delete this row" src="/images/delete.png">
-                            </a>
+    </div>
+    <div class="row subwiz-row">
+        <div class="col-xs-12">
+            <div class="grid-view">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th id="author-grid_c0" width="45%">Link Type</th>
+                        <th id="author-grid_c0" width="45%">Link</th>
+                        <th id="author-grid_c5" class="button-column" width="10%"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($links as $link): ?>
+                    <?php $pos = strpos($link->link, ':') ?>
+                        <tr class="odd js-my-item">
+                            <td><?= substr($link->link, 0, $pos) ?></td>
+                            <td><?= substr($link->link, $pos + 1) ?></td>
+                            <td class="button-column">
+                                <input type="hidden" class="js-my-id" value="<?= $link->id ?>">
+                                <a class="js-delete-link delete-title" link-id="<?=$link->id?>" data-id="<?= $model->id ?>" title="delete this row">
+                                    <img alt="delete this row" src="/images/delete.png">
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <tr class="js-no-results"<?php if ($links): ?> style="display: none"<?php endif ?>>
+                        <td colspan="4">
+                            <span class="empty">No results found.</span>
                         </td>
                     </tr>
-                <?php endforeach; ?>
-                <tr class="js-no-results"<?php if ($links): ?> style="display: none"<?php endif ?>>
-                    <td colspan="4">
-                        <span class="empty">No results found.</span>
-                    </td>
-                </tr>
-                <tr>
-                </tbody>
-            </table>
+                    <tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
