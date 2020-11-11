@@ -7,9 +7,9 @@
                 <h4>Add Authors</h4>
             </div>
             <?php $this->renderPartial('_tabs_navigation', array('model' => $model)); ?>
-            <div class="col-xs-12 form well">
+            <div class="form well">
                 <div class="form-horizontal">
-                    <div class="row">
+                    <div class="row subwiz-row">
                         <div class="col-xs-12">
                             <div id="author-grid" class="grid-view">
                                 <p>Please provide all author details, to do this you may 
@@ -125,12 +125,12 @@
                             </div>
                         </div>
                     </div> <!-- row -->
-                    <div class="row">
+                    <div class="row subwiz-row">
                         <div class="col-xs-12">
                             <p style="text-align: center">OR</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row subwiz-row">
                         <div class="col-xs-12">
                             <div style="text-align:center" class="add-author-container">
                                 <label for="authors">Author list upload</label>
@@ -141,7 +141,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row subwiz-row">
                         <div class="col-xs-12">
                             <div style="text-align:center">
                                 <a href="/datasetSubmission/create1/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
