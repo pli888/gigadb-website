@@ -113,7 +113,7 @@
                                                 <input id="js-author-orcid" type="text" pattern="[1-9]{4}-[1-9]{4}-[1-9]{4}-[1-9]{4}" name="Author[orcid]" placeholder="ORCiD (optional)" style="width:130px">
                                             </td>
                                             <td>
-                                                <?php echo CHtml::dropDownList('js-author-contribution', 'Select credit term', CHtml::listData(Contribution::model()->findAll(), 'name', 'name'), array('encode' => false, 'prompt' => 'Select credit term', 'id' => 'js-author-contribution', 'class' => 'js-author-required', 'style' => "width:140px"));    
+                                                <?php echo CHtml::dropDownList('js-author-contribution', 'Select credit term', CHtml::listData(Contribution::model()->findAll(), 'name', 'name'), array('encode' => false, 'prompt' => 'Select credit term', 'id' => 'js-author-contribution', 'class' => 'form-control js-author-required', 'style' => "width:140px"));    
                                                 ?>
                                             </td>
                                             <td colspan="2">
