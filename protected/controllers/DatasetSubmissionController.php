@@ -852,6 +852,7 @@ class DatasetSubmissionController extends Controller
      */
     public function actionSampleManagement()
     {
+        $this->layout='new_main';
         if (!isset($_GET['id'])) {
             $this->redirect($this->getRedirectUrl());
         }
