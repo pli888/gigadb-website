@@ -21,230 +21,236 @@
                 <div class="form-horizontal">
                     <div class="row subwiz-row">
                         <div class="col-xs-12">
-                            <table id="sample-grid" class="grid-view">
-                                <p class="note">
-                                    Please supply all the information about the experimental samples included in this dataset. This should include samples used only for example purposes even when you have only performed in-silco analysis.
-                                    <a class="myHint" style="float: none;" data-html="true" data-content="For datasets that include biological sample-related data we would expect the sample metadata to be included in the GigaDB dataset. We understand that the level of sample metadata made available is often limited by sample collection restrictions, but authors should make every effort to provide as comprehensive metadata about samples as is possible. For a checklist of metadata fields please see <a href='http://gigadb.org/site/guide'>http://gigadb.org/site/guide</a>."></a>
-                                </p>
-                                <p class="note">
-                                    You should add as many attributes as you have details for, as a guide we provided a small number of templates for common dataset types (genomic, metagenomic and imaging) with a suggestion of possible attributes.
-                                    <a class="myHint" style="float: none;" data-html="true" data-content="Please see <a target='_blank' href='http://gigadb.org/site/guide'>http://gigadb.org/site/guide</a>."></a>
-                                </p>
-                                <div class="clear"></div>
-                                <div class="span6">
-                                    <div class="control-group" id="set-template-div">
-                                        <label class='control-label'>Choose a template</label>
-                                        <div class="controls">
-                                            <?= CHtml::dropDownList('template',
-                                                $template ? $template->id : null,
-                                                CHtml::listData($sts,'id','template_name'),
-                                                array('empty'=> 'Empty', 'class'=>'js-database dropdown-white', 'style'=>'width:200px'));
-                                            ?>
-                                            <a href="#" class="btn <?php if (!$template): ?>js-not-allowed<?php else: ?> btn-green js-set-template<?php endif ?>" style="margin-left: 20px;"/>Apply</a>
-                                        </div>
-                                    </div>
+                            <p class="note">
+                                Please supply all the information about the experimental samples 
+                                included in this dataset. This should include samples used only 
+                                for example purposes even when you have only performed in-silco 
+                                analysis.
+                                <a class="myHint" style="float: none;" data-html="true" data-content="For datasets that include biological sample-related data we would expect the sample metadata to be included in the GigaDB dataset. We understand that the level of sample metadata made available is often limited by sample collection restrictions, but authors should make every effort to provide as comprehensive metadata about samples as is possible. For a checklist of metadata fields please see <a href='http://gigadb.org/site/guide'>http://gigadb.org/site/guide</a>."></a>
+                            </p>
+                            <p class="note">
+                                You should add as many attributes as you have details for, as a 
+                                guide we provided a small number of templates for common dataset 
+                                types (genomic, metagenomic and imaging) with a suggestion of 
+                                possible attributes.
+                                <a class="myHint" style="float: none;" data-html="true" data-content="Please see <a target='_blank' href='http://gigadb.org/site/guide'>http://gigadb.org/site/guide</a>."></a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row subwiz-row">
+                        <div class="col-xs-6">
+                            <div class="control-group" id="set-template-div">
+                                <label class='control-label'>Choose a template</label>
+                                <div class="controls">
+                                    <?= CHtml::dropDownList('template',
+                                        $template ? $template->id : null,
+                                        CHtml::listData($sts,'id','template_name'),
+                                        array('empty'=> 'Empty', 'class'=>'js-database form-control', 'style'=>'width:200px'));
+                                    ?>
+                                    <a href="#" class="btn <?php if (!$template): ?>js-not-allowed<?php else: ?> btn-green js-set-template<?php endif ?>" style="margin-left: 20px;"/>Apply</a>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <span>Note- applying a new template will delete any attributes already inserted below</span>
+                            <a class="myHint" style="float: none;" data-content="The templates provide a guide to some of the possible attributes that could be added to samples, please add more columns as required, or delete those that are not relevant to your data."></a>
+                        </div>
+                    </div>
+                    <div class="row subwiz-row">
+                        <div class="col-xs-12">
+                            <p class="note">
+                                For very few samples you may type the information directly into the web-form below.
+                            </p>
 
-                                <div class="span5">
-                                    <span>Note- applying a new template will delete any attributes already inserted below</span>
-                                    <a class="myHint" style="float: none;" data-content="The templates provide a guide to some of the possible attributes that could be added to samples, please add more columns as required, or delete those that are not relevant to your data."></a>
-                                </div>
-
-                                <div class="clear"></div>
-                    
-                                <p class="note">
-                                    For very few samples you may type the information directly into the web-form below.
-                                </p>
-
-                                <div class="additional-bordered" style="overflow-x: auto;margin: 15px 0;">
-                                    <table class="table table-bordered sample-tab-table" id="samples-table" style="overflow: auto;">
-                                        <thead>
-                                        <tr>
-                                            <th id="sample-grid_c0">
-                                                <span>Sample ID</span>
-                                                <a class="myHint"
-                                                   data-content='The name used to uniquely identify the sample in your study'
-                                                   style="float: right">
+                            <div class="additional-bordered" style="overflow-x: auto;margin: 15px 0;">
+                                <table class="table table-bordered sample-tab-table" id="samples-table" style="overflow: auto;">
+                                    <thead>
+                                    <tr>
+                                        <th id="sample-grid_c0">
+                                            <span>Sample ID</span>
+                                            <a class="myHint"
+                                               data-content='The name used to uniquely identify the sample in your study'
+                                               style="float: right">
+                                            </a>
+                                        </th>
+                                        <th id="sample-grid_c1">
+                                            <span>Species name</span>
+                                            <a class="myHint"
+                                               data-content='Please select the relevant species name from the list here, start typing either the common name or Latin name to refine the list. If the species is not present please contact us to get it added.'
+                                               style="float: right">
+                                            </a>
+                                        </th>
+                                        <th id="sample-grid_c2">
+                                            <span>Description</span>
+                                            <a class="myHint"
+                                               data-content='Please provide a short description of this specific sample, it should be unique to this sample, it can include where it was collected, which tissue, and/or what was extracted, e.g. "DNA extracted from blood of captive grown frog in Birmingham."'
+                                               style="float: right">
+                                            </a>
+                                        </th>
+                                        <?php if ($rows): ?>
+                                            <?php for ($j = 3, $k = count($rows[0]); $j < $k; $j++): ?>
+                                                <?php
+                                                $attributeName = isset($rows[0][$j]) ? $rows[0][$j] : '';
+                                                $attribute = Attribute::findByAttrName($attributeName);
+                                                ?>
+                                                <th class="sample-attribute-column">
+                                                <a class="js-delete-column delete-title" title="delete this column">
+                                                    <img alt="delete this column" src="/images/delete.png">
                                                 </a>
-                                            </th>
-                                            <th id="sample-grid_c1">
-                                                <span>Species name</span>
-                                                <a class="myHint"
-                                                   data-content='Please select the relevant species name from the list here, start typing either the common name or Latin name to refine the list. If the species is not present please contact us to get it added.'
-                                                   style="float: right">
-                                                </a>
-                                            </th>
-                                            <th id="sample-grid_c2">
-                                                <span>Description</span>
-                                                <a class="myHint"
-                                                   data-content='Please provide a short description of this specific sample, it should be unique to this sample, it can include where it was collected, which tissue, and/or what was extracted, e.g. "DNA extracted from blood of captive grown frog in Birmingham."'
-                                                   style="float: right">
-                                                </a>
-                                            </th>
-                                            <?php if ($rows): ?>
-                                                <?php for ($j = 3, $k = count($rows[0]); $j < $k; $j++): ?>
-                                                    <?php
-                                                    $attributeName = isset($rows[0][$j]) ? $rows[0][$j] : '';
-                                                    $attribute = Attribute::findByAttrName($attributeName);
-                                                    ?>
-                                                    <th class="sample-attribute-column">
+                
+                                                <input type="text" class="js-attribute-name-autocomplete" placeholder='Attribute name' value="<?= $attributeName ?>">
+                
+                                                <?= CHtml::dropDownList(
+                                                    'units[]',
+                                                    $attribute ? $attribute->allowed_units : null,
+                                                    CHtml::listData($units, 'id', 'name'),
+                                                    array('empty'=> 'N/A','style'=>'width:70px;margin-right:20px;', 'class' => 'dropdown-white')
+                                                ); ?>
+                                            <?php endfor ?>
+                                        <?php elseif (!$template): ?>
+                                            <?php foreach ($sas as $sa): ?>
+                                                <?php if (strtolower($sa->attribute->attribute_name) == 'description') continue ?>
+                                                <th class="sample-attribute-column">
                                                     <a class="js-delete-column delete-title" title="delete this column">
                                                         <img alt="delete this column" src="/images/delete.png">
                                                     </a>
-                    
-                                                    <input type="text" class="js-attribute-name-autocomplete" placeholder='Attribute name' value="<?= $attributeName ?>">
-                    
-                                                    <?= CHtml::dropDownList(
-                                                        'units[]',
-                                                        $attribute ? $attribute->allowed_units : null,
-                                                        CHtml::listData($units, 'id', 'name'),
-                                                        array('empty'=> 'N/A','style'=>'width:70px;margin-right:20px;', 'class' => 'dropdown-white')
-                                                    ); ?>
-                                                <?php endfor ?>
-                                            <?php elseif (!$template): ?>
-                                                <?php foreach ($sas as $sa): ?>
-                                                    <?php if (strtolower($sa->attribute->attribute_name) == 'description') continue ?>
+                
+                                                    <input type="text" class="js-attribute-name-autocomplete" placeholder='Attribute name' value="<?= $sa->attribute->attribute_name ?>">
+                
+                                                    <?= CHtml::dropDownList('units[]', $sa->unit_id, CHtml::listData($units, 'id', 'name'),array('empty'=> 'N/A','style'=>'width:70px;margin-right:20px;', 'class' => 'dropdown-white')); ?>
+                                                </th>
+                                            <?php endforeach ?>
+                                            <?php else: ?>
+                                                <?php foreach ($template->attributes as $attribute): ?>
                                                     <th class="sample-attribute-column">
                                                         <a class="js-delete-column delete-title" title="delete this column">
                                                             <img alt="delete this column" src="/images/delete.png">
                                                         </a>
                     
-                                                        <input type="text" class="js-attribute-name-autocomplete" placeholder='Attribute name' value="<?= $sa->attribute->attribute_name ?>">
+                                                        <input type="text" class="js-attribute-name-autocomplete" placeholder='Attribute name' value="<?= $attribute->attribute_name ?>">
                     
-                                                        <?= CHtml::dropDownList('units[]', $sa->unit_id, CHtml::listData($units, 'id', 'name'),array('empty'=> 'N/A','style'=>'width:70px;margin-right:20px;', 'class' => 'dropdown-white')); ?>
+                                                        <?= CHtml::dropDownList('units[]', $attribute->allowed_units, CHtml::listData($units, 'id', 'name'),array('empty'=> 'N/A','style'=>'width:70px;margin-right:20px;', 'class' => 'dropdown-white')); ?>
                                                     </th>
                                                 <?php endforeach ?>
-                                                <?php else: ?>
-                                                    <?php foreach ($template->attributes as $attribute): ?>
-                                                        <th class="sample-attribute-column">
-                                                            <a class="js-delete-column delete-title" title="delete this column">
-                                                                <img alt="delete this column" src="/images/delete.png">
-                                                            </a>
-                        
-                                                            <input type="text" class="js-attribute-name-autocomplete" placeholder='Attribute name' value="<?= $attribute->attribute_name ?>">
-                        
-                                                            <?= CHtml::dropDownList('units[]', $attribute->allowed_units, CHtml::listData($units, 'id', 'name'),array('empty'=> 'N/A','style'=>'width:70px;margin-right:20px;', 'class' => 'dropdown-white')); ?>
-                                                        </th>
-                                                    <?php endforeach ?>
-                                                <?php endif ?>
-                                                <th class="button-column"><a href="#" class="btn btn-green btn-sample js-add-column" style="max-width: 100px;">Add Column</a></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
+                                            <?php endif ?>
+                                            <th class="button-column"><a href="#" class="btn btn-green btn-sample js-add-column" style="max-width: 100px;">Add Column</a></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
                                             <?php if ($rows): ?>
                                                 <?php for ($i = 1, $n = count($rows); $i < $n; $i++): ?>
-                                                    <tr class="item">
-                                                        <td style="white-space: nowrap;">
-                                                            <a class="js-delete-row delete-title" title="delete this sample">
-                                                                <img alt="delete this row" src="/images/delete.png">
-                                                            </a>
-                                                            <input type="text" placeholder='Sample ID' value="<?= isset($rows[$i][0]) ? $rows[$i][0] : '' ?>" style="margin-right: 18px;">
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="js-species-autocomplete" placeholder='Species name' value="<?= isset($rows[$i][1]) ? $rows[$i][1] : '' ?>">
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" placeholder='Short description of sample' value="<?= isset($rows[$i][2]) ? $rows[$i][2] : '' ?>" style="width:250px;">
-                                                        </td>
-                                                        <?php for ($j = 3, $k = count($rows[0]); $j < $k; $j++): ?>
-                                                            <td>
-                                                                <input type="text" placeholder='Attribute value' value="<?= isset($rows[$i][$j]) ? $rows[$i][$j] : '' ?>" style="width: 250px;">
-                                                            </td>
-                                                        <?php endfor ?>
-                                                        <td class="button-column">
-                                                        </td>
-                                                    </tr>
+                                            <tr class="item">
+                                                <td style="white-space: nowrap;">
+                                                    <a class="js-delete-row delete-title" title="delete this sample">
+                                                        <img alt="delete this row" src="/images/delete.png">
+                                                    </a>
+                                                    <input type="text" placeholder='Sample ID' value="<?= isset($rows[$i][0]) ? $rows[$i][0] : '' ?>" style="margin-right: 18px;">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="js-species-autocomplete" placeholder='Species name' value="<?= isset($rows[$i][1]) ? $rows[$i][1] : '' ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="text" placeholder='Short description of sample' value="<?= isset($rows[$i][2]) ? $rows[$i][2] : '' ?>" style="width:250px;">
+                                                </td>
+                                                <?php for ($j = 3, $k = count($rows[0]); $j < $k; $j++): ?>
+                                                    <td>
+                                                        <input type="text" placeholder='Attribute value' value="<?= isset($rows[$i][$j]) ? $rows[$i][$j] : '' ?>" style="width: 250px;">
+                                                    </td>
                                                 <?php endfor ?>
-                                                <?php elseif (!$template): ?>
-                                                    <?php foreach($samples as $sample): ?>
-                                                        <tr class="item">
-                                                            <td style="white-space: nowrap;">
-                                                                <a class="js-delete-row delete-title" title="delete this sample">
-                                                                    <img alt="delete this row" src="/images/delete.png">
-                                                                </a>
-                                                                <input type="text" placeholder='Sample ID' value="<?= $sample->name ?>" style="margin-right: 18px;">
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" class="js-species-autocomplete" placeholder='Species name' value="<?= $sample->species->common_name ?>">
-                                                            </td>
-                                                            <td>
-                                                                <?php $mySa = $sample->getSampleAttributeByAttributeName('Description') ?>
-                                                                <input type="text" placeholder='Short description of sample' value="<?= $mySa ? $mySa->value : '' ?>" style="width: 250px;">
-                                                            </td>
-                                                            <?php foreach ($sas as $sa): ?>
-                                                                <?php if (strtolower($sa->attribute->attribute_name) == 'description') continue ?>
-                                                                <td>
-                                                                    <?php $mySa = $sample->getSampleAttributeByAttributeIdAndUnitId($sa->attribute_id, $sa->unit_id) ?>
-                                                                    <input type="text" placeholder='Attribute value' value="<?= $mySa ? $mySa->value : '' ?>" style="width: 250px;">
-                                                                </td>
-                                                            <?php endforeach ?>
-                                                            <td class="button-column">
-                                                                <input type="hidden" class="js-sample-id" value="<?= $sample->id ?>">
-                                                            </td>
-                                                        </tr>
-                                                    <?php endforeach; ?>
-                                                <?php endif; ?>
-                                                <tr id="js-no-results"<?php if ((!$template && $samples) || $rows): ?> style="display: none;"<?php endif ?>>
-                                                    <td colspan="4">
-                                                        <span class="empty">No results found.</span>
+                                                <td class="button-column">
+                                                </td>
+                                            </tr>
+                                                <?php endfor ?>
+                                            <?php elseif (!$template): ?>
+                                                <?php foreach($samples as $sample): ?>
+                                            <tr class="item">
+                                                <td style="white-space: nowrap;">
+                                                    <a class="js-delete-row delete-title" title="delete this sample">
+                                                        <img alt="delete this row" src="/images/delete.png">
+                                                    </a>
+                                                    <input type="text" placeholder='Sample ID' value="<?= $sample->name ?>" style="margin-right: 18px;">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="js-species-autocomplete" placeholder='Species name' value="<?= $sample->species->common_name ?>">
+                                                </td>
+                                                <td>
+                                                    <?php $mySa = $sample->getSampleAttributeByAttributeName('Description') ?>
+                                                    <input type="text" placeholder='Short description of sample' value="<?= $mySa ? $mySa->value : '' ?>" style="width: 250px;">
+                                                </td>
+                                                <?php foreach ($sas as $sa): ?>
+                                                    <?php if (strtolower($sa->attribute->attribute_name) == 'description') continue ?>
+                                                    <td>
+                                                        <?php $mySa = $sample->getSampleAttributeByAttributeIdAndUnitId($sa->attribute_id, $sa->unit_id) ?>
+                                                        <input type="text" placeholder='Attribute value' value="<?= $mySa ? $mySa->value : '' ?>" style="width: 250px;">
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="button-column" style="border-top:none;text-align: left;">
-                                                        <a href="#" class="btn btn-green btn-sample js-add-row" style="margin-left: 30px;">Add Row</a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <p class="note">
-                                            Alternatively, if you have many samples you may wish to prepare the information in a spreadsheet and upload that to this page, the uploader will only parse CSV or TSV files.
-                                        </p>
-                            
-                                        <p class="note">
-                                            Note – ALL samples must include Sample ID, Species name and  sample description as mandatory information.
-                                            Units should be included in header row in parentheses e.g. depth (m)
-                                        </p>
-
-                                        <div class="clear"></div>
-                            
-                                        <div class="span6">
-                                            <form action="/datasetSubmission/validateSamples" data-action="<?= '/datasetSubmission/sampleManagement/id/'. $model->id ?>" method="POST" id="upload-samples" enctype="multipart/form-data">
-                                                <div class="control-group" id="add-samples-div">
-                                                    <label class='control-label'>Upload sample metadata</label>
-                                                    <div class="controls">
-                                                        <input type="file" id="samples" name="samples">
-                                                        <input type="hidden" name="upload" value="true">
-                                                        <a href="#" class="btn js-not-allowed" style="margin-left: 20px;"/>Upload</a>
-                                                        <a class="btn btn-green" id="js-add-samples" style="margin-left: 20px;display: none;" value="Upload"/>Upload</a>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                        <div class="span5">
-                                            <span>Note- uploading metadata file will overwrite any values already inserted above</span>
-                                        </div>
-                            
-                                        <div class="clear"></div>
-                                        <div style="text-align:center" id="samples-save">
-                                            <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn-green">Previous</a>
-                                            <a href="/datasetSubmission/sampleManagement/id/<?= $model->id ?>"
-                                               class="btn btn-green js-save-samples">Save</a>
-                                            <a href="/datasetSubmission/end/id/<?= $model->id ?>"
-                                               class="btn btn-green js-save-samples">Next</a>
-                                        </div>
+                                                <?php endforeach ?>
+                                                <td class="button-column">
+                                                    <input type="hidden" class="js-sample-id" value="<?= $sample->id ?>">
+                                                </td>
+                                            </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                            <tr id="js-no-results"<?php if ((!$template && $samples) || $rows): ?> style="display: none;"<?php endif ?>>
+                                                <td colspan="4">
+                                                    <span class="empty">No results found.</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="button-column" style="border-top:none;text-align: left;">
+                                                    <a href="#" class="btn btn-green btn-sample js-add-row" style="margin-left: 30px;">Add Row</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
-                            </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row subwiz-row">
+                        <div class="col-xs-12">
+                            <p class="note">
+                                Alternatively, if you have many samples you may wish to prepare the information in a spreadsheet and upload that to this page, the uploader will only parse CSV or TSV files.
+                            </p>
+                
+                            <p class="note">
+                                Note – ALL samples must include Sample ID, Species name and  sample description as mandatory information.
+                                Units should be included in header row in parentheses e.g. depth (m)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row subwiz-row">
+                        <div class="col-xs-6">
+                            <form action="/datasetSubmission/validateSamples" data-action="<?= '/datasetSubmission/sampleManagement/id/'. $model->id ?>" method="POST" id="upload-samples" enctype="multipart/form-data">
+                                <div class="control-group" id="add-samples-div">
+                                    <label class='control-label'>Upload sample metadata</label>
+                                    <div class="controls">
+                                        <input type="file" id="samples" name="samples">
+                                        <input type="hidden" name="upload" value="true">
+                                        <a href="#" class="btn js-not-allowed" style="margin-left: 20px;"/>Upload</a>
+                                        <a class="btn btn-green" id="js-add-samples" style="margin-left: 20px;display: none;" value="Upload"/>Upload</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-xs-6">
+                            <span>Note- uploading metadata file will overwrite any values already inserted above</span>
+                        </div>
+                    </div>
+                <div class="row subwiz-row">
+                    <div class="col-xs-12">
+                        <div style="text-align:center" id="samples-save">
+                            <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn-green">Previous</a>
+                            <a href="/datasetSubmission/sampleManagement/id/<?= $model->id ?>"
+                               class="btn btn-green js-save-samples">Save</a>
+                            <a href="/datasetSubmission/end/id/<?= $model->id ?>"
+                               class="btn btn-green js-save-samples">Next</a>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> <!-- form well -->
         </div>
-    </div>
-</div>
+    </div> <!-- content -->
+</div> <!-- container -->
 
 <script>
     $('#samples-table').resizable();
