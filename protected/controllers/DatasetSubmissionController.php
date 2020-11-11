@@ -210,6 +210,7 @@ class DatasetSubmissionController extends Controller
 
     public function actionDatasetManagement()
     {
+        $this->layout='new_main';
         if (isset($_GET['id'])) {
             $dataset = $this->getDataset($_GET['id']);
             $dataset->modification_date = date('Y-m-d');
