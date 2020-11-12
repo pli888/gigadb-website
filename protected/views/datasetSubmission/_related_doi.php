@@ -8,14 +8,14 @@
         <a href="#"
            data-target="related-doi"
            id="related-doi-yes"
-           class="btn additional-button <?php if ($isRelatedDoi === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn btn-default additional-button <?php if ($isRelatedDoi === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
         <a href="#"
            data-target="related-doi"
            data-next-block="projects-block"
            id="related-doi-no"
            data-url="/adminRelation/deleteRelations"
            data-id="<?= $model->id ?>"
-           class="btn additional-button <?php if ($isRelatedDoi === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default additional-button <?php if ($isRelatedDoi === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
     </div>
     <div id="related-doi"<?php if ($isRelatedDoi !== true): ?> style="display: none"<?php endif; ?>>
         <div class="row subwiz-row">
@@ -29,7 +29,7 @@
                     <?= CHtml::dropDownList('dataset_doi', null,
                         array('' => 'Please select') + CHtml::listData(Util::getDois(), 'identifier', 'identifier'),
                         array('class'=>'js-relation-doi form-control','style'=>'width:250px')); ?>
-                    <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed"/>Add Related Doi</a>
+                    <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed"/>Add Related Doi</a>
                 </div>
                 <div class="row subwiz-row">
                     <div class="col-xs-12">
@@ -78,9 +78,9 @@
 
     $(document).on('change', '#relation, #dataset_doi', function () {
         if ($('#relation').val() && $('#dataset_doi').val()){
-            $('.js-not-allowed', relatedDoiDiv).removeClass('js-not-allowed').addClass('js-add-relation btn-green');
+            $('.js-not-allowed', relatedDoiDiv).removeClass('disabled js-not-allowed').addClass('js-add-relation btn-success');
         } else {
-            $('.js-add-relation', relatedDoiDiv).removeClass('js-add-relation btn-green').addClass('js-not-allowed');
+            $('.js-add-relation', relatedDoiDiv).removeClass('btn-success js-add-relation').addClass('js-not-allowed disabled');
         }
     });
 
