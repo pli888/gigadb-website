@@ -8,14 +8,14 @@
             <a href="#"
                data-target="public-links"
                id="public-links-yes"
-           class="btn background-btn additional-button <?php if ($isPublicLinks === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+               class="btn btn-default additional-button <?php if ($isPublicLinks === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
             <a href="#"
                data-target="public-links"
                data-next-block="related-doi-block"
                data-url="/adminLink/deleteLinks"
                id="public-links-no"
                data-id="<?= $model->id ?>"
-           class="btn background-btn additional-button <?php if ($isPublicLinks === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default additional-button <?php if ($isPublicLinks === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
         </div>
         <div id="public-links"<?php if ($isPublicLinks !== true): ?> style="display: none"<?php endif; ?>>
             <div class="row subwiz-row">
@@ -44,7 +44,7 @@
                     <a class="myHint" data-content="Please provide unique identifier of linked data, e.g. an SRA accession; SRS012345."></a>
                     <div class="controls">
                         <?= CHtml::textField('link', '', array('class'=>'js-acc-num form-control', 'size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Unique identifier of linked data")); ?>
-                        <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" style="margin-left: 20px;"/>Add Link</a>
+                        <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" style="margin-left: 20px;"/>Add Link</a>
                     </div>
                 </div>
             </div>
@@ -114,9 +114,9 @@
             $('#prefix', publicLinksDiv).val()
             && $('input[name="link"]', publicLinksDiv).val()
         ) {
-            $('.js-not-allowed', publicLinksDiv).removeClass('js-not-allowed').addClass('js-add-link btn-green');
+            $('.js-not-allowed', publicLinksDiv).removeClass('disabled js-not-allowed').addClass('js-add-link');
         } else {
-            $('.js-add-link', publicLinksDiv).removeClass('js-add-link btn-green').addClass('js-not-allowed');
+            $('.js-add-link', publicLinksDiv).removeClass('js-add-link').addClass('disabled js-not-allowed');
         }
     }
 
@@ -164,7 +164,7 @@
                     $('.js-no-results', publicLinksDiv).hide();
 
                     $('input[name="link"]', publicLinksDiv).val('');
-                    $('.js-add-link', publicLinksDiv).removeClass('js-add-link btn-green').addClass('js-not-allowed');
+                    $('.js-add-link', publicLinksDiv).removeClass('js-add-link').addClass('disabled js-not-allowed');
 
                     $('#related-doi-block').show();
 
