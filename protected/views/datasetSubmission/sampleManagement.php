@@ -48,7 +48,7 @@
                                     CHtml::listData($sts,'id','template_name'),
                                     array('empty'=> 'Empty', 'class'=>'js-database form-control', 'style'=>'width:200px'));
                                 ?>
-                                <a href="#" class="btn <?php if (!$template): ?>js-not-allowed<?php else: ?> btn-green js-set-template<?php endif ?>" style="margin-left: 20px;"/>Apply</a>
+                                <a href="#" class="btn btn-success <?php if (!$template): ?>disabled js-not-allowed<?php else: ?> js-set-template<?php endif ?>" style="margin-left: 20px;"/>Apply</a>
                             </div>
                             <div class="col-md-6">
                                 <span>Note- applying a new template will delete any attributes already inserted below</span>
@@ -543,9 +543,9 @@
 
     $(document).on('change', '#template', function () {
         if ($(this).val()){
-            $('.js-not-allowed', '#set-template-div').removeClass('js-not-allowed').addClass('js-set-template btn-green');
+            $('.js-not-allowed', '#set-template-div').removeClass('disabled js-not-allowed').addClass('js-set-template');
         } else {
-            $('.js-set-template').removeClass('js-set-template btn-green').addClass('js-not-allowed');
+            $('.js-set-template').removeClass('js-set-template').addClass('disabled js-not-allowed');
         }
     });
 
