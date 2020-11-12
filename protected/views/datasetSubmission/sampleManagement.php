@@ -219,34 +219,34 @@
                         </div>
                     </div>
                     <div class="row subwiz-row">
-                        <div class="col-xs-6">
-                            <form action="/datasetSubmission/validateSamples" data-action="<?= '/datasetSubmission/sampleManagement/id/'. $model->id ?>" method="POST" id="upload-samples" enctype="multipart/form-data">
-                                <div class="control-group" id="add-samples-div">
+                        <form action="/datasetSubmission/validateSamples" data-action="<?= '/datasetSubmission/sampleManagement/id/'. $model->id ?>" method="POST" id="upload-samples" enctype="multipart/form-data">
+                            <div class="control-group form-group form-horizontal input-group-prepend" id="add-samples-div">
+                                <div class="col-md-2">
                                     <label class='control-label'>Upload sample metadata</label>
-                                    <div class="controls">
-                                        <input type="file" id="samples" name="samples">
-                                        <input type="hidden" name="upload" value="true">
-                                        <a href="#" class="btn js-not-allowed" style="margin-left: 20px;"/>Upload</a>
-                                        <a class="btn btn-green" id="js-add-samples" style="margin-left: 20px;display: none;" value="Upload"/>Upload</a>
-                                    </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-xs-6">
-                            <span>Note- uploading metadata file will overwrite any values already inserted above</span>
+                                <div class="controls col-md-4">
+                                    <input type="file" id="samples" name="samples">
+                                    <input type="hidden" name="upload" value="true">
+                                    <a href="#" class="btn btn-success disabled js-not-allowed" style="margin-left: 20px;"/>Upload</a>
+                                    <a class="btn btn-success" id="js-add-samples" style="margin-left: 20px;display: none;" value="Upload"/>Upload</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">Note- uploading metadata file will overwrite any values already inserted above</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row subwiz-row">
+                        <div class="col-xs-12">
+                            <div style="text-align:center" id="samples-save">
+                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn-green">Previous</a>
+                                <a href="/datasetSubmission/sampleManagement/id/<?= $model->id ?>"
+                                   class="btn btn-green js-save-samples">Save</a>
+                                <a href="/datasetSubmission/end/id/<?= $model->id ?>"
+                                   class="btn btn-green js-save-samples">Next</a>
+                            </div>
                         </div>
                     </div>
-                <div class="row subwiz-row">
-                    <div class="col-xs-12">
-                        <div style="text-align:center" id="samples-save">
-                            <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn-green">Previous</a>
-                            <a href="/datasetSubmission/sampleManagement/id/<?= $model->id ?>"
-                               class="btn btn-green js-save-samples">Save</a>
-                            <a href="/datasetSubmission/end/id/<?= $model->id ?>"
-                               class="btn btn-green js-save-samples">Next</a>
-                        </div>
-                    </div>
-                </div>
             </div> <!-- form well -->
         </div>
     </div> <!-- content -->
