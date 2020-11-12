@@ -1,20 +1,23 @@
 <div class="row" style="margin-bottom: 5px; margin-top: 10px;">
-    <div class="span9">
-        <span>A GitHub repository………………………………………………………………………………</span>
+    <div class="col-xs-12">
+        <div class="col-xs-6">
+            <span>A GitHub repository</span>
+        </div>
+        <div class="col-xs-6">
+            <a href="#"
+               id="repositories-no"
+               data-target="others-grid"
+               data-target2="repositories"
+               data-url="/adminExternalLink/deleteExLinks"
+               data-id="<?= $model->id ?>"
+               data-type="<?= AIHelper::REPOSITORIES ?>"
+               class="btn btn-default others-button <?php if ($isRepositories === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
 
-        <a href="#"
-           id="repositories-no"
-           data-target="others-grid"
-           data-target2="repositories"
-           data-url="/adminExternalLink/deleteExLinks"
-           data-id="<?= $model->id ?>"
-           data-type="<?= AIHelper::REPOSITORIES ?>"
-           class="btn btn-default others-button <?php if ($isRepositories === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
-
-        <a href="#"
-           id="repositories-yes"
-           data-target="repositories"
-           class="btn btn-default others-button <?php if ($isRepositories === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+            <a href="#"
+               id="repositories-yes"
+               data-target="repositories"
+               class="btn btn-default others-button <?php if ($isRepositories === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+        </div>
     </div>
 </div>
 

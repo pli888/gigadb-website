@@ -1,20 +1,23 @@
 <div class="row" style="margin-bottom: 5px; margin-top: 10px;">
-    <div class="span9">
-        <span>SketchFab 3d-Image viewer links…………………………………………………………………</span>
+    <div class="col-xs-12">
+        <div class="col-xs-6">
+            <span>SketchFab 3d-Image viewer links</span>
+        </div>
+        <div class="col-xs-6">
+            <a href="#"
+               id="3d_images-no"
+               data-target="others-grid"
+               data-target2="3d_images"
+               data-url="/adminExternalLink/deleteExLinks"
+               data-id="<?= $model->id ?>"
+               data-type="<?= AIHelper::_3D_IMAGES ?>"
+               class="btn btn-default others-button <?php if ($is3dImages === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
 
-        <a href="#"
-           id="3d_images-no"
-           data-target="others-grid"
-           data-target2="3d_images"
-           data-url="/adminExternalLink/deleteExLinks"
-           data-id="<?= $model->id ?>"
-           data-type="<?= AIHelper::_3D_IMAGES ?>"
-           class="btn btn-default others-button <?php if ($is3dImages === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
-
-        <a href="#"
-           id="3d_images-yes"
-           data-target="3d_images"
-           class="btn btn-default others-button <?php if ($is3dImages === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+            <a href="#"
+               id="3d_images-yes"
+               data-target="3d_images"
+               class="btn btn-default others-button <?php if ($is3dImages === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+        </div>
     </div>
 </div>
 
