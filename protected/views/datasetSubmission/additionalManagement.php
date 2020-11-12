@@ -102,8 +102,8 @@ $disabled = $isSources === null || $isCodes === null || $isRepositories === null
         }
 
         $this.removeClass('js-no-button');
-        $this.addClass('background-btn');
-        $this.siblings().removeClass('background-btn btn-disabled').addClass('btn-default js-yes-button');
+        $this.addClass('btn-success');
+        $this.siblings().removeClass('btn-success').addClass('btn-default js-yes-button');
 
         if (type) {
             if (
@@ -140,8 +140,8 @@ $disabled = $isSources === null || $isCodes === null || $isRepositories === null
         var target = $this.data('target');
 
         $this.removeClass('js-yes-button');
-        $this.addClass('background-btn');
-        $this.siblings('a').removeClass('background-btn').addClass('btn-default js-no-button');
+        $this.addClass('btn-success');
+        $this.siblings('a').removeClass('btn-success').addClass('btn-default js-no-button');
 
         $('#' + target).show();
 
