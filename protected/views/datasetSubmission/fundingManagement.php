@@ -29,11 +29,11 @@ foreach ($funders as $funder) {
                                 <div style="text-align: center; margin-bottom: 15px;">
                                     <a href="#"
                                        id="funding-yes-button"
-                                       class="btn btn-success <?php if ($model->getFunding() === true): ?>btn btn-danger<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+                                       class="btn btn-default <?php if ($model->getFunding() === true): ?>btn btn-success<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
                                     <a href="#"
                                        id="funding-no-button"
                                        data-id="<?= $model->id ?>"
-                                       class="btn btn-success <?php if ($model->getFunding() === false): ?>btn btn-danger<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+                                       class="btn btn-default <?php if ($model->getFunding() === false): ?>btn btn-success<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
                                 </div>
 
                                 <div id="funding"<?php if ($model->getFunding() !== true): ?> style="display: none;"<?php endif; ?>>
@@ -111,11 +111,11 @@ foreach ($funders as $funder) {
                                 </div>
                                 <div class="clear"></div>
                                 <div style="text-align:center" id="funding-save">
-                                    <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn-green">Previous</a>
+                                    <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
                                     <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>"
-                                       class="btn <?php if ($disabled): ?>js-not-allowed<?php else: ?>btn-green js-save-funding<?php endif; ?>">Save</a>
+                                       class="btn background-btn <?php if ($disabled): ?>disabled js-not-allowed<?php else: ?>js-save-funding<?php endif; ?>">Save</a>
                                     <a href="/datasetSubmission/sampleManagement/id/<?= $model->id ?>"
-                                       class="btn <?php if ($disabled): ?>js-not-allowed<?php else: ?>btn-green js-save-funding<?php endif; ?>">Next</a>
+                                       class="btn background-btn <?php if ($disabled): ?>disabled js-not-allowed<?php else: ?>js-save-funding<?php endif; ?>">Next</a>
                                 </div>
                             </div>
                         </div>
@@ -137,10 +137,10 @@ foreach ($funders as $funder) {
     });
 
     function makeSaveActiveIfCan() {
-        if ($('#funding-no-button').hasClass('btn-green') || $('#funding').find('.odd').length) {
-            $('#funding-save').find('.js-not-allowed').removeClass('js-not-allowed').addClass('btn-green js-save-funding');
+        if ($('#funding-no-button').hasClass('btn-success') || $('#funding').find('.odd').length) {
+            $('#funding-save').find('.js-not-allowed').removeClass('disabled js-not-allowed').addClass('js-save-funding');
         } else {
-            $('#funding-save').find('.js-save-funding').removeClass('btn-green js-save-funding').addClass('js-not-allowed');
+            $('#funding-save').find('.js-save-funding').removeClass('js-save-funding').addClass('js-not-allowed');
         }
     }
 
