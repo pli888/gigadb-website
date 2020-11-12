@@ -63,7 +63,7 @@
                             </p>
 
                             <div class="additional-bordered" style="overflow-x: auto;margin: 15px 0;">
-                                <table class="table table-bordered sample-tab-table" id="samples-table" style="overflow: auto;">
+                                <table class="table table-bordered sample-tab-table subwiztable" id="samples-table" style="overflow: auto;">
                                     <thead>
                                     <tr>
                                         <th id="sample-grid_c0">

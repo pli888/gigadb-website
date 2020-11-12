@@ -73,7 +73,7 @@ foreach ($funders as $funder) {
                                     </div>
 
                                     <div class="grid-view" style="padding-top: 20px">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered subwiztable">
                                             <thead>
                                             <tr>
                                                 <th id="author-grid_c0" width="22%">Funding body</th>
