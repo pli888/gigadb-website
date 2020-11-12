@@ -1,7 +1,9 @@
 <div class="row" style="margin-bottom: 5px;">
-    <div class="span9">
-        <span>A published manuscript that uses this data………………………………………………………</span>
-
+    <div class="col-xs-12">
+        <div class="col-xs-6">
+            <span>A published manuscript that uses this data</span>
+        </div>
+        <div class="col-xs-6">
         <a href="#"
            id="manuscripts-no"
            data-target="others-grid"
@@ -15,6 +17,7 @@
            id="manuscripts-yes"
            data-target="manuscripts"
            class="btn btn-default others-button <?php if ($isManuscripts === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+        </div>
     </div>
 </div>
 

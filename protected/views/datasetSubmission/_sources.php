@@ -1,20 +1,23 @@
 <div class="row" style="margin-bottom: 5px; margin-top: 10px;">
-    <div class="span9">
-        <span>or any other URL to a stable source of data and files directly related to this dataset………..</span>
+    <div class="col-xs-12">
+        <div class="col-xs-6">
+            <span>or any other URL to a stable source of data and files directly related to this dataset</span>
+        </div>
+        <div class="col-xs-6">
+            <a href="#"
+               id="sources-no"
+               data-target="others-grid"
+               data-target2="sources"
+               data-url="/adminExternalLink/deleteExLinks"
+               data-id="<?= $model->id ?>"
+               data-type="<?= AIHelper::SOURCES ?>"
+               class="btn btn-default others-button <?php if ($isSources === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
 
-        <a href="#"
-           id="sources-no"
-           data-target="others-grid"
-           data-target2="sources"
-           data-url="/adminExternalLink/deleteExLinks"
-           data-id="<?= $model->id ?>"
-           data-type="<?= AIHelper::SOURCES ?>"
-           class="btn btn-default others-button <?php if ($isSources === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
-
-        <a href="#"
-           id="sources-yes"
-           data-target="sources"
-           class="btn btn-default others-button <?php if ($isSources === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+            <a href="#"
+               id="sources-yes"
+               data-target="sources"
+               class="btn btn-default others-button <?php if ($isSources === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+        </div>
     </div>
 </div>
 

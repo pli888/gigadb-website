@@ -23,7 +23,7 @@ $disabled = $isSources === null || $isCodes === null || $isRepositories === null
                 <h4>Add Additional Information</h4>
             </div>
             <?php $this->renderPartial('_tabs_navigation', array('model' => $model)); ?>
-            <div class="form well">
+            <div class="col-xs-12 form well">
                 <?php $this->renderPartial('_public_links', array(
                     'model' => $model, 
                     'links' => $links, 

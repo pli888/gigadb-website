@@ -1,7 +1,9 @@
 <div class="row" style="margin-bottom: 5px; margin-top: 10px;">
-    <div class="span9">
-        <span>Protocols.io link to methods used to generate this data………………………………………..</span>
-
+    <div class="col-xs-12">
+        <div class="col-xs-6">
+            <span>Protocols.io link to methods used to generate this data</span>
+        </div>
+        <div class="col-xs-6">
         <a href="#"
            id="protocols-no"
            data-target="others-grid"
@@ -15,6 +17,7 @@
            id="protocols-yes"
            data-target="protocols"
            class="btn btn-default additional-button <?php if ($isProtocols === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+        </div>
     </div>
 </div>
 
