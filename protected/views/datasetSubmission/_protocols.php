@@ -9,23 +9,25 @@
            data-url="/adminExternalLink/deleteExLinks"
            data-id="<?= $model->id ?>"
            data-type="<?= AIHelper::PROTOCOLS ?>"
-           class="btn others-button <?php if ($isProtocols === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default additional-button <?php if ($isProtocols === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
 
         <a href="#"
            id="protocols-yes"
            data-target="protocols"
-           class="btn others-button <?php if ($isProtocols === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn btn-default additional-button <?php if ($isProtocols === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
     </div>
 </div>
 
 <div class="row" id="protocols"<?php if ($isProtocols !== true): ?> style="display: none"<?php endif; ?>>
-    <div class="span9">
-        <label class='control-label others-label'>Please provide the Protocols.io DOI</label>
-        <div class="controls">
-            <?= CHtml::textField('link', '', array('class'=>'js-ex-link others-input', 'size' => 60, 'maxlength' => 100, 'placeholder' => "e.g. doi:10.17504/protocols.io.gk8buzw")); ?>
+    <div class="control-group">
+        <div class="col-md-4">
+            <label class='control-label'>Please provide the Protocols.io DOI</label>
         </div>
-    </div>
-    <div class="span2">
-        <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::PROTOCOLS ?>" class="btn js-not-allowed"/>Add Link</a>
+        <div class="controls col-md-4">
+            <?= CHtml::textField('link', '', array('class'=>'form-control js-ex-link others-input', 'size' => 60, 'maxlength' => 100, 'placeholder' => "e.g. doi:10.17504/protocols.io.gk8buzw")); ?>
+        </div>
+        <div class="col-md-4">
+            <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::PROTOCOLS ?>" class="btn btn-success disabled js-not-allowed"/>Add Link</a>
+        </div>
     </div>
 </div>

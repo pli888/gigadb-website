@@ -75,9 +75,9 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
             var valLength = val.length;
 
             if (valLength){
-                $('.js-not-allowed', manuscriptsDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
+                $('.js-not-allowed', manuscriptsDiv).removeClass('js-not-allowed btn btn-success disabled').addClass('js-add-exLink btn btn-success');
             } else {
-                $('.js-add-exLink', manuscriptsDiv).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
+                $('.js-add-exLink', manuscriptsDiv).removeClass('js-add-exLink btn btn-success').addClass('btn btn-success disabled js-not-allowed');
             }
 
             var keycode = (event.keyCode ? event.keyCode : event.which);
