@@ -18,9 +18,9 @@ foreach ($funders as $funder) {
             <?php $this->renderPartial('_tabs_navigation', array('model' => $model)); ?>
             <div class="form well">
                 <div class="form-horizontal">
-                    <div class="row subwiz-row">
-                        <div class="col-xs-12">
-                            <div id="funding-grid" class="grid-view">
+                    <div id="funding-grid" class="grid-view">
+                        <div class="row subwiz-row">
+                            <div class="col-xs-12">
                                 <p class="note">
                                     Would you like to acknowledge any funding bodies that have provided resources to generate these data?
                                     <a class="myHint" style="float: none;" data-content="We encourage the addition of funding information to acknowledge the support from your funders, we require that funding information is highly structured to ensure that it can be machine readable. If your funding body is not already included in our database please contact us (database@gigasciencejournal.com) with the name, country and a URL of the funder and we can add it to the list."></a>
@@ -109,6 +109,10 @@ foreach ($funders as $funder) {
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row subwiz-row">
+                            <div class="col-xs-12">
                                 <div class="clear"></div>
                                 <div style="text-align:center" id="funding-save">
                                     <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
