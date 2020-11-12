@@ -116,7 +116,7 @@
                                                 </td>
                                                 <td colspan="2">
                                                     <input type="hidden" value="999999999" class="js-author-rank">
-                                                    <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" id="js-add-author"/>Add Author</a>
+                                                    <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn disabled js-not-allowed" id="js-add-author"/>Add Author</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -445,9 +445,9 @@
             && $('#js-author-last-name').val()
             && $('#js-author-contribution').val()
         ) {
-            $('#js-add-author').removeClass('js-not-allowed').addClass('btn-green js-add-author');
+            $('#js-add-author').removeClass('disabled js-not-allowed').addClass('js-add-author');
         } else {
-            $('#js-add-author').removeClass('btn-green js-add-author').addClass('js-not-allowed');
+            $('#js-add-author').removeClass('js-add-author').addClass('disabled js-not-allowed');
         }
     }
 
