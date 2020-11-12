@@ -72,7 +72,7 @@ foreach ($funders as $funder) {
                                         </div>
                                     </div>
 
-                                    <div class="grid-view">
+                                    <div class="grid-view" style="padding-top: 20px">
                                         <table class="table table-bordered">
                                             <thead>
                                             <tr>
