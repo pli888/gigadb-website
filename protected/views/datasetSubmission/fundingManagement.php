@@ -29,11 +29,11 @@ foreach ($funders as $funder) {
                                 <div style="text-align: center; margin-bottom: 15px;">
                                     <a href="#"
                                        id="funding-yes-button"
-                                       class="btn additional-button <?php if ($model->getFunding() === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+                                       class="btn btn-success <?php if ($model->getFunding() === true): ?>btn btn-danger<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
                                     <a href="#"
                                        id="funding-no-button"
                                        data-id="<?= $model->id ?>"
-                                       class="btn additional-button <?php if ($model->getFunding() === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+                                       class="btn btn-success <?php if ($model->getFunding() === false): ?>btn btn-danger<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
                                 </div>
 
                                 <div id="funding"<?php if ($model->getFunding() !== true): ?> style="display: none;"<?php endif; ?>>
@@ -174,9 +174,9 @@ foreach ($funders as $funder) {
             }
         }
 
-        $this.addClass('btn-green btn-disabled');
-        $this.removeClass('js-no-button');
-        $this.siblings().removeClass('btn-green btn-disabled').addClass('js-yes-button');
+        $this.addClass('btn btn-success');
+        $this.removeClass('btn-default js-no-button');
+        $this.siblings().removeClass('btn btn-success').addClass('btn btn-default js-yes-button');
 
         items.remove();
         $('.js-no-results', fundingDiv).show();
@@ -191,9 +191,9 @@ foreach ($funders as $funder) {
     $(".js-yes-button").click(function() {
         var $this = $(this);
 
-        $this.addClass('btn-green btn-disabled');
-        $this.removeClass('js-yes-button');
-        $this.siblings().removeClass('btn-green btn-disabled').addClass('js-no-button');
+        $this.removeClass('btn btn-default js-yes-button');
+        $this.addClass('btn btn-success');
+        $this.siblings().removeClass('btn btn-success').addClass('btn btn-default js-no-button');
 
         fundingDiv.show();
 
