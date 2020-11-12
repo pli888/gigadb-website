@@ -38,22 +38,22 @@
                         </div>
                     </div>
                     <div class="row subwiz-row">
-                        <div class="col-xs-6">
-                            <div class="control-group" id="set-template-div">
+                        <div class="control-group" id="set-template-div">
+                            <div class="col-md-2">
                                 <label class='control-label'>Choose a template</label>
-                                <div class="controls">
-                                    <?= CHtml::dropDownList('template',
-                                        $template ? $template->id : null,
-                                        CHtml::listData($sts,'id','template_name'),
-                                        array('empty'=> 'Empty', 'class'=>'js-database form-control', 'style'=>'width:200px'));
-                                    ?>
-                                    <a href="#" class="btn <?php if (!$template): ?>js-not-allowed<?php else: ?> btn-green js-set-template<?php endif ?>" style="margin-left: 20px;"/>Apply</a>
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <span>Note- applying a new template will delete any attributes already inserted below</span>
-                            <a class="myHint" style="float: none;" data-content="The templates provide a guide to some of the possible attributes that could be added to samples, please add more columns as required, or delete those that are not relevant to your data."></a>
+                            <div class="controls col-md-4">
+                                <?= CHtml::dropDownList('template',
+                                    $template ? $template->id : null,
+                                    CHtml::listData($sts,'id','template_name'),
+                                    array('empty'=> 'Empty', 'class'=>'js-database form-control', 'style'=>'width:200px'));
+                                ?>
+                                <a href="#" class="btn <?php if (!$template): ?>js-not-allowed<?php else: ?> btn-green js-set-template<?php endif ?>" style="margin-left: 20px;"/>Apply</a>
+                            </div>
+                            <div class="col-md-6">
+                                <span>Note- applying a new template will delete any attributes already inserted below</span>
+                                <a class="myHint" style="float: none;" data-content="The templates provide a guide to some of the possible attributes that could be added to samples, please add more columns as required, or delete those that are not relevant to your data."></a>
+                            </div>
                         </div>
                     </div>
                     <div class="row subwiz-row">
