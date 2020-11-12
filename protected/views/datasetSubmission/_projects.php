@@ -8,14 +8,14 @@
             <a href="#"
                data-target="projects"
                id="projects-yes"
-               class="btn additional-button <?php if ($isProjects === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+               class="btn btn-default additional-button <?php if ($isProjects === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
             <a href="#"
                data-target="projects"
                data-next-block="others-block"
                id="projects-no"
                data-url="/adminDatasetProject/deleteProjects"
                data-id="<?= $model->id ?>"
-               class="btn additional-button <?php if ($isProjects === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+               class="btn btn-default additional-button <?php if ($isProjects === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
         </div>
         <div id="projects"<?php if ($isProjects !== true): ?> style="display: none"<?php endif; ?>>
             <div class="row subwiz-row">
@@ -30,7 +30,7 @@
                     <?= CHtml::dropDownList('project', null,
                         array('' => 'Please select') + CHtml::listData(Project::model()->findAll(), 'id', 'name'),
                         array('class'=>'js-project form-control','style'=>'width:auto')); ?>
-                    <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" style="margin-left: 20px;"/>Add Project</a>
+                    <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" style="margin-left: 20px;"/>Add Project</a>
                 </div>
                 <div class="row subwiz-row">
                     <div class="col-xs-12">
@@ -78,9 +78,9 @@
 
     $(document).on('change', '#project', function () {
         if ($('#project').val()){
-            $('.js-not-allowed', projectsDiv).removeClass('js-not-allowed').addClass('js-add-project btn-green');
+            $('.js-not-allowed', projectsDiv).removeClass('disabled js-not-allowed').addClass('js-add-project btn-success');
         } else {
-            $('.js-add-project', projectsDiv).removeClass('js-add-project btn-green').addClass('js-not-allowed');
+            $('.js-add-project', projectsDiv).removeClass('js-add-project btn-success').addClass('js-not-allowed disabled');
         }
     });
 
