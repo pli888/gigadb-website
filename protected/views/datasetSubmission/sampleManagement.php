@@ -51,7 +51,7 @@
                                 <a href="#" class="btn btn-success <?php if (!$template): ?>disabled js-not-allowed<?php else: ?> js-set-template<?php endif ?>" style="margin-left: 20px;"/>Apply</a>
                             </div>
                             <div class="col-md-6">
-                                <span>Note- applying a new template will delete any attributes already inserted below</span>
+                                <label class="control-label">Note- applying a new template will delete any attributes already inserted below</label>
                                 <a class="myHint" style="float: none;" data-content="The templates provide a guide to some of the possible attributes that could be added to samples, please add more columns as required, or delete those that are not relevant to your data."></a>
                             </div>
                         </div>
