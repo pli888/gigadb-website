@@ -101,9 +101,9 @@ $disabled = $isSources === null || $isCodes === null || $isRepositories === null
             $('#' + nextBlock).show();
         }
 
-        $this.addClass('btn-green btn-disabled');
         $this.removeClass('js-no-button');
-        $this.siblings().removeClass('btn-green btn-disabled').addClass('js-yes-button');
+        $this.addClass('background-btn');
+        $this.siblings().removeClass('background-btn btn-disabled').addClass('btn-default js-yes-button');
 
         if (type) {
             if (
@@ -139,9 +139,9 @@ $disabled = $isSources === null || $isCodes === null || $isRepositories === null
         var $this = $(this);
         var target = $this.data('target');
 
-        $this.addClass('btn-green btn-disabled');
         $this.removeClass('js-yes-button');
-        $this.siblings('a').removeClass('btn-green btn-disabled').addClass('js-no-button');
+        $this.addClass('background-btn');
+        $this.siblings('a').removeClass('background-btn').addClass('btn-default js-no-button');
 
         $('#' + target).show();
 
