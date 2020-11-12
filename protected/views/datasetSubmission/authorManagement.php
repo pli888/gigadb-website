@@ -18,7 +18,7 @@
                                     below and you may make any required changes directly 
                                     in the table.</p>
                                 <div class="additional-bordered" style="overflow-x: auto;margin: 15px 0;">
-                                    <table class="table table-bordered" id="author-table" style="overflow: auto;">
+                                    <table class="table table-bordered subwiztable" id="author-table" style="overflow: auto;">
                                         <thead>
                                             <tr>
                                                 <th id="author-grid_c0">
