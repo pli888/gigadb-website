@@ -239,11 +239,11 @@
                     <div class="row subwiz-row">
                         <div class="col-xs-12">
                             <div style="text-align:center" id="samples-save">
-                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn-green">Previous</a>
+                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
                                 <a href="/datasetSubmission/sampleManagement/id/<?= $model->id ?>"
-                                   class="btn btn-green js-save-samples">Save</a>
+                                   class="btn background-btn js-save-samples">Save</a>
                                 <a href="/datasetSubmission/end/id/<?= $model->id ?>"
-                                   class="btn btn-green js-save-samples">Next</a>
+                                   class="btn background-btn js-save-samples">Next</a>
                             </div>
                         </div>
                     </div>
