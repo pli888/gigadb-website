@@ -28,8 +28,8 @@
             <label class='control-label others-label' style="margin-left: 0;width: 100%;">Please provide the DOI or URL:</label>
         </div>
         <div class="controls col-md-4">
-            <?= CHtml::textField('link', '', array('class'=>'js-ex-link', 'size' => 60, 'style' => 'width: 350px;', 'placeholder' => "e.g. doi:12.3456/789012.3")); ?>
-            <?= CHtml::textArea('link', '', array('class'=>'js-ex-description', 'size' => 60, 'style' => 'width: 326px;', 'placeholder' => "Short description of what the link is to")); ?>
+            <?= CHtml::textField('link', '', array('class'=>'form-control js-ex-link', 'size' => 60, 'style' => 'width: 350px;', 'placeholder' => "e.g. doi:12.3456/789012.3")); ?>
+            <?= CHtml::textArea('link', '', array('class'=>'form-control js-ex-description', 'size' => 60, 'style' => 'width: 350px;', 'placeholder' => "Short description of what the link is to")); ?>
         </div>
     </div>
     <div class="col-md-4">
