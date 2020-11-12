@@ -43,27 +43,27 @@ foreach ($funders as $funder) {
                                             <?= CHtml::dropDownList('funder_id',
                                                 null,
                                                 $fundersList,
-                                                array('class'=>'js-database dropdown-white', 'style'=>'width:250px'));
+                                                array('class'=>'js-database form-control', 'style'=>'width:250px'));
                                             ?> * required
                                         </div>
                                     </div>
                                     <p class="note">Often Funding bodies provide funds to different “programs”, if appropriate you may type the funding bodies Program name here:</p>
-                                    <div class="control-group">
+                                    <div class="control-group form-group">
                                         <div style="text-align: center">
-                                            <?= CHtml::textField('program_name', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px;margin-right:60px;', 'placeholder'=>"Program name, e.g. FP7 framework")); ?>
+                                            <?= CHtml::textField('program_name', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px;margin-right:60px;', 'placeholder'=>"Program name, e.g. FP7 framework", 'class' => 'form-control')); ?>
                                         </div>
                                     </div>
                                     <p class="note">Please now provide the unique reference to the grant/funding received</p>
                     
-                                    <div class="control-group">
+                                    <div class="control-group form-group">
                                         <div style="text-align: center">
-                                            <?= CHtml::textField('grant', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Grant reference", 'class' => 'js-funding-required')); ?> * required
+                                            <?= CHtml::textField('grant', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Grant reference", 'class' => 'form-control js-funding-required')); ?> * required
                                         </div>
                                     </div>
                                     <p class="note">Now add the last name and first initial of the Principal investigator names on the grant application</p>
-                                    <div class="control-group">
+                                    <div class="control-group form-group">
                                         <div style="text-align: center">
-                                            <?= CHtml::textField('pi_name', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"PI name, e.g. Bloggs J", 'class' => 'js-funding-required')); ?> * required
+                                            <?= CHtml::textField('pi_name', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"PI name, e.g. Bloggs J", 'class' => 'form-control js-funding-required')); ?> * required
                                         </div>
                                     </div>
                                     <div class="control-group">
