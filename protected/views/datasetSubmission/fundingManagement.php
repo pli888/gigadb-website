@@ -68,7 +68,7 @@ foreach ($funders as $funder) {
                                     </div>
                                     <div class="control-group">
                                         <div style="text-align: center">
-                                            <a href="#" class="btn js-not-allowed"/>Add Link</a>
+                                            <a href="#" class="btn btn-success disabled js-not-allowed"/>Add funding</a>
                                         </div>
                                     </div>
 
@@ -150,9 +150,9 @@ foreach ($funders as $funder) {
             && $('#grant').val()
             && $('#pi_name').val()
         ) {
-            $(fundingDiv).find('.js-not-allowed').removeClass('js-not-allowed').addClass('btn-green js-add-funding');
+            $(fundingDiv).find('.js-not-allowed').removeClass('disabled js-not-allowed').addClass('js-add-funding');
         } else {
-            $(fundingDiv).find('.js-add-funding').removeClass('btn-green js-add-funding').addClass('js-not-allowed');
+            $(fundingDiv).find('.js-add-funding').removeClass('js-add-funding').addClass('disabled js-not-allowed');
         }
     }
 
