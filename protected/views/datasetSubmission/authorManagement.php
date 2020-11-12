@@ -137,7 +137,7 @@
                                 <a class="myHint" data-content="You may upload a tabular file of authors names (in TSV or CSV format), please use include 5 columns and 1 row for each author, e.g.<br> Firstname	Middlename	Lastname	ORCID 		contribution<br>Rosalind	Elsie	Franklin 	0000-0000-0000-0001	Conceptualization"
                                    data-html="true" style="float: none"></a>
                                 <input type="file" id="authors" name="authors">
-                                <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn js-not-allowed" id="js-add-authors"/>Add Authors</a>
+                                <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn disabled js-not-allowed" id="js-add-authors"/>Add Authors</a>
                             </div>
                         </div>
                     </div>
@@ -178,9 +178,9 @@
 
     $(document).on('change', '#authors', function () {
         if ($(this).val()) {
-            $('#js-add-authors').removeClass('js-not-allowed').addClass('btn-green js-add-authors');
+            $('#js-add-authors').removeClass('disabled js-not-allowed').addClass('js-add-authors');
         } else {
-            $('#js-add-authors').removeClass('btn-green js-add-authors').addClass('js-not-allowed');
+            $('#js-add-authors').removeClass('js-add-authors').addClass('disabled js-not-allowed');
         }
     });
 
