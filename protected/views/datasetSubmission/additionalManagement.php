@@ -59,8 +59,8 @@ $disabled = $isSources === null || $isCodes === null || $isRepositories === null
                 <div style="text-align:center" id="additional-save">
                     <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
                     <?php if ($disabled): ?>
-                        <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Save</a>
-                        <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-not-allowed">Next</a>
+                        <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn disabled js-not-allowed">Save</a>
+                        <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn disabled js-not-allowed">Next</a>
                     <?php else: ?>
                         <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Save</a>
                         <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Next</a>
@@ -276,9 +276,9 @@ $disabled = $isSources === null || $isCodes === null || $isRepositories === null
             && ($('#repositories-no').hasClass('btn-success') || ($('#repositories-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::REPOSITORIES ?>').length))
             && ($('#sources-no').hasClass('btn-success') || ($('#sources-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::SOURCES ?>').length))
         ) {
-            $('#additional-save').find('.js-not-allowed').removeClass('js-not-allowed').addClass('btn-green js-save-additional');
+            $('#additional-save').find('.js-not-allowed').removeClass('js-not-allowed btn background-btn disabled').addClass('btn background-btn js-save-additional');
         } else {
-            $('#additional-save').find('.js-save-additional').removeClass('btn-green js-save-additional').addClass('js-not-allowed');
+            $('#additional-save').find('.js-save-additional').removeClass('btn background-btn js-save-additional').addClass('js-not-allowed btn background-btn disabled');
         }
     }
 </script>
