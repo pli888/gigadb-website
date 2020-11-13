@@ -3,7 +3,7 @@
         <div class="col-xs-6">
             <span>Actionable code in CodeOceans</span>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-3">
             <a href="#"
                id="codes-no"
                data-target="others-grid"

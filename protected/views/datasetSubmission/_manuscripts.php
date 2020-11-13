@@ -3,7 +3,7 @@
         <div class="col-xs-6">
             <span>A published manuscript that uses this data</span>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-3">
         <a href="#"
            id="manuscripts-no"
            data-target="others-grid"

@@ -3,7 +3,7 @@
         <div class="col-xs-6">
             <span>or any other URL to a stable source of data and files directly related to this dataset</span>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-3">
             <a href="#"
                id="sources-no"
                data-target="others-grid"

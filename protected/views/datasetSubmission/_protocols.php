@@ -3,7 +3,7 @@
         <div class="col-xs-6">
             <span>Protocols.io link to methods used to generate this data</span>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-3">
         <a href="#"
            id="protocols-no"
            data-target="others-grid"
@@ -11,12 +11,12 @@
            data-url="/adminExternalLink/deleteExLinks"
            data-id="<?= $model->id ?>"
            data-type="<?= AIHelper::PROTOCOLS ?>"
-           class="btn btn-default additional-button <?php if ($isProtocols === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default others-button <?php if ($isProtocols === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
 
         <a href="#"
            id="protocols-yes"
            data-target="protocols"
-           class="btn btn-default additional-button <?php if ($isProtocols === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn btn-default others-button <?php if ($isProtocols === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
         </div>
     </div>
 </div>

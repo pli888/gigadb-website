@@ -3,7 +3,7 @@
         <div class="col-xs-6">
             <span>SketchFab 3d-Image viewer links</span>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-3">
             <a href="#"
                id="3d_images-no"
                data-target="others-grid"
