@@ -3,7 +3,7 @@
         <div class="col-xs-6">
             <span>A GitHub repository</span>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-3">
             <a href="#"
                id="repositories-no"
                data-target="others-grid"
