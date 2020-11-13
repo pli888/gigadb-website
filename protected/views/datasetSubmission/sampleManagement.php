@@ -63,7 +63,7 @@
                             </p>
 
                             <div class="additional-bordered" style="overflow-x: auto;margin: 15px 0;">
-                                <table class="table table-bordered sample-tab-table subwiztable" id="samples-table" style="overflow: auto;">
+                                <table class="table table-bordered sample-tab-table" id="samples-table" style="overflow: auto;">
                                     <thead>
                                     <tr>
                                         <th id="sample-grid_c0">
@@ -133,7 +133,7 @@
                                                     </th>
                                                 <?php endforeach ?>
                                             <?php endif ?>
-                                            <th class="button-column"><a href="#" class="btn btn-green btn-sample js-add-column" style="max-width: 100px;">Add Column</a></th>
+                                            <th class="button-column"><a href="#" class="btn btn-success btn-sample js-add-column" style="max-width: 100px;">Add Column</a></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -197,7 +197,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="button-column" style="border-top:none;text-align: left;">
-                                                    <a href="#" class="btn btn-green btn-sample js-add-row" style="margin-left: 30px;">Add Row</a>
+                                                    <a href="#" class="btn btn-success btn-sample js-add-row" style="margin-left: 30px;">Add Row</a>
                                                 </td>
                                             </tr>
                                         </tbody>
