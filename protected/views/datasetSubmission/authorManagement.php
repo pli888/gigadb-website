@@ -116,7 +116,7 @@
                                                 </td>
                                                 <td colspan="2">
                                                     <input type="hidden" value="999999999" class="js-author-rank">
-                                                    <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn disabled js-not-allowed" id="js-add-author"/>Add Author</a>
+                                                    <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" id="js-add-author"/>Add Author</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -137,7 +137,7 @@
                                 <a class="myHint" data-content="You may upload a tabular file of authors names (in TSV or CSV format), please use include 5 columns and 1 row for each author, e.g.<br> Firstname	Middlename	Lastname	ORCID 		contribution<br>Rosalind	Elsie	Franklin 	0000-0000-0000-0001	Conceptualization"
                                    data-html="true" style="float: none"></a>
                                 <input type="file" id="authors" name="authors">
-                                <a href="#" dataset-id="<?=$model->id?>" class="btn background-btn disabled js-not-allowed" id="js-add-authors"/>Add Authors</a>
+                                <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" id="js-add-authors"/>Add Authors</a>
                             </div>
                         </div>
                     </div>
