@@ -48,7 +48,8 @@ class AdminDatasetController extends Controller
         $dataset->image = new Images;
 
         if (!empty($_POST['Dataset']) && !empty($_POST['Images'])) {
-        	Yii::log("Processing submitted data", 'info');
+
+            Yii::log("Processing submitted data", 'info');
         	$dataset_post_data = $_POST['Dataset'];
         	if (isset($dataset_post_data['publication_date']) && $dataset_post_data['publication_date'] == "" ) {
         		$dataset_post_data['publication_date'] = null;

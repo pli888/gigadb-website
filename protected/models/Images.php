@@ -132,6 +132,7 @@ class Images extends ImageHaver
 
 
     public function save($runValidation = true, $attributes = NULL){
+        Yii::log('', CLogger::LEVEL_INFO, '==== In Images::save function ====');
         if (!parent::save()) return false;
         $this->updateImage('image_upload');
         return true;

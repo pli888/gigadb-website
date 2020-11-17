@@ -32,6 +32,8 @@ class ImageHaver extends CActiveRecord {
      * @return string $path
      */
     public function getPath($type, $size='') {
+        Yii::log('', CLogger::LEVEL_INFO, '==== In ImageHaver::getPath function ====');
+
         $class = get_class($this);
         $dir = "/$type";
         switch ($size) {
@@ -45,7 +47,7 @@ class ImageHaver extends CActiveRecord {
         } else {
             $path = "$dir/{$class}_{$this->id}.png";
         }
-        #Yii::log(__FUNCTION__."> path: $path", 'debug');
+        Yii::log(__FUNCTION__."> path: $path", 'debug');
         return $path;
     }
 
@@ -115,6 +117,7 @@ class ImageHaver extends CActiveRecord {
      * @return bool
      */
     public function setImage($type, $image) {
+        Yii::log('', CLogger::LEVEL_INFO, '==== In ImageHaver::setImage function ====');
         $path = $this->getFullPath($type);
         $thumbPath = $this->getFullPath($type, 'thumb');
         $smallThumbPath = $this->getFullPath($type, 'small_thumb');
@@ -124,14 +127,19 @@ class ImageHaver extends CActiveRecord {
         if ($image->getSize() > 0) {
             Yii::log(__FUNCTION__."> attempting to store image : $path",'debug');
             $this->createDirs($type);
+
+            Yii::log('', CLogger::LEVEL_INFO, 'Image size: '.$image->getSize());
+            Yii::log('', CLogger::LEVEL_INFO, '$path: '.$path);
+            
             if (!$image->saveAs($path)) {
                 Yii::log("Could not save file to path: $path", 'error');
+                Yii::log('', CLogger::LEVEL_INFO, 'Not OK here!!!');
                 return false;
             }
 	    #Yii::log("Got it to: $path", 'debug');
             //            $this->transformImage($path, $path, $this->size, null);
-            $this->transformImage($path, $thumbPath, $this->thumbSize, null);
-            $this->transformImage($path, $smallThumbPath, $this->smallThumbSize, null);
+//            $this->transformImage($path, $thumbPath, $this->thumbSize, null);
+//            $this->transformImage($path, $smallThumbPath, $this->smallThumbSize, null);
         } else {
             if (file_exists($path)) return unlink($path);
             else return true;
@@ -316,6 +324,8 @@ class ImageHaver extends CActiveRecord {
      * @param $height
      */
     public function transformImage($fromPath, $toPath, $width, $height) {
+        Yii::log('', CLogger::LEVEL_INFO, '==== In ImageHaver::transformImage function ====');
+        Yii::log('', CLogger::LEVEL_INFO, '$fromPath:'.$fromPath);
         $image = Yii::app()->image->load($fromPath);
         if ($image) {
             $image->resize($width, $height);
