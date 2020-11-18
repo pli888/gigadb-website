@@ -84,20 +84,22 @@ Scenario: redirect
 	And I wait "10" seconds
 	And the url should be "/dataset/100002"
 
-@ok @wlsubwiz-broken
+@ok
 Scenario: new dataset with mandatory fields filled in
 	Given I sign in as an admin
 	And I am on "/adminDataset/admin"
 	When I follow "Create Dataset"
 	And I select "user@gigadb.org" from "Submitter"
-	And I fill in "Title" with "My dataset"
+	And I fill in "Dataset_title" with "My dataset"
 	And I fill in "Dataset Size" with "345345324235"
+	And I check "use_generic_image" 
 	And I fill in "Image Source" with "Wikimedia"
 	And I fill in "Image License" with "CC0"
 	And I fill in "Image Credit *" with "Anonymous"
 	And I fill in "DOI" with "100900"
 	And I fill in "Ftp Site" with "ftp.genomics.cn"
 	And I press "Create"
+	And I wait "5" seconds
 	Then the response should contain "My Dataset"
 	And the response should contain "10.5524/100900"
 	And I should see a button "Your dataset?"
