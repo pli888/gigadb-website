@@ -47,8 +47,6 @@ class AdminDatasetController extends Controller
         $dataset = new Dataset;
         $dataset->image = new Images;
 
-        Yii::log("actionCreate",'info');
-
         if (!empty($_POST['Dataset']) && !empty($_POST['Images'])) {
         	Yii::log("Processing submitted data", 'info');
         	$dataset_post_data = $_POST['Dataset'];
@@ -66,6 +64,13 @@ class AdminDatasetController extends Controller
             $dataset->setAttributes($dataset_post_data, true);
             Yii::log("dataset title: ".$dataset->title,'debug');
             $dataset->image->attributes = $_POST['Images'];
+            
+            // For when generic logo checkbox is selected on /adminDataset/create page
+            if($_POST['Images']['is_no_image'] == 1) {
+                $dataset->image->setIsNoImage(1);
+                $dataset->image->location = 'no_image.png';
+                $dataset->image->url = Yii::app()->params['home_url'].'/images/uploads/no_image.png';
+            }
 
             if( !$dataset->validate() ) {
             	Yii::log("Dataset instance is not valid", 'info');

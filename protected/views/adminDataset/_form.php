@@ -113,6 +113,14 @@ $cs->registerCssFile('/css/jquery.tag-editor.css');
                             <?php echo $form->error($model->image,'image_upload'); ?>
                         </div>
                     </div>
+
+                    <div class="control-group">
+                        <label for="use_generic_image" class="control-label">Tick this box to use a generic GigaDB logo instead</label>
+                        <div class="controls col-sm-4">
+                            <?php echo $form->checkBox($model->image,'is_no_image', array('id'=>'use_generic_image', 'style' => 'margin: 25px 0 0 0px;')); ?>
+                        </div>
+                    </div>
+                    
                     <div class="control-group">
                         <?php echo $form->labelEx($model->image,'url',array('class'=>'control-label')); ?>
                         <div class="controls">
