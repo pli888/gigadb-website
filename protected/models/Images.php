@@ -6,7 +6,7 @@
  *
  * The followings are the available columns in table 'image':
  * @property integer $id
- * @property string $location
+ * @property string $location  // For WL subwiz - used for image filename
  * @property string $tag
  * @property string $url
  * @property string $license
@@ -21,9 +21,9 @@ class Images extends ImageHaver
 
     /** @var $image_upload CUploadedFile */
     public $image_upload;
-    public $is_no_image = 0;
+    public $is_no_image = 0;  // Boolean showing if it is a generic dataset image
     public static $fup_img = '/images/fair.png';
-    public $old_image;
+    public $old_image;  // For WL subwiz - not sure if this is being used
     /**
      * Returns the static model of the specified AR class.
      * @param string $className active record class name.
@@ -62,9 +62,18 @@ class Images extends ImageHaver
         );
     }
 
+    /**
+     * Tests whether any attributes are missing for image object
+     * 
+     * New function for WL submission wizard.
+     * 
+     * @param $attribute
+     * @param $params
+     */
     public function validateImageUpload($attribute, $params)
     {
-        if (!$this->is_no_image && !$this->$attribute && ($this->getIsNewRecord() || $this->location == 'no_image.jpg')) {
+        // IF this image is NOT a generic dataset image AND $attribute has a value AND ( image is a new database table record OR location has value "no_image.jpg")
+        if (!$this->is_no_image && !$this->$attribute && ($this->getIsNewRecord() || $this->location == 'no_image.png')) {
             $labels = $this->attributeLabels();
             $this->addError($attribute, $labels[$attribute] . ' cannot be blank.');
         }
@@ -132,11 +141,26 @@ class Images extends ImageHaver
         return "image_upload";
     }
 
+    /**
+     * Shows if this image object is a generic dataset image or not
+     * 
+     * New function for WL submission wizard.
+     * 
+     * 0 = use custom image provided for submitter
+     * 1 = use generic dataset image
+     * 
+     * @param $isNoImage
+     */
     public function setIsNoImage($isNoImage)
     {
         $this->is_no_image = (int)$isNoImage;
     }
 
+    /**
+     * New function for WL submission wizard
+     * 
+     * @param $data
+     */
     public function loadByData($data)
     {
         if (!$data['is_no_image']) {
@@ -170,6 +194,8 @@ class Images extends ImageHaver
     }
 
     /**
+     * New function for WL submission wizard
+     * 
      * @return bool
      * @throws Exception
      */
