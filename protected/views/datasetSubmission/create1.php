@@ -97,7 +97,7 @@ $cs->registerCssFile('/css/jquery.tag-editor.css');
                             <div class="controls col-sm-7">
                                 <?php
                                     $email = Yii::app()->user->getEmail();
-                                    echo CHtml::textField("email", $email, array('class' => 'form-control', 'size' => 20, 'maxlength' => 300, 'readonly' => "readonly"));
+                                    echo CHtml::textField("Dataset_submitter_id", $email, array('class' => 'form-control', 'size' => 20, 'maxlength' => 300, 'readonly' => "readonly"));
                                 ?>
                             </div>
                         </div>
@@ -133,7 +133,7 @@ $cs->registerCssFile('/css/jquery.tag-editor.css');
                                                 break;
                                             }
                                         }
-                                        echo '<input type="checkbox" name="datasettypes[]" value="'.$id.'"' . $checkedHtml . '/> ' . $datasetType . '<br/>';
+                                        echo '<input id="'.$datasetType.'" type="checkbox" name="datasettypes[]" value="'.$id.'"' . $checkedHtml . '/> ' . $datasetType . '<br/>';
                                     }
                                 ?>
                             </div>
@@ -196,6 +196,18 @@ $cs->registerCssFile('/css/jquery.tag-editor.css');
                             <div class="controls col-sm-7">
                                 <?php echo $form->textField($image, 'photographer', array('size' => 60, 'maxlength' => 200, 'class' => 'image, form-control')); ?>
                                 <?php echo $form->error($image, 'photographer'); ?>
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <div class="col-sm-5">
+                                <?php echo $form->labelEx($image, 'source', array('class' => 'control-label')); ?>
+                                <a class="myHint" data-content="The source that should
+                                   be credited for the image"></a>
+                            </div>
+                            <div class="controls col-sm-7">
+                                <?php echo $form->textField($image, 'source', array('size' => 60, 'maxlength' => 200, 'class' => 'image, form-control')); ?>
+                                <?php echo $form->error($image, 'source'); ?>
                             </div>
                         </div>
 
@@ -334,7 +346,7 @@ $cs->registerCssFile('/css/jquery.tag-editor.css');
         var titleWarning = $('#title-warning');
 
         if (title.val().length > 100) {
-            titleWarning.show();
+            titleWarning.removeClass('hide');
         } else {
             titleWarning.hide();
         }
