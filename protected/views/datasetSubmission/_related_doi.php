@@ -29,7 +29,7 @@
                     <?= CHtml::dropDownList('dataset_doi', null,
                         array('' => 'Please select') + CHtml::listData(Util::getDois(), 'identifier', 'identifier'),
                         array('class'=>'js-relation-doi form-control','style'=>'width:250px')); ?>
-                    <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed"/>Add Related Doi</a>
+                    <a id="add-related-doi" href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed"/>Add Related Doi</a>
                 </div>
                 <div class="row subwiz-row">
                     <div class="col-xs-12">
