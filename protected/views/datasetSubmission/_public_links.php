@@ -23,7 +23,7 @@
                 <p class="note">Please select the appropriate database from the list (you may repeat process to add different database links).</p>
         
                 <div class="control-group">
-                    <label class='control-label'>Database</label>
+                    <label class='control-label' for="prefix">Database</label>
                     <a class="myHint" data-html="true" data-content="Please contact <a href=&quot;mailto:database@gigasciencejournal.com&quot; >database@gigasciencejournal.com</a> to request the addition of a new database."></a>
                     <div class="controls">
                         <?= CHtml::dropDownList('prefix',
@@ -40,11 +40,11 @@
                 <p class="note js-set-database">Please select add accession numbers to your data in the above database</p>
         
                 <div class="control-group js-set-database">
-                    <label class='control-label'>Accession number</label>
+                    <label class='control-label' for="link">Accession number</label>
                     <a class="myHint" data-content="Please provide unique identifier of linked data, e.g. an SRA accession; SRS012345."></a>
                     <div class="controls">
                         <?= CHtml::textField('link', '', array('class'=>'js-acc-num form-control', 'size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Unique identifier of linked data")); ?>
-                        <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" style="margin-left: 20px;"/>Add Link</a>
+                        <a href="#" id="add-link" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" style="margin-left: 20px;"/>Add Link</a>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                                 <td><?= substr($link->link, $pos + 1) ?></td>
                                 <td class="button-column">
                                     <input type="hidden" class="js-my-id" value="<?= $link->id ?>">
-                                    <a class="js-delete-link delete-title" link-id="<?=$link->id?>" data-id="<?= $model->id ?>" title="delete this row">
+                                    <a href="#" id="delete-link" class="js-delete-link" title="delete this row">
                                         <img alt="delete this row" src="/images/delete.png">
                                     </a>
                                 </td>
@@ -154,7 +154,7 @@
                         '<td>' + response.link['link_type'] + '</td>' +
                         '<td>' + response.link['link'] + '</td>' +
                         '<td class="button-column">' +
-                        '<a class="js-delete-link delete-title" title="delete this row">' +
+                        '<a href="#" id="delete-link" class="js-delete-link" title="delete this row">' +
                         '<img alt="delete this row" src="/images/delete.png">' +
                         '</a>' +
                         '</td>' +
