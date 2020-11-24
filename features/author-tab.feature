@@ -42,7 +42,7 @@ Scenario: Add an Author via a CSV file to a dataset
     | Leia | | Organa  | 4545-4545-4545-4545 | Funding acquisition | 3 |
     # And I press "Save"
 
-@add-author-tsv @javascript @wip
+@add-author-tsv @javascript
 Scenario: Add an Author via a TSV file to a dataset
     Given I sign in as an admin
     When I go to "/datasetSubmission/authorManagement/id/300"
