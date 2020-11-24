@@ -131,15 +131,17 @@
                         </div>
                     </div>
                     <div class="row subwiz-row">
-                        <div class="col-xs-12">
-                            <div style="text-align:center" class="add-author-container">
-                                <label for="authors">Author list upload</label>
-                                <a class="myHint" data-content="You may upload a tabular file of authors names (in TSV or CSV format), please use include 5 columns and 1 row for each author, e.g.<br> Firstname	Middlename	Lastname	ORCID 		contribution<br>Rosalind	Elsie	Franklin 	0000-0000-0000-0001	Conceptualization"
-                                   data-html="true" style="float: none"></a>
-                                <input type="file" id="authors" name="authors">
-                                <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" id="js-add-authors"/>Add Authors</a>
+                        <form>
+                            <div class="col-xs-12">
+                                <div style="text-align:center" class="add-author-container">
+                                    <label for="authors">Author list upload</label>
+                                    <a class="myHint" data-content="You may upload a tabular file of authors names (in TSV or CSV format), please use include 5 columns and 1 row for each author, e.g.<br> Firstname	Middlename	Lastname	ORCID 		contribution<br>Rosalind	Elsie	Franklin 	0000-0000-0000-0001	Conceptualization"
+                                       data-html="true" style="float: none"></a>
+                                    <input type="file" id="authors" name="authors">
+                                    <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" id="js-add-authors"/>Add Authors</a>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="row subwiz-row">
                         <div class="col-xs-12">
