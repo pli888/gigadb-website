@@ -3,6 +3,7 @@ default:
     default:
       filters:
       contexts:
+        - DatasetSubmissionContext
         - AffiliateLoginContext
         - GigadbWebsiteContext
         - AuthorMergingContext
