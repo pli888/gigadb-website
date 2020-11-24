@@ -72,34 +72,32 @@ class DatasetSubmissionContext implements Context
                 );
             }
         }
-        elseif("Files" == $arg1) {
-            //| File Name | Description | Data Type | Size | File Attributes | link |
+        elseif("Additional Information" == $arg1) {
+            //| Link Type | Link |
             foreach($table as $row) {
-                $link = $row['link'];
+//                $link = $row['link'];
                 PHPUnit_Framework_Assert::assertTrue(
-                    $this->minkContext->getSession()->getPage()->hasContent($row['File Name']), "File Name match"
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Link Type'])
                 );
                 PHPUnit_Framework_Assert::assertTrue(
-                    $this->minkContext->getSession()->getPage()->hasContent($row['Description']), "Description match"
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Link'])
                 );
-                PHPUnit_Framework_Assert::assertTrue(
-                    $this->minkContext->getSession()->getPage()->hasContent($row['Data Type']), "Data Type match"
-                );
-                PHPUnit_Framework_Assert::assertTrue(
-                    $this->minkContext->getSession()->getPage()->hasContent($row['Size']), "Size match"
-                );
-                PHPUnit_Framework_Assert::assertTrue(
-                    $this->minkContext->getSession()->getPage()->hasContent($row['File Attributes']), "File Attributes match"
-                );
-                if ($link) {
-                    $this->minkContext->assertSession()->elementExists('css',"a.download-btn[href='$link']");
-                }
             }
         }
         else {
             PHPUnit_Framework_Assert::fail("Unknown type of tab");
         }
     }
+
+    /**
+     * @hen /^I confirm popup$/
+     */
+    public function iConfirmPopup()
+    {
+        $this->minkContext->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+    }
+
+
 
 
 
