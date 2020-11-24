@@ -50,7 +50,7 @@
                                         <td class="button-column">
                                             <input type="hidden" class="js-relationship-id" value="<?= $relation->relationship->id ?>">
                                             <input type="hidden" class="js-my-id" value="<?= $relation->id ?>">
-                                            <a class="js-delete-relation delete-title" relation-id="<?=$relation->id?>" data-id="<?= $model->id ?>" title="delete this row">
+                                            <a href="#" id="delete-related-doi" class="js-delete-relation delete-title" relation-id="<?=$relation->id?>" data-id="<?= $model->id ?>" title="delete this row">
                                                 <img alt="delete this row" src="/images/delete.png">
                                             </a>
                                         </td>
@@ -119,7 +119,7 @@
                             '<td>' + response.relation['relationship_name'] + '</td>' +
                             '<td>' + response.relation['related_doi'] + '</td>' +
                             '<td class="button-column">' +
-                            '<a class="js-delete-relation delete-title" title="delete this row">' +
+                            '<a href="#" id="delete-related-doi" class="js-delete-relation delete-title" title="delete this row">' +
                             '<img alt="delete this row" src="/images/delete.png">' +
                             '</a>' +
                             '</td>' +

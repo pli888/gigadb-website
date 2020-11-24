@@ -26,12 +26,14 @@
                     If the project you wish to add is not in the list, please complete the submission without it and inform us by email so we may add it to your dataset and update this list.
                 </p>
     
+                    <form>
                 <div class="control-group" style="text-align: center">
                     <?= CHtml::dropDownList('project', null,
                         array('' => 'Please select') + CHtml::listData(Project::model()->findAll(), 'id', 'name'),
                         array('class'=>'js-project form-control','style'=>'width:auto')); ?>
-                    <a href="#" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" style="margin-left: 20px;"/>Add Project</a>
+                    <a href="#" id="add-project" dataset-id="<?=$model->id?>" class="btn btn-success disabled js-not-allowed" style="margin-left: 20px;"/>Add Project</a>
                 </div>
+                    </form>
                 <div class="row subwiz-row">
                     <div class="col-xs-12">
                         <div id="author-grid" class="grid-view">

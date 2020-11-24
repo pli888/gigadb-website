@@ -29,7 +29,7 @@ Scenario: Dataset has been submitted to a public repository
     And I follow "add-link"
     And I wait "3" seconds
     # And I take a screenshot named "addinfo"
-    Then I should see dataset submission "Additional Information" tab with table
+    Then I should see dataset submission "Additional Information" tab with "public_links" table
     | Link Type | Link |
     | ENA | AF240632 |
 
@@ -55,68 +55,61 @@ Scenario: Dataset is not related to another GigaDB dataset
     And I follow "related-doi-no"
     Then I should see "Collaboration links"
 
-@related-gigadb-datasets @javascript @wip
+@related-gigadb-datasets @javascript
 Scenario: Dataset is related to another GigaDB dataset
     Given I sign in as an admin
     When I go to "/datasetSubmission/additionalManagement/id/300"
     And I follow "public-links-no"
     And I follow "related-doi-yes"
-    Then I select "IsIdenticalTo" from "relation"
+    And I select "IsIdenticalTo" from "relation"
     And I select "100006" from "dataset_doi"
     And I follow "add-related-doi"
     And I wait "3" seconds
-    And I take a screenshot named "addinfo"
-#    Then I should see "Add Related Doi" button
+    # And I take a screenshot named "addinfo"
+    Then I should see dataset submission "Additional Information" tab with "related_datasets" table
+    | Relationship | Related DOI |
+    | IsIdenticalTo | 100006 |
 
-@related-gigadb-datasets
-Scenario: Dataset is related to another GigaDB dataset and its DOI is added
-    Given I am logged in to Gigadb web site
-    And I go to "/datasetSubmission/additionalManagement/id/300"
-    And I press "No" button for "Public data archive links"
-    And I press "Yes button for "Related GigaDB Datasets"
-    And I select "cites" from relationship dropdown list
-    And I select "100321" from relation doi dropdown list
-    And I press "Add Related Doi"
-    Then I should see a table
-    | Related DOI | Relationship |
-    | 100321 | "isCitedBy this dataset" |
-
-@related-gigadb-datasets
+@related-gigadb-datasets @javascript
 Scenario: Delete related DOI and relationship to related GigaDB datasets
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "Yes button for "Related GigaDB Datasets"
-    And I select "cites" from relationship dropdown list
-    And I select "100321" from relation doi dropdown list
-    And I press "Add Related Doi"
-    And I press "Delete this row"
-    And I see an alert "Are you sure you want to delete this item?"
-    And I press "OK" button
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-yes"
+    And I select "IsIdenticalTo" from "relation"
+    And I select "100006" from "dataset_doi"
+    And I follow "add-related-doi"
+    And I wait "3" seconds
+    And I follow "delete-related-doi"
+    And I confirm popup
+    # And I take a screenshot named "addinfo"
     Then I should see "No results found."
-    And I should see a table
-    | Related DOI | Relationship |
 
 @collaboration-link
 Scenario: Dataset is not part of a large recognised (international) project
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No" button for "Related GigaDB Datasets"
-    And I press "No" button for "Project links"
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
+    And I follow "projects-no"
     Then I should see "Other links"
 
-@collaboration-link
+@collaboration-link @javascript
 Scenario: Dataset is part of a large recognised (international) project
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No button for "Related GigaDB Datasets"
-    And I press "Yes" button for "Project links"
-    Then I should see "Add Project" button
-    And I should see a form element labelled "project"
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
+    And I follow "projects-yes"
+    And I select "16" from "project"
+    And I follow "add-project"
+    And I wait "3" seconds
+    And I take a screenshot named "addinfo"
+    Then I should see dataset submission "Additional Information" tab with "collaboration_links" table
+    | Project Name |
+    | Genome 10K |
 
-@collaboration-link
+@collaboration-link @javascript @wip
 Scenario: Link selected project to dataset
     Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"

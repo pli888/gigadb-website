@@ -44,11 +44,12 @@ class DatasetSubmissionContext implements Context
     }
 
     /**
-     * @Then I should see dataset submission :arg1 tab with table
+     * @Then I should see dataset submission :arg1 tab with :arg2 table
      */
-    public function iShouldSeeDatasetSubmissionTabWithTable($arg1, TableNode $table)
+    public function iShouldSeeDatasetSubmissionTabWithTable($arg1, $arg2, TableNode $table)
     {
-        if ("Author" == $arg1) {
+        print_r($table);
+        if ("Author" == $arg1 && "authors" == $arg2) {
 //            $this->minkContext->getSession()->getPage()->clickLink($arg1);
             //| First name | Middle name | Last name | ORCiD | CrediT | Order |
             foreach($table as $row) {
@@ -72,7 +73,7 @@ class DatasetSubmissionContext implements Context
                 );
             }
         }
-        elseif("Additional Information" == $arg1) {
+        elseif("Additional Information" == $arg1 && "public_links" == $arg2) {
             //| Link Type | Link |
             foreach($table as $row) {
 //                $link = $row['link'];
@@ -84,13 +85,34 @@ class DatasetSubmissionContext implements Context
                 );
             }
         }
+        elseif("Additional Information" == $arg1 && "related_datasets" == $arg2) {
+            //| Relationship | Related DOI |
+            foreach($table as $row) {
+//                $link = $row['link'];
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Relationship'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Related DOI'])
+                );
+            }
+        }
+        elseif("Additional Information" == $arg1 && "collaboration_links" == $arg2) {
+            //| Project Name |
+            foreach($table as $row) {
+//                $link = $row['link'];
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Project Name'])
+                );
+            }
+        }
         else {
             PHPUnit_Framework_Assert::fail("Unknown type of tab");
         }
     }
 
     /**
-     * @hen /^I confirm popup$/
+     * @When /^I confirm popup$/
      */
     public function iConfirmPopup()
     {
