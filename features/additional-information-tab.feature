@@ -5,78 +5,73 @@ I WANT TO fill in the Additional Information tab
 SO THAT I can provide more information about my dataset
 
 Background:
-    Given Gigadb web site is loaded with "gigadb_testdata.pgdmp" data
+    Given Gigadb web site is loaded with "new_gigadb_testdata.pgdmp" data
+    And default admin user exists
     And user "joy_fox" is loaded
+    And user "subwiz_study" is loaded
 
 @public-data-archive-links
 Scenario: Dataset has not been submitted to a public repository
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
     Then the response should contain "Related GigaDB Datasets"
 
-@public-data-archive-links
+@public-data-archive-links @javascript
 Scenario: Dataset has been submitted to a public repository
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    When I press "Yes" button for "Public data archive links"
+    Given I sign in as an admin
+    And I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-yes"
     Then I should see a form element labelled "Database"
-
-@public-data-archive-links
-Scenario: Dataset has been submitted to a public repository and test database is selectable and dropdown accession number field appears
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "Yes" button for "Public data archive links"
-    And I select "AE" from "Database"
-    Then I should see a form element labelled "Accession number"
-
-@public-data-archive-links
-Scenario: Dataset has been submitted to a public repository and test entry of an accession number
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "Yes" button for "Public data archive links"
-    And I select "AE" from "Database"
-    And I fill in "Accession number" with "E-MEXP-31"
-    And I press "Add Link" button
-    Then I should see a table
+    And I select "ENA" from "prefix"
+    And I should see a form element labelled "Accession number"
+    And I fill in "link" with "AF240632"
+    And I follow "add-link"
+    And I wait "3" seconds
+    # And I take a screenshot named "addinfo"
+    Then I should see dataset submission "Additional Information" tab with table
     | Link Type | Link |
-    | "Array Express" | E-MEXP-31 |
+    | ENA | AF240632 |
 
-@public-data-archive-links
+@public-data-archive-links @javascript
 Scenario: Dataset has been submitted to a public repository and test deletion of added accession number
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "Yes" button for "Public data archive links"
-    And I select "AE" from "Database"
-    And I fill in "Accession number" with "E-MEXP-31"
-    And I press "Add Link" button
-    And I press "Delete this row" button
-    And I see an alert "Are you sure you want to delete this item?"
-    And I press "OK" button
+    Given I sign in as an admin
+    And I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-yes"
+    And I select "ENA" from "prefix"
+    And I fill in "link" with "AF240632"
+    And I follow "add-link"
+    And I wait "3" seconds
+    And I follow "delete-link"
+    When I confirm popup
+    # And I take a screenshot named "addinfo"
     Then I should see "No results found."
-    And I should see a table
-    | Link Type | Link |
 
 @related-gigadb-datasets
 Scenario: Dataset is not related to another GigaDB dataset
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No" button for "Related GigaDB Datasets"
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
     Then I should see "Collaboration links"
 
-@related-gigadb-datasets
+@related-gigadb-datasets @javascript @wip
 Scenario: Dataset is related to another GigaDB dataset
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "Yes button for "Related GigaDB Datasets"
-    Then I should see "Add Related Doi" button
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-yes"
+    Then I select "IsIdenticalTo" from "relation"
+    And I select "100006" from "dataset_doi"
+    And I follow "add-related-doi"
+    And I wait "3" seconds
+    And I take a screenshot named "addinfo"
+#    Then I should see "Add Related Doi" button
 
 @related-gigadb-datasets
 Scenario: Dataset is related to another GigaDB dataset and its DOI is added
     Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
+    And I go to "/datasetSubmission/additionalManagement/id/300"
     And I press "No" button for "Public data archive links"
     And I press "Yes button for "Related GigaDB Datasets"
     And I select "cites" from relationship dropdown list
