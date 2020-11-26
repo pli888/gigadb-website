@@ -12,7 +12,7 @@
            data-url="/adminExternalLink/deleteExLinks"
            data-id="<?= $model->id ?>"
            data-type="<?= AIHelper::_3D_IMAGES ?>"
-           class="btn others-button <?php if ($is3dImages === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default others-button <?php if ($is3dImages === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
 
         <!-- Render YES button to add manuscript -->
         <!-- If there are manuscripts (true) then YES button is green and disabled -->
@@ -20,7 +20,7 @@
         <a href="#"
            id="3d_images-yes"
            data-target="3d_images"
-           class="btn others-button <?php if ($is3dImages === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn btn-default others-button <?php if ($is3dImages === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
     </div>
 </div>
 

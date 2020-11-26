@@ -16,7 +16,7 @@
         <a href="#"
            data-target="related-doi"
            id="related-doi-yes"
-           class="btn additional-button <?php if ($isRelatedDoi === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn btn-default additional-button <?php if ($isRelatedDoi === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
         <!-- If $isRelatedDoi is false then NO button is green and not disabled, has js-no-button functionality -->
         <a href="#"
            data-target="related-doi"
@@ -24,7 +24,7 @@
            id="related-doi-no"
            data-url="/adminRelation/deleteRelations"
            data-id="<?= $model->id ?>"
-           class="btn additional-button <?php if ($isRelatedDoi === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default additional-button <?php if ($isRelatedDoi === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
     </div>
 
     <!-- For displaying form to add new related DOI -->
@@ -88,9 +88,9 @@
     // relationship and DOI dropdown menus
     $(document).on('change', '#relation, #dataset_doi', function () {
         if ($('#relation').val() && $('#dataset_doi').val()){
-            $('.js-not-allowed', relatedDoiDiv).removeClass('js-not-allowed').addClass('js-add-relation btn-green');
+            $('.js-not-allowed', relatedDoiDiv).removeClass('js-not-allowed').addClass('js-add-relation btn-success');
         } else {
-            $('.js-add-relation', relatedDoiDiv).removeClass('js-add-relation btn-green').addClass('js-not-allowed');
+            $('.js-add-relation', relatedDoiDiv).removeClass('js-add-relation btn-success').addClass('js-not-allowed');
         }
     });
 

@@ -16,7 +16,7 @@
         <a href="#"
            data-target="projects"
            id="projects-yes"
-           class="btn additional-button <?php if ($isProjects === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn btn-default additional-button <?php if ($isProjects === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
         <!-- If there are no projects to be specified (false) then NO button is green and disabled -->
         <!-- If projects have been specified (true) then NO button is grey and not disabled, js-no-button functionality added -->
         <a href="#"
@@ -25,7 +25,7 @@
            id="projects-no"
            data-url="/adminDatasetProject/deleteProjects"
            data-id="<?= $model->id ?>"
-           class="btn additional-button <?php if ($isProjects === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default additional-button <?php if ($isProjects === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
     </div>
 
     <!-- For displaying form to add new project -->
@@ -90,9 +90,9 @@
     // project dropdown menus
     $(document).on('change', '#project', function () {
         if ($('#project').val()){
-            $('.js-not-allowed', projectsDiv).removeClass('js-not-allowed').addClass('js-add-project btn-green');
+            $('.js-not-allowed', projectsDiv).removeClass('js-not-allowed').addClass('js-add-project btn-success');
         } else {
-            $('.js-add-project', projectsDiv).removeClass('js-add-project btn-green').addClass('js-not-allowed');
+            $('.js-add-project', projectsDiv).removeClass('js-add-project btn-success').addClass('js-not-allowed');
         }
     });
 
