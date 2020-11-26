@@ -10,9 +10,9 @@ $additionalInfo = $model->getAdditionalInformation();
 // !!count($object) will return a boolean TRUE for any true value number and
 // FALSE for any false value, e.g 0
 $isPublicLinks = $additionalInfo ? !!count($links) : null;
-echo "<p>isPublicLinks = $isPublicLinks</p>";
+//echo "<p>isPublicLinks = $isPublicLinks</p>";
 $isRelatedDoi = $additionalInfo ? !!count($relations) : null;
-echo "<p>isRelatedDoi = $isRelatedDoi</p>";
+//echo "<p>isRelatedDoi = $isRelatedDoi</p>";
 $isProjects = $additionalInfo ? !!count($dps) : null;
 $isManuscripts = $additionalInfo ? !!count($manuscripts) : null;
 $isProtocols = $additionalInfo ? !!count($protocols) : null;
@@ -33,61 +33,66 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
             <!-- Render tabs -->
             <?php $this->renderPartial('_tabs_navigation', array('model' => $model)); ?>
 
-            <div class="span12 form well">
-                <!-- Render Public data archive links section -->
-                <?php $this->renderPartial('_public_links', array(
-                    'model' => $model,
-                    'links' => $links,
-                    'link_database' => $link_database,
-                    'isPublicLinks' => $isPublicLinks)); ?>
+            <div class="form well">
+                <div class="form-horizontal">
+                    <div class="row subwiz-row">
+                        <div class="col-xs-12">
+                        <!-- Render Public data archive links section -->
+                        <?php $this->renderPartial('_public_links', array(
+                            'model' => $model,
+                            'links' => $links,
+                            'link_database' => $link_database,
+                            'isPublicLinks' => $isPublicLinks)); ?>
+        
+                        <!-- Render Related GigaDB Datasets section -->
+                        <div id="related-doi-block"<?php if ($isPublicLinks === null): ?> style="display: none;"<?php endif ?>>
+                            <div class="clear"></div>
+                            <?php $this->renderPartial('_related_doi', array(
+                                'model' => $model,
+                                'relations' => $relations,
+                                'isRelatedDoi' => $isRelatedDoi)); ?>
+                        </div>
 
-                <!-- Render Related GigaDB Datasets section -->
-                <div id="related-doi-block"<?php if ($isPublicLinks === null): ?> style="display: none;"<?php endif ?>>
-                    <div class="clear"></div>
-                    <?php $this->renderPartial('_related_doi', array(
-                        'model' => $model,
-                        'relations' => $relations,
-                        'isRelatedDoi' => $isRelatedDoi)); ?>
-                </div>
+                        <!-- Render Collaboration links section -->
+                        <div id="projects-block"<?php if ($isRelatedDoi === null): ?> style="display: none;"<?php endif ?>>
+                            <div class="clear"></div>
+                            <?php $this->renderPartial('_projects', array(
+                                'model' => $model,
+                                'dps' => $dps, // dataset projects
+                                'isProjects' => $isProjects)); ?>
+                        </div>
+        
+                        <!-- Render Other links section -->
+                        <div id="others-block" <?php if ($isProjects === null): ?> style="display: none;"<?php endif ?>>
+                            <div class="clear"></div>
+                            <?php $this->renderPartial('_others', array(
+                                'model' => $model,
+                                'manuscripts' => $manuscripts,
+                                'protocols' => $protocols,
+                                '_3dImages' => $_3dImages,
+                                'codes' => $codes,
+                                'sources' => $sources,
+                                'isManuscripts' => $isManuscripts,
+                                'isProtocols' => $isProtocols,
+                                'is3dImages' => $is3dImages,
+                                'isCodes' => $isCodes,
+                                'isSources' => $isSources,
+                            )); ?>
+                        </div>
 
-                <!-- Render Collaboration links section -->
-                <div id="projects-block"<?php if ($isRelatedDoi === null): ?> style="display: none;"<?php endif ?>>
-                    <div class="clear"></div>
-                    <?php $this->renderPartial('_projects', array(
-                        'model' => $model,
-                        'dps' => $dps, // dataset projects
-                        'isProjects' => $isProjects)); ?>
-                </div>
-
-                <!-- Render Other links section -->
-                <div id="others-block" <?php if ($isProjects === null): ?> style="display: none;"<?php endif ?>>
-                    <div class="clear"></div>
-                    <?php $this->renderPartial('_others', array(
-                        'model' => $model,
-                        'manuscripts' => $manuscripts,
-                        'protocols' => $protocols,
-                        '_3dImages' => $_3dImages,
-                        'codes' => $codes,
-                        'sources' => $sources,
-                        'isManuscripts' => $isManuscripts,
-                        'isProtocols' => $isProtocols,
-                        'is3dImages' => $is3dImages,
-                        'isCodes' => $isCodes,
-                        'isSources' => $isSources,
-                    )); ?>
-                </div>
-
-                <div class="clear"></div>
-                <div style="text-align:center" id="additional-save">
-                    <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn-green">Previous</a>
-                    <?php if ($disabled): ?>
-                        <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn js-not-allowed">Save</a>
-                        <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn js-not-allowed">Next</a>
-                    <?php else: ?>
-                        <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn btn-green js-save-additional">Save</a>
-                        <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn btn-green js-save-additional">Next</a>
-                    <?php endif; ?>
-                </div>
+                        <div class="clear"></div>
+                        <div style="text-align:center" id="additional-save">
+                            <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn-green">Previous</a>
+                            <?php if ($disabled): ?>
+                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn js-not-allowed">Save</a>
+                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn js-not-allowed">Next</a>
+                            <?php else: ?>
+                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn btn-green js-save-additional">Save</a>
+                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn btn-green js-save-additional">Next</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>    
             </div>
         </section>
     </div>
