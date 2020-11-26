@@ -1,5 +1,6 @@
 <?php
-$exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSources || $isRepositories;
+$exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSources;
+echo "exLinks: $exLinks";
 ?>
 <div class="form-horizontal additional-bordered">
     <h3 style="display: inline-block">Other links</h3>
@@ -10,14 +11,19 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
         Do you wish to add links to any of the following:
     </p>
 
+    <!-- Add manuscript that uses this dataset -->
     <?php $this->renderPartial('_manuscripts', array('model' => $model, 'isManuscripts' => $isManuscripts)); ?>
+    <!-- Add protocols.io link -->
     <?php $this->renderPartial('_protocols', array('model' => $model, 'isProtocols' => $isProtocols)); ?>
+    <!-- Add SketchFab link -->
     <?php $this->renderPartial('_3d_images', array('model' => $model, 'is3dImages' => $is3dImages)); ?>
+    <!-- Add Code Ocean link -->
     <?php $this->renderPartial('_codes', array('model' => $model, 'isCodes' => $isCodes)); ?>
-    <?php $this->renderPartial('_repositories', array('model' => $model, 'isRepositories' => $isRepositories)); ?>
+    <!-- Add URL that is a source for this dataset -->
     <?php $this->renderPartial('_sources', array('model' => $model, 'isSources' => $isSources)); ?>
 
     <div class="clear"></div>
+    <!-- Render table to display links if they exist -->
     <div id="others-grid" class="grid-view"<?php if (!$exLinks): ?> style="display: none;"<?php endif ?>>
         <table class="table table-bordered">
             <thead>
@@ -29,24 +35,27 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
             </tr>
             </thead>
             <tbody>
+            <!-- Render rows for $manuscripts -->
             <?php foreach($manuscripts as $exLink): ?>
                 <?php $this->renderPartial('_manuscript_tr', array('model' => $model, 'manuscript' => $exLink)); ?>
             <?php endforeach; ?>
+            <!-- Render rows for $protocols -->
             <?php foreach($protocols as $exLink): ?>
                 <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
             <?php endforeach; ?>
+            <!-- Render rows for $_3dImages SketchFab -->
             <?php foreach($_3dImages as $exLink): ?>
                 <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
             <?php endforeach; ?>
+            <!-- Render rows for $codes Code Ocean -->
             <?php foreach($codes as $exLink): ?>
                 <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
             <?php endforeach; ?>
-            <?php foreach($repositories as $exLink): ?>
-                <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
-            <?php endforeach; ?>
+            <!-- Render rows for other $sources for this dataset -->
             <?php foreach($sources as $exLink): ?>
                 <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
             <?php endforeach; ?>
+            <!-- Display this row if no links have been added and table needs to be displayed -->
             <tr class="js-no-results"<?php if ($exLinks): ?> style="display: none"<?php endif ?>>
                 <td colspan="4">
                     <span class="empty">No results found.</span>
@@ -64,9 +73,9 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
     var protocolsDiv = $('#protocols');
     var _3dimagesDiv = $('#3d_images');
     var codesDiv = $('#codes');
-    var repositoriesDiv = $('#repositories');
     var sourcesDiv = $('#sources');
 
+    // Execute if content is added to text field in manuscripts section
     $(manuscriptsDiv).on('keydown', 'input[name="link"]', function (event) {
         var input = $(this);
 
@@ -74,10 +83,11 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
             var val = input.val().trim();
             var valLength = val.length;
 
+            // Change behaviour of buttons if text field has content
             if (valLength){
-                $('.js-not-allowed', manuscriptsDiv).removeClass('js-not-allowed btn btn-success disabled').addClass('js-add-exLink btn btn-success');
+                $('.js-not-allowed', manuscriptsDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
             } else {
-                $('.js-add-exLink', manuscriptsDiv).removeClass('js-add-exLink btn btn-success').addClass('btn btn-success disabled js-not-allowed');
+                $('.js-add-exLink', manuscriptsDiv).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
             }
 
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -87,6 +97,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
         }), 50);
     });
 
+    // Execute if content is added to text field in protocols.io section
     $(protocolsDiv).on('keydown', 'input[name="link"]', function (event) {
         var input = $(this);
 
@@ -94,6 +105,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
             var val = input.val().trim();
             var valLength = val.length;
 
+            // Change behaviour of buttons if text field has content
             if (valLength){
                 $('.js-not-allowed', protocolsDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
             } else {
@@ -107,6 +119,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
         }), 50);
     });
 
+    // Execute if content is added to text field in SketchFab section
     $(_3dimagesDiv).on('keydown', 'input[name="link"]', function (event) {
         var input = $(this);
 
@@ -114,6 +127,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
             var val = input.val().trim();
             var valLength = val.length;
 
+            // Change behaviour of buttons if text field has content
             if (valLength){
                 $('.js-not-allowed', _3dimagesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
             } else {
@@ -127,6 +141,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
         }), 50);
     });
 
+    // Execute if content is added to text field in Code Ocean section
     $(codesDiv).on('keydown', 'input[name="link"]', function (event) {
         var input = $(this);
 
@@ -134,6 +149,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
             var val = input.val().trim();
             var valLength = val.length;
 
+            // Change behaviour of buttons if text field has content
             if (valLength){
                 $('.js-not-allowed', codesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
             } else {
@@ -147,26 +163,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
         }), 50);
     });
 
-    $(repositoriesDiv).on('keydown', 'input[name="link"]', function (event) {
-        var input = $(this);
-
-        setTimeout((function(){
-            var val = input.val().trim();
-            var valLength = val.length;
-
-            if (valLength){
-                $('.js-not-allowed', repositoriesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
-            } else {
-                $('.js-add-exLink', repositoriesDiv).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
-            }
-
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13'){
-                $('.js-add-exLink', repositoriesDiv).trigger('click');
-            }
-        }), 50);
-    });
-
+    // Execute if content is added to text field in other sources of dataset section
     $(sourcesDiv).on('keydown', 'input[name="link"]', function () {
         var input = $(this);
 
@@ -174,6 +171,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
             var val = input.val().trim();
             var valLength = val.length;
 
+            // Change behaviour of buttons if text field has content
             if (valLength){
                 $('.js-not-allowed', sourcesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
             } else {
@@ -182,6 +180,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
         }), 50);
     });
 
+    // Execute if Add Link button is clicked
     $(othersDiv).on('click', ".js-add-exLink", function(e) {
         e.preventDefault();
         var $this = $(this);
@@ -218,6 +217,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
                         return false;
                     }
 
+                    // Create HTML table row code to display row
                     var tr = '<tr class="odd js-my-item-'+ response.exLink['type'] +'">' +
                         '<input type="hidden" class="js-type" value="' + response.exLink['type'] + '">' +
                         '<td>' + response.exLink['url'] + '</td>' +
@@ -242,8 +242,6 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
                         div = _3dimagesDiv;
                     }  else if (response.exLink['type'] == <?= AIHelper::CODES ?>) {
                         div = codesDiv;
-                    }  else if (response.exLink['type'] == <?= AIHelper::REPOSITORIES ?>) {
-                        div = repositoriesDiv;
                     }  else if (response.exLink['type'] == <?= AIHelper::SOURCES ?>) {
                         div = sourcesDiv;
 
