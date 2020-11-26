@@ -82,13 +82,13 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
 
                         <div class="clear"></div>
                         <div style="text-align:center" id="additional-save">
-                            <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn-success">Previous</a>
+                            <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn background-btn">Previous</a>
                             <?php if ($disabled): ?>
-                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn js-not-allowed">Save</a>
-                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn js-not-allowed">Next</a>
+                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn disabled js-not-allowed">Save</a>
+                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn disabled js-not-allowed">Next</a>
                             <?php else: ?>
-                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn btn-success js-save-additional">Save</a>
-                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn btn-success js-save-additional">Next</a>
+                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Save</a>
+                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn background-btn js-save-additional">Next</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -332,9 +332,9 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
             && ($('#codes-no').hasClass('btn-success') || ($('#codes-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::CODES ?>').length))
             && ($('#sources-no').hasClass('btn-success') || ($('#sources-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::SOURCES ?>').length))
         ) {
-            $('#additional-save').find('.js-not-allowed').removeClass('js-not-allowed').addClass('btn-success js-save-additional');
+            $('#additional-save').find('.js-not-allowed').removeClass('js-not-allowed disabled').addClass('js-save-additional');
         } else {
-            $('#additional-save').find('.js-save-additional').removeClass('btn-success js-save-additional').addClass('js-not-allowed');
+            $('#additional-save').find('.js-save-additional').removeClass('js-save-additional').addClass('js-not-allowed disabled');
         }
     }
 </script>
