@@ -12,7 +12,7 @@
            data-url="/adminExternalLink/deleteExLinks"
            data-id="<?= $model->id ?>"
            data-type="<?= AIHelper::SOURCES ?>"
-           class="btn others-button <?php if ($isSources === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default others-button <?php if ($isSources === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
 
         <!-- Render YES button to add manuscript -->
         <!-- If there are manuscripts (true) then YES button is green and disabled -->
@@ -20,7 +20,7 @@
         <a href="#"
            id="sources-yes"
            data-target="sources"
-           class="btn others-button <?php if ($isSources === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn btn-default others-button <?php if ($isSources === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
     </div>
 </div>
 

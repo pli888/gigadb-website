@@ -12,7 +12,7 @@
            data-url="/adminExternalLink/deleteExLinks"
            data-id="<?= $model->id ?>"
            data-type="<?= AIHelper::PROTOCOLS ?>"
-           class="btn others-button <?php if ($isProtocols === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default others-button <?php if ($isProtocols === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
 
         <!-- Render YES button to add manuscript -->
         <!-- If there are manuscripts (true) then YES button is green and disabled -->
@@ -20,7 +20,7 @@
         <a href="#"
            id="protocols-yes"
            data-target="protocols"
-           class="btn others-button <?php if ($isProtocols === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn btn-default others-button <?php if ($isProtocols === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
     </div>
 </div>
 

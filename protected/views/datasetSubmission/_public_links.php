@@ -20,7 +20,7 @@
         <a href="#"
            data-target="public-links"
            id="public-links-yes"
-           class="btn additional-button <?php if ($isPublicLinks === true): ?>btn-green btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
+           class="btn btn-default additional-button <?php if ($isPublicLinks === true): ?>btn-success btn-disabled<?php else: ?>js-yes-button<?php endif; ?>"/>Yes</a>
         <!-- If $isPublicLinks is null then NO button not disabled, js-no-button -->
         <a href="#"
            data-target="public-links"
@@ -28,7 +28,7 @@
            data-url="/adminLink/deleteLinks"
            id="public-links-no"
            data-id="<?= $model->id ?>"
-           class="btn additional-button <?php if ($isPublicLinks === false): ?>btn-green btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
+           class="btn btn-default additional-button <?php if ($isPublicLinks === false): ?>btn-success btn-disabled<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
     </div>
 
     <!-- For displaying form to add new public link -->
@@ -132,9 +132,9 @@
             $('#prefix', publicLinksDiv).val()
             && $('input[name="link"]', publicLinksDiv).val()
         ) {
-            $('.js-not-allowed', publicLinksDiv).removeClass('js-not-allowed').addClass('js-add-link btn-green');
+            $('.js-not-allowed', publicLinksDiv).removeClass('js-not-allowed').addClass('js-add-link btn-success');
         } else {
-            $('.js-add-link', publicLinksDiv).removeClass('js-add-link btn-green').addClass('js-not-allowed');
+            $('.js-add-link', publicLinksDiv).removeClass('js-add-link btn-success').addClass('js-not-allowed');
         }
     }
 
@@ -184,7 +184,7 @@
                     $('.js-no-results', publicLinksDiv).hide();
 
                     $('input[name="link"]', publicLinksDiv).val('');
-                    $('.js-add-link', publicLinksDiv).removeClass('js-add-link btn-green').addClass('js-not-allowed');
+                    $('.js-add-link', publicLinksDiv).removeClass('js-add-link btn-success').addClass('js-not-allowed');
 
                     $('#related-doi-block').show();
 

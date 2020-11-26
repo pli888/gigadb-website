@@ -82,13 +82,13 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
 
                         <div class="clear"></div>
                         <div style="text-align:center" id="additional-save">
-                            <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn-green">Previous</a>
+                            <a href="/datasetSubmission/authorManagement/id/<?= $model->id ?>" class="btn-success">Previous</a>
                             <?php if ($disabled): ?>
                                 <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn js-not-allowed">Save</a>
                                 <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn js-not-allowed">Next</a>
                             <?php else: ?>
-                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn btn-green js-save-additional">Save</a>
-                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn btn-green js-save-additional">Next</a>
+                                <a href="/datasetSubmission/additionalManagement/id/<?= $model->id ?>" class="btn btn-success js-save-additional">Save</a>
+                                <a href="/datasetSubmission/fundingManagement/id/<?= $model->id ?>" class="btn btn-success js-save-additional">Next</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -139,18 +139,18 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
         }
         console.log("nextBlock: ", nextBlock);
 
-        $this.addClass('btn-green btn-disabled');
+        $this.addClass('btn-success btn-disabled');
         $this.removeClass('js-no-button');
-        $this.siblings().removeClass('btn-green btn-disabled').addClass('js-yes-button');
+        $this.siblings().removeClass('btn-success btn-disabled').addClass('js-yes-button');
 
         // Not sure what is going on here
         if (type) {
             if (
-                $('#manuscripts-no').hasClass('btn-green')
-                && $('#protocols-no').hasClass('btn-green')
-                && $('#3d_images-no').hasClass('btn-green')
-                && $('#codes-no').hasClass('btn-green')
-                && $('#sources-no').hasClass('btn-green')
+                $('#manuscripts-no').hasClass('btn-success')
+                && $('#protocols-no').hasClass('btn-success')
+                && $('#3d_images-no').hasClass('btn-success')
+                && $('#codes-no').hasClass('btn-success')
+                && $('#sources-no').hasClass('btn-success')
             ) {
                 target.hide();
             }
@@ -183,9 +183,9 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
         var target = $this.data('target');
         console.log("target: ", target);
 
-        $this.addClass('btn-green btn-disabled');
+        $this.addClass('btn-success btn-disabled');
         $this.removeClass('js-yes-button');
-        $this.siblings('a').removeClass('btn-green btn-disabled').addClass('js-no-button');
+        $this.siblings('a').removeClass('btn-success btn-disabled').addClass('js-no-button');
 
         // Displays element provided by target variable, e.g. public-links
         $('#' + target).show();
@@ -323,18 +323,18 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
     {
         let othersDiv = $('#others-grid');
         if (
-            ($('#public-links-no').hasClass('btn-green') || $('#public-links').find('.odd').length)
-            && ($('#related-doi-no').hasClass('btn-green') || $('#related-doi').find('.odd').length)
-            && ($('#projects-no').hasClass('btn-green') || $('#projects').find('.odd').length)
-            && ($('#manuscripts-no').hasClass('btn-green') || ($('#manuscripts-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::MANUSCRIPTS ?>').length))
-            && ($('#protocols-no').hasClass('btn-green') || ($('#protocols-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::PROTOCOLS ?>').length))
-            && ($('#3d_images-no').hasClass('btn-green') || ($('#3d_images-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::_3D_IMAGES ?>').length))
-            && ($('#codes-no').hasClass('btn-green') || ($('#codes-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::CODES ?>').length))
-            && ($('#sources-no').hasClass('btn-green') || ($('#sources-yes').hasClass('btn-green') && othersDiv.find('.js-my-item-<?= AIHelper::SOURCES ?>').length))
+            ($('#public-links-no').hasClass('btn-success') || $('#public-links').find('.odd').length)
+            && ($('#related-doi-no').hasClass('btn-success') || $('#related-doi').find('.odd').length)
+            && ($('#projects-no').hasClass('btn-success') || $('#projects').find('.odd').length)
+            && ($('#manuscripts-no').hasClass('btn-success') || ($('#manuscripts-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::MANUSCRIPTS ?>').length))
+            && ($('#protocols-no').hasClass('btn-success') || ($('#protocols-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::PROTOCOLS ?>').length))
+            && ($('#3d_images-no').hasClass('btn-success') || ($('#3d_images-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::_3D_IMAGES ?>').length))
+            && ($('#codes-no').hasClass('btn-success') || ($('#codes-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::CODES ?>').length))
+            && ($('#sources-no').hasClass('btn-success') || ($('#sources-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::SOURCES ?>').length))
         ) {
-            $('#additional-save').find('.js-not-allowed').removeClass('js-not-allowed').addClass('btn-green js-save-additional');
+            $('#additional-save').find('.js-not-allowed').removeClass('js-not-allowed').addClass('btn-success js-save-additional');
         } else {
-            $('#additional-save').find('.js-save-additional').removeClass('btn-green js-save-additional').addClass('js-not-allowed');
+            $('#additional-save').find('.js-save-additional').removeClass('btn-success js-save-additional').addClass('js-not-allowed');
         }
     }
 </script>

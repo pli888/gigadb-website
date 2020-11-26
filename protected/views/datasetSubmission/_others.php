@@ -85,9 +85,9 @@ echo "exLinks: $exLinks";
 
             // Change behaviour of buttons if text field has content
             if (valLength){
-                $('.js-not-allowed', manuscriptsDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
+                $('.js-not-allowed', manuscriptsDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-success');
             } else {
-                $('.js-add-exLink', manuscriptsDiv).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
+                $('.js-add-exLink', manuscriptsDiv).removeClass('js-add-exLink btn-success').addClass('js-not-allowed');
             }
 
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -107,9 +107,9 @@ echo "exLinks: $exLinks";
 
             // Change behaviour of buttons if text field has content
             if (valLength){
-                $('.js-not-allowed', protocolsDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
+                $('.js-not-allowed', protocolsDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-success');
             } else {
-                $('.js-add-exLink', protocolsDiv).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
+                $('.js-add-exLink', protocolsDiv).removeClass('js-add-exLink btn-success').addClass('js-not-allowed');
             }
 
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -129,9 +129,9 @@ echo "exLinks: $exLinks";
 
             // Change behaviour of buttons if text field has content
             if (valLength){
-                $('.js-not-allowed', _3dimagesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
+                $('.js-not-allowed', _3dimagesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-success');
             } else {
-                $('.js-add-exLink', _3dimagesDiv).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
+                $('.js-add-exLink', _3dimagesDiv).removeClass('js-add-exLink btn-success').addClass('js-not-allowed');
             }
 
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -151,9 +151,9 @@ echo "exLinks: $exLinks";
 
             // Change behaviour of buttons if text field has content
             if (valLength){
-                $('.js-not-allowed', codesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
+                $('.js-not-allowed', codesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-success');
             } else {
-                $('.js-add-exLink', codesDiv).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
+                $('.js-add-exLink', codesDiv).removeClass('js-add-exLink btn-success').addClass('js-not-allowed');
             }
 
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -173,9 +173,9 @@ echo "exLinks: $exLinks";
 
             // Change behaviour of buttons if text field has content
             if (valLength){
-                $('.js-not-allowed', sourcesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-green');
+                $('.js-not-allowed', sourcesDiv).removeClass('js-not-allowed').addClass('js-add-exLink btn-success');
             } else {
-                $('.js-add-exLink', sourcesDiv).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
+                $('.js-add-exLink', sourcesDiv).removeClass('js-add-exLink btn-success').addClass('js-not-allowed');
             }
         }), 50);
     });
@@ -249,7 +249,7 @@ echo "exLinks: $exLinks";
                     }
 
                     $('input[name="link"]', div).val('');
-                    $('.js-add-exLink', div).removeClass('js-add-exLink btn-green').addClass('js-not-allowed');
+                    $('.js-add-exLink', div).removeClass('js-add-exLink btn-success').addClass('js-not-allowed');
 
                     $('#related-doi-block').show();
 
