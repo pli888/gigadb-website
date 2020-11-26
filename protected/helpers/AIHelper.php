@@ -3,7 +3,7 @@
 class AIHelper
 {
     const MANUSCRIPTS = 1;
-    const SOURCES = 1;
+    const SOURCES = 2;
     const PROTOCOLS = 3;
     const _3D_IMAGES = 5;
     const CODES = 6;
