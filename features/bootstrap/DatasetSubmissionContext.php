@@ -72,7 +72,27 @@ class DatasetSubmissionContext implements Context
                 );
             }
         }
-        elseif("Additional Information" == $arg1 && "public_links" == $arg2) {
+        elseif("Funding" == $arg1 && "funding" == $arg2) {
+            print_r($table);
+            //| Funding body | Program Name | Grant Number | PI name |
+            foreach($table as $row) {
+//                $link = $row['link'];
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Funding body'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Program Name'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Grant Number'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['PI name'])
+                );
+            }
+        }
+        elseif("Additional Information" == $arg1 &&
+            "public_links" == $arg2) {
             //| Link Type | Link |
             foreach($table as $row) {
 //                $link = $row['link'];
