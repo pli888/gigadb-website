@@ -230,7 +230,7 @@ Scenario: Dataset is associated with another manuscript DOI
     | Url | Link Description | External Link Type |
     | doi:10.1093/gigascience/giy095 | | manuscript |
 
-@other-links @sources @javascript @wip
+@other-links @sources @javascript
   Scenario: Dataset is associated with a dataset DOI in another online repository
     Given I sign in as an admin
     When I go to "/datasetSubmission/additionalManagement/id/300"
@@ -246,7 +246,7 @@ Scenario: Dataset is associated with another manuscript DOI
     And I fill in "sources-description" with "test short description"
     And I follow "add-sources-link"
     And I wait "2" seconds
-    And I take a screenshot named "addinfo"
+    # And I take a screenshot named "addinfo"
     Then I should see dataset submission "Additional Information" tab with "other_links_table" table
     | Url | Link Description | External Link Type |
     | doi:12.3456/789012.3  | test short description | source |
