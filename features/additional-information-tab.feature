@@ -164,7 +164,7 @@ Scenario: Dataset is associated with a SketchFab link
     | Url | Link Description | External Link Type |
     | https://skfb.ly/test | | 3d image |
 
-@other-links @codeocean @javascript @wip
+@other-links @codeocean @javascript
 Scenario: Dataset has executable code in CodeOcean
     Given I sign in as an admin
     When I go to "/datasetSubmission/additionalManagement/id/300"
@@ -180,32 +180,33 @@ Scenario: Dataset has executable code in CodeOcean
     And I follow "repositories-no"
     And I follow "sources-no"
     And I wait "2" seconds
-    And I take a screenshot named "addinfo"
+    # And I take a screenshot named "addinfo"
     Then I should see dataset submission "Additional Information" tab with "other_links_table" table
     | Url | Link Description | External Link Type |
     | stuff | | code |
 
-@other-links @protocolsio
+@other-links @protocolsio @javascript @wip
 Scenario: Dataset is associated with a Protocols.io DOI
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No" button for "Related GigaDB Datasets"
-    And I press "No" button for "Project links"
-    And I press "No" button for "A published manuscript that uses this data"
-    And I press "Yes" button for "Protocols.io link to methods used to generate this data"
-    And I fill in "Protocols.io DOI" with "doi:10.17504/protocols.io.gk8buzw"
-    And I press "No" button for "SketchFab 3d-Image viewer links"
-    And I press "No" button for "Actionable code in CodeOceans"
-    And I press "No" button for "or any other URL to a stable source of data and files directly related to this dataset"
-    And I press "Add Link" button
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
+    And I follow "projects-no"
+    And I follow "manuscripts-no"
+    And I follow "protocols-yes"
+    And I fill in "protocols-link" with "doi:10.17504/protocols.io.888test"
+    And I follow "add-protocols-link"
+    And I follow "3d_images-no"
+    And I follow "codes-no"
+    And I follow "sources-no"
+    # And I take a screenshot named "addinfo"
+    Then I should see dataset submission "Additional Information" tab with "other_links_table" table
+    | Url | Link Description | External Link Type |
+    | doi:10.17504/protocols.io.888test | | protocol |
     #Then the protocol url is added and External Link Type is "protocol"
     #When I press Next button on Additional Information tab
     #Then the link 'url' is saved to DB 'external_link' where dataset id is '322'
     #And I delete the saved link from DB 'external_link' where dataset id is '322'
-    Then I should see a table
-    | Url | External Link Type |
-    | "doi:10.17504/protocols.io.gk8buzw" | Protocols.io DOI |
 
 @other-links @doi-or-url
 Scenario: Dataset is associated with another manuscript DOI
