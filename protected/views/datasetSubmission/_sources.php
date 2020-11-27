@@ -1,6 +1,6 @@
 <div class="row" style="margin-bottom: 5px; margin-top: 10px;">
     <div class="span9">
-        <span>or any other URL to a stable source of data and files directly related to this dataset………..</span>
+        <span>or any other URL to a stable source of data and files directly related to this dataset</span>
 
         <!-- Render NO button to add manuscript -->
         <!-- If there are no manuscripts (false) then No button is green and disabled, and js-no-button functionality added -->
