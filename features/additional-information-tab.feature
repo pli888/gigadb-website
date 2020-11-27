@@ -164,27 +164,26 @@ Scenario: Dataset is associated with a SketchFab link
     | Url | Link Description | External Link Type |
     | https://skfb.ly/test | | 3d image |
 
-@other-links @codeocean @wip
+@other-links @codeocean @javascript @wip
 Scenario: Dataset has executable code in CodeOcean
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No" button for "Related GigaDB Datasets"
-    And I press "No" button for "Project links"
-    And I press "No" button for "A published manuscript that uses this data"
-    And I press "No" button for "Protocols.io link to methods used to generate this data"
-    And I press "No" button for "SketchFab 3d-Image viewer links"
-    And I press "Yes" button for "Actionable code in CodeOcean"
-    And I fill in "CodeOcean link" with "<script src="https://codeocean.com/widget.js?id=0a812d9b-0ff3-4eb7-825f-76d3cd049a43" async></script>"
-    And I press "No" button for "or any other URL to a stable source of data and files directly related to this dataset"
-    And I press "Add Link" button
-    #Then the CodeOcean is added and External Link Type is "code"
-    #And I press "Save" button
-    #hen the link 'url' is saved to DB 'external_link' where dataset id is '322'
-    #And I delete the saved link from DB 'external_link' where dataset id is '322'
-    Then I should see a table
-    | Url | External Link Type |
-    | "<script src="https://codeocean.com/widget.js?id=0a812d9b-0ff3-4eb7-825f-76d3cd049a43" async></script>" | CodeOcean |
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
+    And I follow "projects-no"
+    And I follow "manuscripts-no"
+    And I follow "protocols-no"
+    And I follow "3d_images-no"
+    And I follow "codes-yes"
+    And I fill in "codes-link" with "stuff"
+    And I follow "add-codes-link"
+    And I follow "repositories-no"
+    And I follow "sources-no"
+    And I wait "2" seconds
+    And I take a screenshot named "addinfo"
+    Then I should see dataset submission "Additional Information" tab with "other_links_table" table
+    | Url | Link Description | External Link Type |
+    | stuff | | code |
 
 @other-links @protocolsio
 Scenario: Dataset is associated with a Protocols.io DOI
