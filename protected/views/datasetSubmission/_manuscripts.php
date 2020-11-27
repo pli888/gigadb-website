@@ -1,7 +1,6 @@
 <div class="row" style="margin-bottom: 5px;">
-    <?php echo "isManuscripts: ", $isManuscripts ?>
     <div class="span9">
-        <span>A published manuscript that uses this data………………………………………………………</span>
+        <span>A published manuscript that uses this data</span>
 
         <!-- Render NO button to add manuscript -->
         <!-- If there are no manuscripts (false) then No button is green and disabled, and js-no-button functionality added -->
