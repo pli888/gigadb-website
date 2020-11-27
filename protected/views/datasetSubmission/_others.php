@@ -147,7 +147,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
     });
 
     // Execute if content is added to text field in Code Ocean section
-    $(codesDiv).on('keydown', 'input[name="link"]', function (event) {
+    $(codesDiv).on('keydown', 'input[name="codes-link"]', function (event) {
         var input = $(this);
 
         setTimeout((function(){

@@ -106,7 +106,6 @@ class DatasetSubmissionContext implements Context
             }
         }
         elseif("Additional Information" == $arg1 && "other_links_table" == $arg2) {
-            print_r("Stuff!!!!:".$table);
             //| Url | Link Description | External Link Type |
             foreach($table as $row) {
 //                $link = $row['link'];
