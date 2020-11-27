@@ -169,7 +169,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
     });
 
     // Execute if content is added to text field in other sources of dataset section
-    $(sourcesDiv).on('keydown', 'input[name="link"]', function () {
+    $(sourcesDiv).on('keydown', 'input[name="sources-link"]', function () {
         var input = $(this);
 
         setTimeout((function(){

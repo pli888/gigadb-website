@@ -230,25 +230,24 @@ Scenario: Dataset is associated with another manuscript DOI
     | Url | Link Description | External Link Type |
     | doi:10.1093/gigascience/giy095 | | manuscript |
 
-@other-links @doi-or-url @wip
+@other-links @sources @javascript @wip
   Scenario: Dataset is associated with a dataset DOI in another online repository
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for Public data archive links
-    And I press "No" button for "Related GigaDB Datasets"
-    And I press "No" button for "Project links"
-    And I press "No" button for "A published manuscript that uses this data"
-    And I press "No" button for "Protocols.io link to methods used to generate this data"
-    And I press "No" button for "SketchFab 3d-Image viewer links"
-    And I press "No" button for "Actionable code in CodeOceans"
-    And I press "Yes" button for "or any other URL to a stable source of data and files directly related to this dataset"
-    And I fill in "DOI or URL" with "doi:12.3456/789012.3"
-    #And I fill in "short description" with "test short description"
-    And I press "Add Link" button
-    #Then the DOI or URL is added, Short Description is added and External Link Type is "source"
-    #When I press Save button on Additional Information tab
-    #Then the link 'url' is saved to DB 'external_link' where dataset id is '322'
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
+    And I follow "projects-no"
+    And I follow "manuscripts-no"
+    And I follow "protocols-no"
+    And I follow "3d_images-no"
+    And I follow "codes-no"
+    And I follow "sources-yes"
+    And I fill in "sources-link" with "doi:12.3456/789012.3"
+    And I fill in "sources-description" with "test short description"
+    And I follow "add-sources-link"
+    And I wait "2" seconds
+    And I take a screenshot named "addinfo"
+    Then I should see dataset submission "Additional Information" tab with "other_links_table" table
+    | Url | Link Description | External Link Type |
+    | doi:12.3456/789012.3  | test short description | source |
     #And I delete the saved link from DB 'external_link' where dataset id is '322'
-    Then I should see a table
-    | Url | External Link Type |
-    | "doi:12.3456/789012.3"  | "DOI or URL" |
