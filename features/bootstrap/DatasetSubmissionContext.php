@@ -48,7 +48,6 @@ class DatasetSubmissionContext implements Context
      */
     public function iShouldSeeDatasetSubmissionTabWithTable($arg1, $arg2, TableNode $table)
     {
-        print_r($table);
         if ("Author" == $arg1 && "authors" == $arg2) {
 //            $this->minkContext->getSession()->getPage()->clickLink($arg1);
             //| First name | Middle name | Last name | ORCiD | CrediT | Order |
@@ -103,6 +102,22 @@ class DatasetSubmissionContext implements Context
 //                $link = $row['link'];
                 PHPUnit_Framework_Assert::assertTrue(
                     $this->minkContext->getSession()->getPage()->hasContent($row['Project Name'])
+                );
+            }
+        }
+        elseif("Additional Information" == $arg1 && "other_links_table" == $arg2) {
+            print_r("Stuff!!!!:".$table);
+            //| Url | Link Description | External Link Type |
+            foreach($table as $row) {
+//                $link = $row['link'];
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Url'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Link Description'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['External Link Type'])
                 );
             }
         }
