@@ -81,7 +81,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
     var sourcesDiv = $('#sources');
 
     // Execute if content is added to text field in manuscripts section
-    $(manuscriptsDiv).on('keydown', 'input[name="link"]', function (event) {
+    $(manuscriptsDiv).on('keydown', 'input[name="manuscripts-link"]', function (event) {
         var input = $(this);
 
         setTimeout((function(){

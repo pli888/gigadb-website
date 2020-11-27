@@ -185,7 +185,7 @@ Scenario: Dataset has executable code in CodeOcean
     | Url | Link Description | External Link Type |
     | stuff | | code |
 
-@other-links @protocolsio @javascript @wip
+@other-links @protocolsio @javascript
 Scenario: Dataset is associated with a Protocols.io DOI
     Given I sign in as an admin
     When I go to "/datasetSubmission/additionalManagement/id/300"
@@ -208,29 +208,29 @@ Scenario: Dataset is associated with a Protocols.io DOI
     #Then the link 'url' is saved to DB 'external_link' where dataset id is '322'
     #And I delete the saved link from DB 'external_link' where dataset id is '322'
 
-@other-links @doi-or-url
+@other-links @manuscripts @javascript
 Scenario: Dataset is associated with another manuscript DOI
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No" button for "Related GigaDB Datasets"
-    And I press "No" button for "Project links"
-    And I press "Yes" button for "A published manuscript that uses this data"
-    And I fill in "manuscript link" with "doi:10.1093/gigascience/giy095"
-    And I press "No" button for "Protocols.io link to methods used to generate this data"
-    And I press "No" button for "SketchFab 3d-Image viewer links"
-    And I press "No" button for "Actionable code in CodeOceans"
-    And I press "No" button for "or any other URL to a stable source of data and files directly related to this dataset"
-    And I press Add Link button
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
+    And I follow "projects-no"
+    And I follow "manuscripts-yes"
+    And I fill in "manuscripts-link" with "doi:10.1093/gigascience/giy095"
+    And I follow "add-manuscripts-link"
+    And I follow "protocols-no"
+    And I follow "3d_images-no"
+    And I follow "codes-no"
+    And I follow "sources-no"
     #Then the manuscript url is added and External Link Type is "manuscript"
     #When I press Save button on Additional Information tab
     #Then the link 'identifier' is saved to DB 'manuscript' where dataset id is '322'
     #And I delete the saved link from DB 'manuscript' where dataset id is '322'
-    Then I should see a table
-    | Url | External Link Type |
-    | "doi:10.1093/gigascience/giy095"  | manuscript link |
+    Then I should see dataset submission "Additional Information" tab with "other_links_table" table
+    | Url | Link Description | External Link Type |
+    | doi:10.1093/gigascience/giy095 | | manuscript |
 
-@other-links @doi-or-url
+@other-links @doi-or-url @wip
   Scenario: Dataset is associated with a dataset DOI in another online repository
     Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"
