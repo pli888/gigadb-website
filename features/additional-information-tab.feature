@@ -124,45 +124,47 @@ Scenario: Delete project link to dataset
     # And I take a screenshot named "addinfo"
     Then I should see "No results found."
 
-@other-links @wip
-Scenario: Dataset is not associated with a Protocol IO, SketchFab, CodeOcean link nor another dataset stored from another repository
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No" button for "Related GigaDB Datasets"
-    And I press "No" button for "Project links"
-    And I press "No" button for "A published manuscript that uses this data"
-    And I press "No" button for "Protocols.io link to methods used to generate this data"
-    And I press "No" button for "SketchFab 3d-Image viewer links"
-    And I press "No" button for "Actionable code in CodeOceans"
-    And I press "No" button for "or any other URL to a stable source of data and files directly related to this dataset"
-    And I see active "Next" button class "btn btn-green js-save-additional"
-    And I press "Next" button
-    Then I should see "Funding" tab with text "Would you like to acknowledge any funding bodies that have provided resources to generate these data?"
+@other-links @javascript
+Scenario: Dataset has no Protocols IO, SketchFab, Code Ocean nor other source
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
+    And I follow "projects-no"
+    And I follow "manuscripts-no"
+    And I follow "protocols-no"
+    And I follow "3d_images-no"
+    And I follow "codes-no"
+    And I follow "repositories-no"
+    And I follow "sources-no"
+    # And I take a screenshot named "addinfo"
+    And I follow "Next"
+    And I wait "2" seconds
+    # And I take a screenshot named "funding"
+    Then I should see "Add Fundings"
 
-@other-links @sketchfab
+@other-links @javascript @sketchfab
 Scenario: Dataset is associated with a SketchFab link
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No" button for "Related GigaDB Datasets"
-    And I press "No" button for "Project links"
-    And I press "No" button for "A published manuscript that uses this data"
-    And I press "No" button for "Protocols.io link to methods used to generate this data"
-    And I press "Yes" button for "SketchFab 3d-Image viewer links"
-    And I fill in "SketchFab link" with "https://skfb.ly/69wDV"
-    And I press "No" button for "Actionable code in CodeOcean"
-    And I press "No" button for "or any other URL to a stable source of data and files directly related to this dataset"
-    And I press "Add Link" button
-    #And the sketch fab url is added and External Link Type is "3d image"
-    When I press "Next" button
-    #Then the link 'url' is saved to DB 'external_link' where dataset id is '322'
-    #And I delete the saved link from DB 'external_link' where dataset id is '322'
-    Then I should see a table
-    | Url | External Link Type |
-    | https://skfb.ly/69wDV | SketchFab |
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
+    And I follow "projects-no"
+    And I follow "manuscripts-no"
+    And I follow "protocols-no"
+    And I follow "3d_images-yes"
+    And I fill in "sketchfab-link" with "https://skfb.ly/test"
+    And I follow "add-sketchfab-link"
+    And I follow "codes-no"
+    And I follow "repositories-no"
+    And I follow "sources-no"
+    And I wait "2" seconds
+    # And I take a screenshot named "addinfo"
+    Then I should see dataset submission "Additional Information" tab with "other_links_table" table
+    | Url | Link Description | External Link Type |
+    | https://skfb.ly/test | | 3d image |
 
-@other-links @codeocean
+@other-links @codeocean @wip
 Scenario: Dataset has executable code in CodeOcean
     Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"

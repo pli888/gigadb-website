@@ -26,15 +26,17 @@
 
 <!-- Render form if $isManuscripts is false -->
 <div class="row" id="manuscripts"<?php if ($isManuscripts !== true): ?> style="display: none"<?php endif; ?>>
-    <div class="span9">
-        <div class="controls">
-            <!-- id = "link" -->
-            <?= CHtml::textField('link', '', array('class'=>'js-ex-link others-input', 'size' => 60, 'maxlength' => 100, 'placeholder' => "e.g. doi:10.1093/gigascience/giy095")); ?>
+    <div class="control-group">
+        <div class="span9">
+            <div class="controls">
+                <!-- id = "link" -->
+                <?= CHtml::textField('link', '', array('class'=>'js-ex-link others-input', 'size' => 60, 'maxlength' => 100, 'placeholder' => "e.g. doi:10.1093/gigascience/giy095")); ?>
+            </div>
         </div>
-    </div>
-    <div class="span2">
-        <!-- Render Add Link button -->
-        <!-- js-add-exLink class added to button when it turns active -->
-        <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::MANUSCRIPTS ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
+        <div class="span2">
+            <!-- Render Add Link button -->
+            <!-- js-add-exLink class added to button when it turns active -->
+            <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::MANUSCRIPTS ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
+        </div>
     </div>
 </div>

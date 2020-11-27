@@ -25,16 +25,18 @@
 </div>
 
 <!-- Render form if $is3dImages is false -->
+<form>
 <div class="row" id="3d_images"<?php if ($is3dImages !== true): ?> style="display: none"<?php endif; ?>>
     <div class="span9">
         <label class='control-label others-label'>Please provide SketchFab Link</label>
         <div class="controls">
-            <?= CHtml::textField('link', '', array('class'=>'js-ex-link others-input', 'size' => 60, 'maxlength' => 100, 'placeholder' => "e.g. https://skfb.ly/69wDV")); ?>
+            <?= CHtml::textField('sketchfab-link', '', array('class'=>'js-ex-link others-input', 'size' => 60, 'maxlength' => 100, 'placeholder' => "e.g. https://skfb.ly/69wDV")); ?>
         </div>
     </div>
     <div class="span2">
         <!-- Render Add Link button -->
         <!-- js-add-exLink class added to button when it turns active -->
-        <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::_3D_IMAGES ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
+        <a href="#" id="add-sketchfab-link" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::_3D_IMAGES ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
     </div>
 </div>
+</form>

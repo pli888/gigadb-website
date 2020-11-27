@@ -26,7 +26,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
     <div class="clear"></div>
     <!-- Render table to display links if they exist -->
     <div id="others-grid" class="grid-view"<?php if (!$exLinks): ?> style="display: none;"<?php endif ?>>
-        <table class="table table-bordered">
+        <table id="other_links_table" class="table table-bordered">
             <thead>
             <tr>
                 <th id="author-grid_c0" width="35%">Url</th>
@@ -125,7 +125,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
     });
 
     // Execute if content is added to text field in SketchFab section
-    $(_3dimagesDiv).on('keydown', 'input[name="link"]', function (event) {
+    $(_3dimagesDiv).on('keydown', 'input[name="sketchfab-link"]', function (event) {
         var input = $(this);
 
         setTimeout((function(){
