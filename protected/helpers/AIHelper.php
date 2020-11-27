@@ -2,8 +2,8 @@
 
 class AIHelper
 {
-    const MANUSCRIPTS = 1;
-    const SOURCES = 2;
+    const MANUSCRIPTS = 8;
+    const SOURCES = 9;
     const PROTOCOLS = 3;
     const _3D_IMAGES = 5;
     const CODES = 6;
@@ -22,7 +22,7 @@ class AIHelper
                 return 'repository';
             case AIHelper::CODES:
                 return 'code';
-            default:
+            case AIHelper::SOURCES:
                 return 'source';
         }
     }

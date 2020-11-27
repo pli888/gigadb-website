@@ -30,14 +30,14 @@
         <label class='control-label others-label' style="margin-left: 0;width: 100%;font-weight: normal;">Where possible use the DOI instead of a URL.</label>
         <label class='control-label others-label' style="margin-left: 0;width: 100%;">Please provide the DOI or URL:</label>
         <div>
-            <?= CHtml::textField('link', '', array('class'=>'js-ex-link', 'size' => 60, 'style' => 'width: 350px;', 'placeholder' => "e.g. doi:12.3456/789012.3")); ?>
-            <?= CHtml::textArea('link', '', array('class'=>'js-ex-description', 'size' => 60, 'style' => 'width: 326px;', 'placeholder' => "Short description of what the link is to")); ?>
+            <?= CHtml::textField('sources-link', '', array('class'=>'js-ex-link', 'size' => 60, 'style' => 'width: 350px;', 'placeholder' => "e.g. doi:12.3456/789012.3")); ?>
+            <?= CHtml::textArea('sources-description', '', array('class'=>'js-ex-description', 'size' => 60, 'style' => 'width: 326px;', 'placeholder' => "Short description of what the link is to")); ?>
         </div>
     </div>
     <div class="span2">
         <br><br><br>
         <!-- Render Add Link button -->
         <!-- js-add-exLink class added to button when it turns active -->
-        <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::SOURCES ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
+        <a href="#" id="add-sources-link" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::SOURCES ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
     </div>
 </div>
