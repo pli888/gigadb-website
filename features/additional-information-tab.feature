@@ -104,41 +104,27 @@ Scenario: Dataset is part of a large recognised (international) project
     And I select "16" from "project"
     And I follow "add-project"
     And I wait "3" seconds
-    And I take a screenshot named "addinfo"
+    # And I take a screenshot named "addinfo"
     Then I should see dataset submission "Additional Information" tab with "collaboration_links" table
     | Project Name |
     | Genome 10K |
 
-@collaboration-link @javascript @wip
-Scenario: Link selected project to dataset
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No button for "Related GigaDB Datasets"
-    And I press "Yes" button for "Project links"
-    And I select "2" from projects dropdown list
-    And I press "Add Project" button
-    Then I should see a table
-    | Project Name |
-    | 2 |
-
-@collaboration-link
+@collaboration-link @javascript
 Scenario: Delete project link to dataset
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/additionalManagement/id/322"
-    And I press "No" button for "Public data archive links"
-    And I press "No button for "Related GigaDB Datasets"
-    And I press "Yes" button for "Project links"
-    And I select "2" from projects dropdown list
-    And I press "Add Project" button
-    And I press "Delete this row" button
-    And I see an alert "Are you sure you want to delete this item?"
-    And I press "OK" button
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/additionalManagement/id/300"
+    And I follow "public-links-no"
+    And I follow "related-doi-no"
+    And I follow "projects-yes"
+    And I select "16" from "project"
+    And I follow "add-project"
+    And I wait "3" seconds
+    And I follow "delete-project"
+    And I confirm popup
+    # And I take a screenshot named "addinfo"
     Then I should see "No results found."
-    And I should see a table
-    | Project Name |
 
-@other-links
+@other-links @wip
 Scenario: Dataset is not associated with a Protocol IO, SketchFab, CodeOcean link nor another dataset stored from another repository
     Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/additionalManagement/id/322"

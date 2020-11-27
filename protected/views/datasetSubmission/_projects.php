@@ -55,14 +55,14 @@
                         <div id="author-grid" class="grid-view">
                             <table class="table table-bordered">
                                 <thead>
-                                <tr>
-                                    <th id="author-grid_c0" width="80%">Project Name</th>
-                                    <th id="author-grid_c5" class="button-column" width="20%"></th>
-                                </tr>
+                                    <tr>
+                                        <th id="author-grid_c0" width="80%">Project Name</th>
+                                        <th id="author-grid_c5" class="button-column" width="20%"></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 <!-- Loop thru $dps related dataset_projects -->
-                                <?php foreach($dps as $dp) { ?>
+                                    <?php foreach($dps as $dp) { ?>
                                     <!-- Add js-my-item class to each row. This class name is used -->
                                     <!-- by js-no-button for deleting rows if NO button is pressed -->
                                     <tr class="odd js-my-item">
@@ -72,17 +72,17 @@
                                         </td>
                                         <td class="button-column">
                                             <input type="hidden" class="js-my-id" value="<?= $dp->id ?>">
-                                            <a class="js-delete-project delete-title" dp-id="<?=$dp->id?>" data-id="<?= $model->id ?>" title="delete this row">
+                                            <a href="#" id="delete-project" class="js-delete-project delete-title" dp-id="<?=$dp->id?>" data-id="<?= $model->id ?>" title="delete this row">
                                                 <img alt="delete this row" src="/images/delete.png">
                                             </a>
                                         </td>
                                     </tr>
-                                <? } ?>
-                                <tr class="js-no-results"<?php if ($dps): ?> style="display: none"<?php endif ?>>
-                                    <td colspan="4">
-                                        <span class="empty">No results found.</span>
-                                    </td>
-                                </tr>
+                                    <? } ?>
+                                    <tr class="js-no-results"<?php if ($dps): ?> style="display: none"<?php endif ?>>
+                                        <td colspan="4">
+                                            <span class="empty">No results found.</span>
+                                        </td>
+                                    </tr>
                                 <tr>
                                 </tbody>
                             </table>
@@ -143,7 +143,7 @@
                         '<input type="hidden" class="js-project-id" value="' + response.project['id'] + '">' +
                         '<td>' + response.project['name'] + '</td>' +
                         '<td class="button-column">' +
-                        '<a class="js-delete-project delete-title" title="delete this row">' +
+                        '<a href="#" id="delete-project" class="js-delete-project delete-title" title="delete this row">' +
                         '<img alt="delete this row" src="/images/delete.png">' +
                         '</a>' +
                         '</td>' +
