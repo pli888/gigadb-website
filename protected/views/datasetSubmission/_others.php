@@ -103,7 +103,7 @@ $exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSourc
     });
 
     // Execute if content is added to text field in protocols.io section
-    $(protocolsDiv).on('keydown', 'input[name="link"]', function (event) {
+    $(protocolsDiv).on('keydown', 'input[name="protocols-link"]', function (event) {
         var input = $(this);
 
         setTimeout((function(){

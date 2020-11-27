@@ -30,12 +30,12 @@
         <label class='control-label others-label'>Please provide the Protocols.io DOI</label>
         <div class="controls">
             <!-- id = "link" -->
-            <?= CHtml::textField('link', '', array('class'=>'js-ex-link others-input', 'size' => 60, 'maxlength' => 100, 'placeholder' => "e.g. doi:10.17504/protocols.io.gk8buzw")); ?>
+            <?= CHtml::textField('protocols-link', '', array('class'=>'js-ex-link others-input', 'size' => 60, 'maxlength' => 100, 'placeholder' => "e.g. doi:10.17504/protocols.io.gk8buzw")); ?>
         </div>
     </div>
     <div class="span2">
         <!-- Render Add Link button -->
         <!-- js-add-exLink class added to button when it turns active -->
-        <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::PROTOCOLS ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
+        <a href="#" id="add-protocols-link" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::PROTOCOLS ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
     </div>
 </div>
