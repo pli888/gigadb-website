@@ -1,6 +1,5 @@
 <?php
-$exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSources;
-echo "exLinks: $exLinks";
+$exLinks = $isManuscripts || $isProtocols || $is3dImages || $isCodes || $isSources || $isRepositories;
 ?>
 <div class="form-horizontal additional-bordered">
     <h3 style="display: inline-block">Other links</h3>
@@ -19,6 +18,8 @@ echo "exLinks: $exLinks";
     <?php $this->renderPartial('_3d_images', array('model' => $model, 'is3dImages' => $is3dImages)); ?>
     <!-- Add Code Ocean link -->
     <?php $this->renderPartial('_codes', array('model' => $model, 'isCodes' => $isCodes)); ?>
+    <!-- Add URL that ii Github repo for this dataset -->
+    <?php $this->renderPartial('_repositories', array('model' => $model, 'isRepositories' => $isRepositories)); ?>
     <!-- Add URL that is a source for this dataset -->
     <?php $this->renderPartial('_sources', array('model' => $model, 'isSources' => $isSources)); ?>
 
@@ -51,7 +52,10 @@ echo "exLinks: $exLinks";
             <?php foreach($codes as $exLink): ?>
                 <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
             <?php endforeach; ?>
-            <!-- Render rows for other $sources for this dataset -->
+            <!-- Render rows for $repositories Github -->
+            <?php foreach($repositories as $exLink): ?>
+                <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
+            <?php endforeach; ?>
             <?php foreach($sources as $exLink): ?>
                 <?php $this->renderPartial('_others_tr', array('model' => $model, 'exLink' => $exLink)); ?>
             <?php endforeach; ?>
@@ -73,6 +77,7 @@ echo "exLinks: $exLinks";
     var protocolsDiv = $('#protocols');
     var _3dimagesDiv = $('#3d_images');
     var codesDiv = $('#codes');
+    var repositoriesDiv = $('#repositories');
     var sourcesDiv = $('#sources');
 
     // Execute if content is added to text field in manuscripts section
@@ -242,6 +247,8 @@ echo "exLinks: $exLinks";
                         div = _3dimagesDiv;
                     }  else if (response.exLink['type'] == <?= AIHelper::CODES ?>) {
                         div = codesDiv;
+                    }  else if (response.exLink['type'] == <?= AIHelper::REPOSITORIES ?>) {
+                        div = repositoriesDiv;
                     }  else if (response.exLink['type'] == <?= AIHelper::SOURCES ?>) {
                         div = sourcesDiv;
 

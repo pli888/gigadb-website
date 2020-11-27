@@ -10,18 +10,16 @@ $additionalInfo = $model->getAdditionalInformation();
 // !!count($object) will return a boolean TRUE for any true value number and
 // FALSE for any false value, e.g 0
 $isPublicLinks = $additionalInfo ? !!count($links) : null;
-//echo "<p>isPublicLinks = $isPublicLinks</p>";
 $isRelatedDoi = $additionalInfo ? !!count($relations) : null;
-//echo "<p>isRelatedDoi = $isRelatedDoi</p>";
 $isProjects = $additionalInfo ? !!count($dps) : null;
 $isManuscripts = $additionalInfo ? !!count($manuscripts) : null;
 $isProtocols = $additionalInfo ? !!count($protocols) : null;
 $is3dImages = $additionalInfo ? !!count($_3dImages) : null;
 $isCodes = $additionalInfo ? !!count($codes) : null;
+$isRepositories = $additionalInfo ? !!count($repositories) : null;
 $isSources = $additionalInfo ? !!count($sources) : null;
 
-// $disabled is a boolean depending if $isSources, etc is null or not
-$disabled = $isSources === null || $isCodes === null || $is3dImages === null || $isProtocols === null || $isManuscripts === null || $isProjects === null || $isRelatedDoi === null || $isPublicLinks === null;
+$disabled = $isSources === null || $isCodes === null || $isRepositories === null || $is3dImages === null || $isProtocols === null || $isManuscripts === null || $isProjects === null || $isRelatedDoi === null || $isPublicLinks === null;
 ?>
 <div class="container">
     <div class="content">
@@ -72,11 +70,13 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
                                 '_3dImages' => $_3dImages,
                                 'codes' => $codes,
                                 'sources' => $sources,
+                                'repositories' => $repositories,
                                 'isManuscripts' => $isManuscripts,
                                 'isProtocols' => $isProtocols,
                                 'is3dImages' => $is3dImages,
                                 'isCodes' => $isCodes,
                                 'isSources' => $isSources,
+                                'isRepositories' => $isRepositories,
                             )); ?>
                         </div>
 
@@ -150,6 +150,7 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
                 && $('#protocols-no').hasClass('btn-success')
                 && $('#3d_images-no').hasClass('btn-success')
                 && $('#codes-no').hasClass('btn-success')
+                && $('#repositories-no').hasClass('btn-success')
                 && $('#sources-no').hasClass('btn-success')
             ) {
                 target.hide();
@@ -330,6 +331,7 @@ $disabled = $isSources === null || $isCodes === null || $is3dImages === null || 
             && ($('#protocols-no').hasClass('btn-success') || ($('#protocols-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::PROTOCOLS ?>').length))
             && ($('#3d_images-no').hasClass('btn-success') || ($('#3d_images-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::_3D_IMAGES ?>').length))
             && ($('#codes-no').hasClass('btn-success') || ($('#codes-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::CODES ?>').length))
+            && ($('#repositories-no').hasClass('btn-success') || ($('#repositories-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::REPOSITORIES ?>').length))
             && ($('#sources-no').hasClass('btn-success') || ($('#sources-yes').hasClass('btn-success') && othersDiv.find('.js-my-item-<?= AIHelper::SOURCES ?>').length))
         ) {
             $('#additional-save').find('.js-not-allowed').removeClass('js-not-allowed disabled').addClass('js-save-additional');
