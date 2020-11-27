@@ -1,6 +1,6 @@
 <div class="row" style="margin-bottom: 5px; margin-top: 10px;">
     <div class="span9">
-        <span>Protocols.io link to methods used to generate this data………………………………………..</span>
+        <span>Protocols.io link to methods used to generate this data</span>
 
         <!-- Render NO button to add manuscript -->
         <!-- If there are no manuscripts (false) then No button is green and disabled, and js-no-button functionality added -->
