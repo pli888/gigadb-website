@@ -26,6 +26,6 @@
         </div>
     </div>
     <div class="span2">
-        <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::REPOSITORIES ?>" class="btn js-not-allowed"/>Add Link</a>
+        <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::REPOSITORIES ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
     </div>
 </div>

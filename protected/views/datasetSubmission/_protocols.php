@@ -36,6 +36,6 @@
     <div class="span2">
         <!-- Render Add Link button -->
         <!-- js-add-exLink class added to button when it turns active -->
-        <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::PROTOCOLS ?>" class="btn js-not-allowed"/>Add Link</a>
+        <a href="#" dataset-id="<?=$model->id?>" data-type="<?= AIHelper::PROTOCOLS ?>" class="btn btn-default js-not-allowed"/>Add Link</a>
     </div>
 </div>
