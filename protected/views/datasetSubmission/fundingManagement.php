@@ -36,79 +36,81 @@ foreach ($funders as $funder) {
                                        class="btn btn-default <?php if ($model->getFunding() === false): ?>btn btn-success<?php else: ?>js-no-button<?php endif; ?>"/>No</a>
                                 </div>
 
-                                <div id="funding"<?php if ($model->getFunding() !== true): ?> style="display: none;"<?php endif; ?>>
-                                    <p class="note">Please select the appropriate funding body from the dropdown list. This list is from FundRef  and should be used if possible. If your funding body is not present you may either contact FundRef directly to ask for its addition (please allow some time for the updates to propagate to this page) or use the Funding body “Other” from the list.</p>
-                                    <div class="control-group">
-                                        <div style="text-align: center">
-                                            <?= CHtml::dropDownList('funder_id',
-                                                null,
-                                                $fundersList,
-                                                array('class'=>'js-database form-control', 'style'=>'width:250px'));
-                                            ?> * required
+                                <form>
+                                    <div id="funding"<?php if ($model->getFunding() !== true): ?> style="display: none;"<?php endif; ?>>
+                                        <p class="note">Please select the appropriate funding body from the dropdown list. This list is from FundRef  and should be used if possible. If your funding body is not present you may either contact FundRef directly to ask for its addition (please allow some time for the updates to propagate to this page) or use the Funding body “Other” from the list.</p>
+                                        <div class="control-group">
+                                            <div style="text-align: center">
+                                                <?= CHtml::dropDownList('funder_id',
+                                                    null,
+                                                    $fundersList,
+                                                    array('class'=>'js-database form-control', 'style'=>'width:250px'));
+                                                ?> * required
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p class="note">Often Funding bodies provide funds to different “programs”, if appropriate you may type the funding bodies Program name here:</p>
-                                    <div class="control-group form-group">
-                                        <div style="text-align: center">
-                                            <?= CHtml::textField('program_name', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px;margin-right:60px;', 'placeholder'=>"Program name, e.g. FP7 framework", 'class' => 'form-control')); ?>
+                                        <p class="note">Often Funding bodies provide funds to different “programs”, if appropriate you may type the funding bodies Program name here:</p>
+                                        <div class="control-group form-group">
+                                            <div style="text-align: center">
+                                                <?= CHtml::textField('program_name', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px;margin-right:60px;', 'placeholder'=>"Program name, e.g. FP7 framework", 'class' => 'form-control')); ?>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p class="note">Please now provide the unique reference to the grant/funding received</p>
-                    
-                                    <div class="control-group form-group">
-                                        <div style="text-align: center">
-                                            <?= CHtml::textField('grant', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Grant reference", 'class' => 'form-control js-funding-required')); ?> * required
+                                        <p class="note">Please now provide the unique reference to the grant/funding received</p>
+                        
+                                        <div class="control-group form-group">
+                                            <div style="text-align: center">
+                                                <?= CHtml::textField('grant', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"Grant reference", 'class' => 'form-control js-funding-required')); ?> * required
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p class="note">Now add the last name and first initial of the Principal investigator names on the grant application</p>
-                                    <div class="control-group form-group">
-                                        <div style="text-align: center">
-                                            <?= CHtml::textField('pi_name', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"PI name, e.g. Bloggs J", 'class' => 'form-control js-funding-required')); ?> * required
+                                        <p class="note">Now add the last name and first initial of the Principal investigator names on the grant application</p>
+                                        <div class="control-group form-group">
+                                            <div style="text-align: center">
+                                                <?= CHtml::textField('pi_name', '', array('size' => 60, 'maxlength' => 100, 'style'=>'width:240px', 'placeholder'=>"PI name, e.g. Bloggs J", 'class' => 'form-control js-funding-required')); ?> * required
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <div style="text-align: center">
-                                            <a href="#" class="btn btn-success disabled js-not-allowed"/>Add funding</a>
+                                        <div class="control-group">
+                                            <div style="text-align: center">
+                                                <a href="#" id="add-funding" class="btn btn-success disabled js-not-allowed"/>Add funding</a>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="grid-view" style="padding-top: 20px">
-                                        <table class="table table-bordered subwiztable">
-                                            <thead>
-                                            <tr>
-                                                <th id="author-grid_c0" width="22%">Funding body</th>
-                                                <th id="author-grid_c1" width="23%">Program Name</th>
-                                                <th id="author-grid_c2" width="22%">Grant Number</th>
-                                                <th id="author-grid_c3" width="23%">PI name</th>
-                                                <th id="author-grid_c4" class="button-column" width="10%"></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <?php foreach($fundings as $funding): ?>
-                                                <tr class="odd">
-                                                    <td><?= $funding->funder->primary_name_display ?></td>
-                                                    <td><?= $funding->comments ?></td>
-                                                    <td><?= $funding->grant_award ?></td>
-                                                    <td><?= $funding->awardee ?></td>
-                                                    <td class="button-column">
-                                                        <a class="js-delete-funding delete-title" title="delete this row">
-                                                            <img alt="delete this row" src="/images/delete.png">
-                                                        </a>
-                                                        <input type="hidden" class="js-funding-id" value="<?= $funding->id ?>">
-                                                        <input type="hidden" class="js-funder-id" value="<?= $funding->funder_id ?>">
+    
+                                        <div class="grid-view" style="padding-top: 20px">
+                                            <table class="table table-bordered subwiztable">
+                                                <thead>
+                                                <tr>
+                                                    <th id="author-grid_c0" width="22%">Funding body</th>
+                                                    <th id="author-grid_c1" width="23%">Program Name</th>
+                                                    <th id="author-grid_c2" width="22%">Grant Number</th>
+                                                    <th id="author-grid_c3" width="23%">PI name</th>
+                                                    <th id="author-grid_c4" class="button-column" width="10%"></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php foreach($fundings as $funding): ?>
+                                                    <tr class="odd">
+                                                        <td><?= $funding->funder->primary_name_display ?></td>
+                                                        <td><?= $funding->comments ?></td>
+                                                        <td><?= $funding->grant_award ?></td>
+                                                        <td><?= $funding->awardee ?></td>
+                                                        <td class="button-column">
+                                                            <a href="#" id="delete-funding" class="js-delete-funding delete-title" title="delete this row">
+                                                                <img alt="delete this row" src="/images/delete.png">
+                                                            </a>
+                                                            <input type="hidden" class="js-funding-id" value="<?= $funding->id ?>">
+                                                            <input type="hidden" class="js-funder-id" value="<?= $funding->funder_id ?>">
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                                <tr class="js-no-results"<?php if ($fundings): ?> style="display: none"<?php endif ?>>
+                                                    <td colspan="5">
+                                                        <span class="empty">No results found.</span>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
-                                            <tr class="js-no-results"<?php if ($fundings): ?> style="display: none"<?php endif ?>>
-                                                <td colspan="5">
-                                                    <span class="empty">No results found.</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                            </tbody>
-                                        </table>
+                                                <tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <div class="row subwiz-row">
