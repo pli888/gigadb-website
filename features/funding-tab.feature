@@ -17,7 +17,7 @@ Scenario: Pressing Next button on Funding tab leads to Sample tab
     And I follow "Next"
     Then I should be on "/datasetSubmission/sampleManagement/id/300"
     
-@javascript @wip
+@javascript
 Scenario: Add funding information for dataset
     Given I sign in as an admin
     When I go to "/datasetSubmission/fundingManagement/id/300"
