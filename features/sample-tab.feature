@@ -5,50 +5,77 @@ I WANT TO fill in the Sample tab
 SO THAT I can provide information about the samples used in my dataset
 
 Background:
-    Given Gigadb web site is loaded with "gigadb_testdata.pgdmp" data
+    Given Gigadb web site is loaded with "new_gigadb_testdata.pgdmp" data
+    And default admin user exists
     And user "joy_fox" is loaded
+    And user "subwiz_study" is loaded
 
+@javascript
 Scenario: Add species information to sample
-    Given I am logged in to Gigadb web site
-    When I go to "datasetSubmission/sampleManagement/id/210"
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/sampleManagement/id/300"
+    And I follow "Add Row"
+    And I wait "1" seconds
     #And I update dataset status to "Incomplete" where id is "210"
-    And I fill in "Sample ID" with "Sample ID"
-    And I fill in "Species name" with "Adelie penguin"
-    And I fill in "Description" with "some description about species"
-    And I press "Add row"
-    And I press "Next"
-    And I should be on "/datasetSubmission/end/id/210"
-    And I press "Return to your profile page"
-    Then I should be on "/user/view_profile/added/210/#submitted"
+    And I fill in "sample-id" with "sample-001"
+    And I fill in "species-name" with "Adelie penguin"
+    And I fill in "description" with "foobar"
+#    And I follow "Save"
+#    And I take a screenshot named "sampletab"
+    And I follow "Next"
+    And I wait "3" seconds
+#    And I take a screenshot named "end"
+    Then I should see "All the dataset and sample metadata has been received, thank you."
+#    And I should be on "/datasetSubmission/end/id/210"
+#    And I press "Return to your profile page"
+#    Then I should be on "/user/view_profile/added/210/#submitted"
 
-# need to add templates
+
+@javascript
 Scenario: Show warning that data in sample table will be over-written when applying template
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/sampleManagement/id/210"
-    And I select "Genomic/Transcriptomic" from "Choose a template"
-    And I press "Apply"
-    Then I should see "Please note that all data in table will be overwritten! Are you sure?"
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/sampleManagement/id/300"
+    And I follow "Add Row"
+    And I wait "1" seconds
+    And I fill in "sample-id" with "sample-001"
+    And I fill in "species-name" with "Adelie penguin"
+    And I fill in "description" with "foobar"
+    And I follow "Save"
+    And I wait "2" seconds
+    And I select "genomic" from "template"
+    And I follow "Apply"
+    And I wait "2" seconds
+    Then I confirm popup
+#    And I take a screenshot named "sampletab"
+#    Then I should see "Please note that all data in table will be overwritten! Are you sure?"
 
+@javascript
 Scenario: Load sample template
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/sampleManagement/id/210"
-    And I select "Genomic/Transcriptomic" from "Choose a template"
-    And I press "Apply"
-    Then I should see a table
-    | Sample ID | Species name | Description | Analyte type | Geographic location- latitude | Geographic location- longitude | Geographic location- country and/or sea, region | Alternative accession-BioSample | Alternative names | Source material identifiers | Collection date | Environment- biome | Environment- feature | Isolate | Life stage | Sex | Tissue | Age | IUCN Red List | Sample source | Sample contact | Collected by |
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/sampleManagement/id/300"
+    And I select "genomic" from "template"
+    And I follow "Apply"
+    And I wait "2" seconds
+    Then I should see dataset submission Sample tab with genomic table
+    | Sample ID | Species name | Description | age | life stage | geographic location (country and/or sea,region) | collection date | ploidy | sample collection device or method | sample material processing | amount or size of sample collected | sequencing method | tissue | sample source | alternative accession-BioSample | alternative accession-BioProject | collected by | estimated genome size | isolate | Analyte type | geographic location (latitude) | geographic location (longitude) | cell line | broad-scale environmental context | local environmental context | environmental medium |
 
+@javascript @wip
 Scenario: Upload sample metadata file
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/sampleManagement/id/210"
-    And I attach the file "metadata_file" to "Upload sample metadata"
-    And I press "Upload"
-    And I press "Save"
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/sampleManagement/id/300"
+    And I attach the file "/var/www/features/resources/sample_example-genomics.csv" to "samples"
+    And I wait "2" seconds
+    And I take a screenshot named "samples_tab"
+    And I follow "js-add-samples"
+    And I wait "2" seconds
+    And I follow "Save"
+    And I wait "2" seconds
     # Table info below from http://gigadb.org/dataset/100720
-    Then I should see a table
-    | Sample ID | Species name | Description | Analyte type | Geographic location- latitude | Geographic location- longitude | Geographic location- country and/or sea, region | Alternative accession-BioSample | Alternative names | Source material identifiers | Collection date | Environment- biome | Environment- feature | Isolate | Life stage | Sex | Tissue | Age | IUCN Red List | Sample source | Sample contact | Collected by |
-    | ephyrA    | "Rhopilema esculentum" | "RNA extracted from mixed tissue of flame jellyish ephyra" | RNA | 40.113 | 124.362 | China:Liaoning | SAMN10687023 |  |  | 2018-04-03 |                                                                                                                       |                      |         | ephyra     |     | mixed  |     |               |               |                |              |
+    Then I should see dataset submission Sample tab with genomic table
+    | Sample ID | Species name | Description | analyte type | alternative accession-BioSample | alternative accession-BioProject | Geographic location (country and/or sea, region) | geographic location (latitude) | geographic location (longitude) | Broad-scale environmental context | Local environmental context | Environmental medium | Life stage | Age | Sample source | Collection date | Ploidy | Tissue | Collected by | Isolate | Cell line | Sample collection device or method | Sample material processing | Amount or size of sample collected | Estimated genome size | sequencing method |
+    | SRS004381 | Adelie penguin | We sequenced DNA extracted from blood of a 3-year old female panda named Jingjing | DNA | SAMN00008160 | PRJNA38683 | China: Chengdu province | 30.73649705 | 104.1384994 | mountain [ENVO:00000081] | zoological garden [ENVO:00010625] | test | adult [UBERON:0007023] | 3years | Chengdu Research Base of Giant Panda Breeding | not recorded | diploid [PATO:0001394] | peripheral blood [BTO:0000553] | not recorded | Jingjing | test cell line | phlebotomy [NCIT:C28221] | Puregene Tissue Core Kit A (Qiagen) | 100 ml | 2700MB | Illumina HiSeq |
 
-Scenario: Return to profile page after sample tab with submitted dataset highlighted
+    Scenario: Return to profile page after sample tab with submitted dataset highlighted
     Given I am logged in to Gigadb web site
     When I go to "/datasetSubmission/end/id/210"
     And I press "Return to your profile page"
