@@ -59,28 +59,39 @@ Scenario: Load sample template
     Then I should see dataset submission Sample tab with genomic table
     | Sample ID | Species name | Description | age | life stage | geographic location (country and/or sea,region) | collection date | ploidy | sample collection device or method | sample material processing | amount or size of sample collected | sequencing method | tissue | sample source | alternative accession-BioSample | alternative accession-BioProject | collected by | estimated genome size | isolate | Analyte type | geographic location (latitude) | geographic location (longitude) | cell line | broad-scale environmental context | local environmental context | environmental medium |
 
-@javascript @wip
+@javascript
 Scenario: Upload sample metadata file
     Given I sign in as an admin
     When I go to "/datasetSubmission/sampleManagement/id/300"
-    And I attach the file "/var/www/features/resources/sample_example-genomics.csv" to "samples"
-    And I wait "2" seconds
-    And I take a screenshot named "samples_tab"
+    And I attach the file "/var/www/features/resources/minimal_sample_example.csv" to "samples"
+    And I wait "3" seconds
     And I follow "js-add-samples"
-    And I wait "2" seconds
+    And I wait "3" seconds
     And I follow "Save"
-    And I wait "2" seconds
+    And I wait "3" seconds
+    And I take a screenshot named "samples_tab"
     # Table info below from http://gigadb.org/dataset/100720
-    Then I should see dataset submission Sample tab with genomic table
-    | Sample ID | Species name | Description | analyte type | alternative accession-BioSample | alternative accession-BioProject | Geographic location (country and/or sea, region) | geographic location (latitude) | geographic location (longitude) | Broad-scale environmental context | Local environmental context | Environmental medium | Life stage | Age | Sample source | Collection date | Ploidy | Tissue | Collected by | Isolate | Cell line | Sample collection device or method | Sample material processing | Amount or size of sample collected | Estimated genome size | sequencing method |
-    | SRS004381 | Adelie penguin | We sequenced DNA extracted from blood of a 3-year old female panda named Jingjing | DNA | SAMN00008160 | PRJNA38683 | China: Chengdu province | 30.73649705 | 104.1384994 | mountain [ENVO:00000081] | zoological garden [ENVO:00010625] | test | adult [UBERON:0007023] | 3years | Chengdu Research Base of Giant Panda Breeding | not recorded | diploid [PATO:0001394] | peripheral blood [BTO:0000553] | not recorded | Jingjing | test cell line | phlebotomy [NCIT:C28221] | Puregene Tissue Core Kit A (Qiagen) | 100 ml | 2700MB | Illumina HiSeq |
+    Then I should see dataset submission Sample tab with minimal table
+    | Sample ID | Species name | Description |
+    # Need to drill into <td><input><div> to access the data below
+    # | SRS004381 | Adelie penguin | We sequenced DNA extracted from blood of a 3-year old female panda named Jingjing |
 
+@javascript
     Scenario: Return to profile page after sample tab with submitted dataset highlighted
-    Given I am logged in to Gigadb web site
-    When I go to "/datasetSubmission/end/id/210"
-    And I press "Return to your profile page"
-    Then I should be on "/user/view_profile/added/210/#submitted"
+    Given I sign in as an admin
+    When I go to "/datasetSubmission/sampleManagement/id/300"
+    And I attach the file "/var/www/features/resources/minimal_sample_example.csv" to "samples"
+    And I wait "3" seconds
+    And I follow "js-add-samples"
+    And I wait "3" seconds
+    And I follow "Save"
+    And I wait "3" seconds
+    And I follow "Next"
+    And I wait "2" seconds
+    And I follow "Return to your profile page"
+    Then I should be on "/user/view_profile/added/300/#submitted"
 
+@javascript @wip
 Scenario: When Save button is pressed then sample data is displayed in table
     Given I am logged in to Gigadb web site
     When I go to "datasetSubmission/sampleManagement/id/210"
