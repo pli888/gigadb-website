@@ -205,7 +205,7 @@
                                         <input type="file" id="samples" name="samples">
                                         <input type="hidden" name="upload" value="true">
                                         <a href="#" class="btn btn-success disabled js-not-allowed" style="margin-left: 20px;"/>Upload</a>
-                                        <a class="btn btn-success" id="js-add-samples" style="margin-left: 20px;display: none;" value="Upload"/>Upload</a>
+                                        <a href="#" class="btn btn-success" id="js-add-samples" style="margin-left: 20px;display: none;" value="Upload"/>Upload</a>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="control-label">Note- uploading metadata file will overwrite any values already inserted above</label>
@@ -340,15 +340,15 @@
             '<a class="js-delete-row delete-title" title="delete this sample">' +
             '<img alt="delete this row" src="/images/delete.png">' +
             '</a>' +
-            '<input type="text" placeholder=\'Sample ID\' style="margin-right: 18px;">' +
+            '<input id="sample-id" type="text" placeholder=\'Sample ID\' style="margin-right: 18px;">' +
             '</td>';
 
         newTr += '<td>' +
-            '<input type="text" class="js-species-autocomplete" placeholder=\'Species name\'>' +
+            '<input id="species-name" type="text" class="js-species-autocomplete" placeholder=\'Species name\'>' +
             '</td>';
 
         newTr += '<td>' +
-            '<input type="text" placeholder=\'Short description of sample\' style="width:250px;">' +
+            '<input id="description" type="text" placeholder=\'Short description of sample\' style="width:250px;">' +
             '</td>';
 
         for (var i = 0, n = samplesTable.find('.sample-attribute-column').length - 1; i < n; i++) {

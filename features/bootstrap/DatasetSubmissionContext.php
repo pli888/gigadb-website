@@ -91,6 +91,91 @@ class DatasetSubmissionContext implements Context
                 );
             }
         }
+        elseif("Sample" == $arg1 && "genomic" == $arg2) {
+            print_r($table);
+            //    | Sample ID | Species name | Description | age | life stage | geographic location (country and/or sea,region) | collection date | ploidy | sample collection device or method | sample material processing | amount or size of sample collected | sequencing method | tissue | sample source | alternative accession-BioSample | alternative accession-BioProject | collected by | estimated genome size | isolate | Analyte type | geographic location (latitude) | geographic location (longitude) | cell line | broad-scale environmental context | local environmental context | environmental medium |
+            foreach($table as $row) {
+//                $link = $row['link'];
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Sample ID'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Species name'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Description'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['age'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['life stage'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['geographic location (country and/or sea,region)'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['collection date'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['ploidy'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['sample collection device or method'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['sample material processing'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['amount or size of sample collected'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['sequencing method'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['tissue'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['sample source'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['alternative accession-BioSample'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['alternative accession-BioProject'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['collected by'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['estimated genome size'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['isolate'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Analyte type'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['geographic location (latitude)'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['geographic location (longitude)'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['cell line'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['broad-scale environmental context'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['local environmental context'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['environmental medium'])
+                );
+            }
+        }
         elseif("Additional Information" == $arg1 &&
             "public_links" == $arg2) {
             //| Link Type | Link |
