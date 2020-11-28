@@ -176,6 +176,22 @@ class DatasetSubmissionContext implements Context
                 );
             }
         }
+        elseif("Sample" == $arg1 && "minimal" == $arg2) {
+            print_r($table);
+            //    | Sample ID | Species name | Description |
+            foreach($table as $row) {
+//                $link = $row['link'];
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Sample ID'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Species name'])
+                );
+                PHPUnit_Framework_Assert::assertTrue(
+                    $this->minkContext->getSession()->getPage()->hasContent($row['Description'])
+                );
+            }
+        }
         elseif("Additional Information" == $arg1 &&
             "public_links" == $arg2) {
             //| Link Type | Link |
