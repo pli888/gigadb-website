@@ -5,6 +5,7 @@
 /** @var SampleAttribute[] $sas */
 /** @var TemplateName[] $sts */
 /** @var TemplateName $template */
+/** @var Species $species  */
 ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
@@ -250,7 +251,7 @@
 
     function getSpeciesNameAutocomplete() {
         var speciesList = JSON.parse('<?= json_encode(array_values(CHtml::listData($species, 'id', 'common_name'))) ?>');
-        $("#js-species-autocomplete").autocomplete({
+        $("#species-name").autocomplete({
             source: speciesList
         });
     }
@@ -363,6 +364,8 @@
         $('#js-no-results').hide();
 
         $(".delete-title").tooltip({'placement':'right'});
+
+        getSpeciesNameAutocomplete();
 
         return false;
     });
