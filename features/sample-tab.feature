@@ -123,7 +123,7 @@ Scenario: Display error message when sample with same sample ID is used twice
 #    Then I confirm popup
 #    Then I should see "Row 2: Sample ID already exist."
 
-@javascript @wip
+@javascript
 Scenario: User adds an invalid species name and gets notified
     Given I sign in as an admin
     When I go to "/datasetSubmission/sampleManagement/id/300"
