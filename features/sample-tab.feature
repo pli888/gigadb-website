@@ -117,7 +117,7 @@ Scenario: Display error message when sample with same sample ID is used twice
     And I fill in "description" with "foobar"
     And I follow "Add Row"
     And I fill in "sample-id" with "sample-001"
-    And I fill in "species-name" with "Adelie penguin"
+    And I fill in "js-species-autocomplete" with "Adelie penguin"
     And I fill in "description" with "foobar"
     And I follow "Save"
 #    Then I confirm popup
