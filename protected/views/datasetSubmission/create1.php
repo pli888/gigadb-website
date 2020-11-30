@@ -277,7 +277,7 @@ $cs->registerCssFile('/css/jquery.tag-editor.css');
                         <div class="col-xs-12" style="text-align:center">
                                 <div class="control-group form-group">
                                     <div class="controls">
-                                        <input id="agree-checkbox" type="checkbox" style="margin-right:5px"/><a target="_blank" href="/site/term">I have read GigaDB's Terms and Conditions</a>
+                                        <input id="agree-checkbox" name="agree-checkbox" type="checkbox" style="margin-right:5px"/><a target="_blank" href="/site/term">I have read GigaDB's Terms and Conditions</a>
                                     </div>
                                 </div>
                         </div>

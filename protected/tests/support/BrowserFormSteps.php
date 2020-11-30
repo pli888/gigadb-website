@@ -39,19 +39,14 @@ trait BrowserFormSteps
 	public function fillDatasetCreate1FormDummyFieldsJustKeywords($input)
 	{
         // Add keywords and submit the form
+        $this->session->getPage()->checkField("Epigenomic");
+        $this->session->getPage()->checkField("image-upload");
         $this->session->getPage()->fillField("Dataset_title", "dummy");
-        // N.B. There is no Dataset_dataset_size now in WL subwiz
-        $this->session->getPage()->fillField("Dataset_dataset_size", "4500");
-        $this->session->getPage()->fillField("Images_source", "ftp://blah");
-        $this->session->getPage()->fillField("Images_license", "CC0");
-        $this->session->getPage()->fillField("Images_photographer", "me");
         $this->session->getPage()->fillField("keywords", $input);
-        $this->session->getPage()->checkField("Images[is_no_image]");
-        // In WL subwiz, there is a Terms and Conditions box that needs to be
-        //checked. Then press Save button to save dataset into database. A Next
-        // button will then appear and needs to be pressed to re-direct to
-        // Author page
-        $this->session->getPage()->pressButton("Next");
+
+        // In WL subwiz, need to check Terms and Conditions box
+        $this->session->getPage()->checkField("agree-checkbox");
+        $this->session->getPage()->pressButton("Save");
 	}
 
 
