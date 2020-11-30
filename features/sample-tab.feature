@@ -5,7 +5,7 @@ I WANT TO fill in the Sample tab
 SO THAT I can provide information about the samples used in my dataset
 
 Background:
-    Given Gigadb web site is loaded with "new_gigadb_testdata.pgdmp" data
+    Given Gigadb web site is loaded with "gigadb_testdata.pgdmp" data
     And default admin user exists
     And user "joy_fox" is loaded
     And user "subwiz_study" is loaded
