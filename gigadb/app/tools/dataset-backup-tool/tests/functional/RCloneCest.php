@@ -9,6 +9,10 @@ use yii\console\ExitCode;
  */
 class RCloneCest {
 
+    /**
+     * @param FunctionalTester $I
+     * @group rclone-setup
+     */
     public function trySetup(\FunctionalTester $I) {
         $I->runShellCommand("rclone config dump");
         $rcloneConfigJ = $I->grabShellOutput();
@@ -21,6 +25,10 @@ class RCloneCest {
         $I->assertEquals("DEEP_ARCHIVE",$configArray["gigadb-backup"]["storage_class"]);
     }
 
+    /**
+     * @param FunctionalTester $I
+     * @group rclone-setup
+     */
     public function tryListTestBucket(\FunctionalTester $I) {
         $I->runShellCommand("rclone lsjson gigadb-backup:");
         $listJ = $I->grabShellOutput();
