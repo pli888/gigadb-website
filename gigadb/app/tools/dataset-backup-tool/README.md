@@ -140,6 +140,7 @@ Change directory to the `dataset-backup-tool`:
 ```
 $ cd gigadb/app/tools/dataset-backup-tool
 $ compose install
+$ chmod a+x scripts/perm_to_ok.sh scripts/perm_to_not_ok.sh scripts/fix_permission.sh
 ```
 
 There are 3 smoke tests in `tests/functional/FixPermissionCest.php` which would
