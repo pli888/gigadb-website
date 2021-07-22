@@ -33,7 +33,7 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 
-*/.cos.conf
+config/cos.conf
 */create_bucket.sh
 */delete_bucket.sh
 */rclone.conf
