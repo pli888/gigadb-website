@@ -17,7 +17,7 @@ class BucketHelper extends \Codeception\Module
     {
         $this->debug("********** BEFORE *********");
         try {
-            $output = shell_exec("scripts/perm_to_not_ok.sh");
+            $output = shell_exec("scripts/create_bucket.sh");
         }
         catch (Throwable $e) {
             $this->stdout($e->getMessage().PHP_EOL, Console::FG_RED);
@@ -31,7 +31,7 @@ class BucketHelper extends \Codeception\Module
     {
         $this->debug("********** AFTER *********");
         try {
-            $output = shell_exec("scripts/perm_to_ok.sh");
+            $output = shell_exec("scripts/delete_bucket.sh");
         }
         catch (Throwable $e) {
             $this->stdout($e->getMessage().PHP_EOL, Console::FG_RED);
