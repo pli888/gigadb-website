@@ -121,6 +121,50 @@ $ docker-compose run --rm backup_tool /app/scripts/sync_files.sh --verbose
 
 >**Note 2:** the deletion script is more interactive as it prompts the user for the file to delete and then ask for confirmation.
 
+## Tools for GigaDB: To handle file permission issues [#684](https://github.com/gigascience/gigadb-website/issues/684)
+
+In `cngb-gigadb-bak` server, to identify the permission of the files that is `not globally readable` in `/data/gigadb/pub/10.5524/` we could use:
+```
+$ find /data/gigadb/pub/10.5524/ ! -perm -g+r,u+r,o+r
+```
+To change the files to `globally readable`, we could use:
+```
+$ find /data/gigadb/pub/10.5524/ ! -perm -g+r,u+r,o+r -exec chmod a+r {} \;
+```
+The above is the main command to find not `globally readable` files recursively in a directory and fix it.
+
+## Smoke tests for finding and fixing the permissions
+
+### How to run the test:
+Change directory to the `dataset-backup-tool`:
+```
+$ cd gigadb/app/tools/dataset-backup-tool
+$ compose install
+```
+
+There are 3 smoke tests in `tests/functional/FixPermissionCest.php` which would
+identify and fix the permission in a mock directory `tests/_data/10.1234` :
+* `listOkFilePermissions` will identify the permission of the `tests/_data/10.1234/100001_101009/100010/perm-ok.txt` which wasd created with `-rw-r--r--`.
+
+* `listNotOkFilePermissions` will identify the permission of the `tests/_data/10.1234/100001_101009/100300/perm-not-ok.txt` which was created with `----------`.
+
+* `changeNotOkFilePermissionToOk` will identify `non globally readable` files in `tests/_data/10.1234/` and change it to `globally readable` like this `-r--r--r--`.
+
+To run these smoke tests:
+```
+$ docker-compose run --rm backup_tool ./vendor/bin/codecept run tests/functional/FixPermissionCest.php
+```
+
+###  Set up the `cronjob`:
+The permission issues could occur regularly, so a regular fixing would be needed.  
+To enable the `cronjob` which would start fixing permission at midnight of every day:
+```
+$ cd gigadb/app/tools/dataset-backup-tool
+$ crontab < cronjob_fix_permission.txt
+$ crontab -l 
+0 0 * * * /app/scripts/fix-permissions.sh >> /tmp/permission_cron.log 2>&1
+```
+
 
 
 
