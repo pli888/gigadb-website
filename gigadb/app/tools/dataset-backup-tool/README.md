@@ -83,7 +83,7 @@ we need to:
 The latter file is git-ignored and is created from example ``gigadb/app/tools/dataset-backup-tool/config/variables.example`` by copying it:
 ```
 $ cd gigadb/app/tools/dataset-backup-tool
-$ cp config/variables.example config/variable
+$ cp config/variables.example config/variables
 ```
 The default values from the example should work for testing purpose.
 
