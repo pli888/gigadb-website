@@ -5,10 +5,10 @@
 This project offers a tool implemented as Yii2 Console command for backing up
 data files into [Tencent Cloud Object Storage](https://intl.cloud.tencent.com/product/cos).
 This Yii2 tool uses [RClone](https://rclone.org) whose commands have been 
-wrapped within thin wrapper scripts:
+wrapped with thin wrapper scripts:
 
-  * `gigadb/app/tools/dataset-backup-tool/scripts/sync_files.sh` for the
-    incremental backup
+  * `gigadb/app/tools/dataset-backup-tool/scripts/sync_files.sh` for incremental 
+    backup
   * `gigadb/app/tools/dataset-backup-tool/scripts/delete_files.sh` for
     deleting a file
 
@@ -16,12 +16,12 @@ wrapped within thin wrapper scripts:
 
 Change into the working directory for this tool:
 ```
-$  cd gigadb/app/tools/dataset-backup-tool/
+$ cd gigadb/app/tools/dataset-backup-tool/
 ```
 
 Install Composer dependencies
 ```
-$  composer install 
+$ composer install 
 ```
 
 There are two configuration files which are required by the tool:
@@ -40,7 +40,9 @@ we want to make the backup copies of the source files. An example of what the
 `variables` file looks like is provided by `dataset-backup-tool/config/variables.dist` 
 file.
 
-## Procedure
+## Backing up data files
+
+### Upload Procedure
 
 On a developer environment, we will use `docker-compose`. On a production
 environment (CNGB backup server), we will use the script directly for now. In
@@ -59,9 +61,9 @@ Creating dataset-backup-tool_backup_tool_run ... done
 2021/11/15 13:41:59 NOTICE: test.tsv: Not copying as --dry-run
 ```
 
-The reason you see `Not copying as --dry-run` is because the --dry-run mode is
-active by default. When confident the output shows what you want to happen, you
-can enable the `verbose` mode to proceed for real:
+The reason you see `Not copying as --dry-run` is because `--dry-run` mode is
+on by default. When confident the output shows what you want to happen, you
+can enable `verbose` mode to proceed for real:
 ```
 $ docker-compose run --rm backup_tool /app/scripts/sync_files.sh --verbose
 Creating dataset-backup-tool_backup_tool_run ... done
@@ -80,6 +82,8 @@ Elapsed time:        8.5s
 ```
 
 >**Note 1:** using ``-v`` instead of ``--verbose`` is possible.
+
+### File Deletion Procedure
 
 The deletion script is more interactive as it prompts the user for the file to 
 delete and then ask for confirmation:
@@ -107,9 +111,7 @@ Are you sure you want to delete /cngbdb/giga/gigadb/readme_dataset.txt? (y/n) y.
 Check the contents of the bucket on the Tencent Cloud console to confirm that
 the file has been deleted.
 
-## Tests
-
-### Set up
+### Tests
 
 If you have not already done so, please execute:
 ```
@@ -122,7 +124,7 @@ file and a configuration file, `cos.conf` and shell scripts, `create_bucket.sh`
 and `delete_bucket.sh` will be created in the `dataset-backup-tool/config` and 
 `dataset-backup-tool/scripts` directories, respectively.
 
-## Tencent coscmd smoke tests
+#### Tencent coscmd smoke tests
 
 The smoke tests uses the `create_bucket.sh` and `delete_bucket.sh` shell scripts 
 for creating and deleting a Tencent bucket at the start and end of the tests. 
@@ -151,7 +153,7 @@ To run these smoke tests:
 $ docker-compose run --rm backup_tool ./vendor/bin/codecept run tests/functional/BackupSmokeCest.php
 ```
 
-## RClone smoke tests
+#### RClone smoke tests
 
 Rclone is the recommended approach for operating the backup workflows.
 `gigadb/app/tools/dataset-backup-tool/config/rclone.conf` is the configuration 
@@ -174,24 +176,35 @@ These functional smoke tests can be run as follows:
 $ docker-compose run --rm backup_tool ./vendor/bin/codecept run -g rclone-backup
 ```
 
----
 ## Handling file permission issues
 
-In `cngb-gigadb-bak` server, to identify the permission of the files that is 
-`not globally readable` in `/data/gigadb/pub/10.5524/` we could use:
+### Procedure
+
+In `cngb-gigadb-bak` server, to identify the permission of the files that is
+not globally readable in `/data/gigadb/pub/10.5524/` we could use:
 ```
 $ find /data/gigadb/pub/10.5524/ ! -perm -g+r,u+r,o+r
 ```
-To change the files to `globally readable`, we could use:
+To change the files to globally readable, we could use:
 ```
 $ find /data/gigadb/pub/10.5524/ ! -perm -g+r,u+r,o+r -exec chmod a+r {} \;
 ```
-The above is the main command to find not globally readable files recursively 
+The above is the main command to find not globally readable files recursively
 in a directory and fix it.
 
-## Smoke tests for finding and fixing the permissions
+###  Set up cronjob
 
-### How to run the test:
+Permission issues can occur regularly so regular fixing might be needed. A 
+cronjob can be created to fix file permissions at midnight on a daily basis:
+```
+$ cd gigadb/app/tools/dataset-backup-tool
+$ crontab < cronjob_fix_permission.txt
+$ crontab -l 
+0 0 * * * /app/scripts/fix-permissions.sh >> /tmp/permission_cron.log 2>&1
+```
+
+### Smoke tests for finding and fixing the permissions
+
 Change directory to the `dataset-backup-tool`:
 ```
 $ cd gigadb/app/tools/dataset-backup-tool
@@ -212,15 +225,4 @@ identify and fix the permission in a mock directory `tests/_data/10.1234` :
 To run these smoke tests:
 ```
 $ docker-compose run --rm backup_tool ./vendor/bin/codecept run tests/functional/FixPermissionCest.php
-```
-
-###  Set up the `cronjob`:
-The permission issues could occur regularly, so a regular fixing would be needed.  
-To enable the `cronjob` which would start fixing permission at midnight of every 
-day:
-```
-$ cd gigadb/app/tools/dataset-backup-tool
-$ crontab < cronjob_fix_permission.txt
-$ crontab -l 
-0 0 * * * /app/scripts/fix-permissions.sh >> /tmp/permission_cron.log 2>&1
 ```
