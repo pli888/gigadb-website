@@ -2,6 +2,7 @@
 
 # Convert xlsx to xls format
 libreoffice --convert-to xls uploadDir/*.xlsx --outdir uploadDir
+rm uploadDir/*.xlsx
 
 # Set classpath
 export PROJECT_HOME="/tool"
