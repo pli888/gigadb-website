@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Apply the patch Excel2Database4
+patch --verbose -n -p1 -i Excel2Database4.txt
+
 # Set classpath
 export PROJECT_HOME="/tool"
 export LIB_DIR="$PROJECT_HOME/lib"
