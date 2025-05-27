@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 
 - Feat #513,#2190: Create meta tags based on environments
+
+## v4.4.12 - 2025-05-27 - 6c1271813 - 
+
+- Feat #1892: Update onboarding pages layout
 - Feat #2235: Use temporary directory for database volume in CI legacy_test job
 - Feat #2235: Create Manuscript and DatasetLog Yii2 models and create a wrapper to use Manuscript Yii2 model with yii1 Form
 - Feat #2235: Add a checkbox to determine whether if a manuscript should be considered a pre-print link
@@ -88,7 +92,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Feat #701: Code refactoring to separate upload status transitions and notifications to prepare for upload status overhaul
 - Security #1867: Update the gitlab static application security testing (SAST) job using the Semgrep-based analyzer
 
-## v4.3.9 - 2024-10-28 - 961f7821a -
+## v4.4.0 - 2024-11-13 - ea1a37cc9 - live since 2024-12-12
+
+- Fix #2066: Max length for attribute value set to 1000 in file admin form
+- Feat #1968: Add curators manual for operating tools on bastion server and improve tools usage
+- Feat #1750: Switch to guzzle instead of cURL (preliminry work to prepare for DataCite schema upgrade)
+- Fix #2042: Batch deletion of file attributes and samples to make deleting files from the admin dashboard faster
+
+## v4.3.9 - 2024-10-28 - 961f7821a - 2024-11-06
 
 - Fix #1838: switch datepicker format to yyy-mm-dd
 - Feat #1768: Alphabetically sorted dataset author dropdown options in adminDatasetAuthor form
