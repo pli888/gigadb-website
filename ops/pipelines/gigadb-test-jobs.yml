@@ -102,6 +102,8 @@ unit_func_tests:
     - ./tests/unit_functional_runner
   environment:
     name: dev
+  tags:
+    - $GITLAB_USER_LOGIN
 
 api_tests:
   stage: test
@@ -146,6 +148,8 @@ api_tests:
     - ./tests/api_runner
   environment:
     name: dev
+  tags:
+    - $GITLAB_USER_LOGIN
 
 integration_tests:
   stage: test
@@ -192,6 +196,8 @@ integration_tests:
     - ./tests/integration_runner
   environment:
     name: dev
+  tags:
+    - $GITLAB_USER_LOGIN
 
 a_gigadb:
   stage: acceptance
@@ -260,3 +266,5 @@ a_gigadb:
   needs: ["sd_gigadb"]
   environment:
     name: dev
+  tags:
+    - $GITLAB_USER_LOGIN
